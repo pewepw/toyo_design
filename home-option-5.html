@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyo Tires Care - Neumorphism</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            background: #e0e5ec;
+        }
+        
+        /* Hide scrollbar but keep scroll functionality */
+        html, body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .ios-status-bar {
+            background: white;
+            color: black;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .neumorphic {
+            background: #e0e5ec;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+            border-radius: 20px;
+        }
+        .neumorphic-inset {
+            background: #e0e5ec;
+            box-shadow: inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff;
+            border-radius: 20px;
+        }
+        .neumorphic-small {
+            background: #e0e5ec;
+            box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+            border-radius: 15px;
+        }
+        .header-neu {
+            background: #e0e5ec;
+            padding: 24px;
+            margin: 16px;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+        }
+        .points-card-neu {
+            background: #e0e5ec;
+            padding: 24px;
+            margin: 16px;
+            border-radius: 20px;
+            box-shadow: inset 10px 10px 30px #bebebe, inset -10px -10px 30px #ffffff;
+            position: relative;
+        }
+        .points-display {
+            background: #e0e5ec;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 8px 8px 24px #bebebe, -8px -8px 24px #ffffff;
+            text-align: center;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .service-card-neu {
+            background: #e0e5ec;
+            padding: 24px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 15px 15px 40px #bebebe, -15px -15px 40px #ffffff;
+            transition: all 0.3s ease;
+        }
+        .service-card-neu:hover {
+            transform: translateY(-5px);
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+        }
+        .service-card-neu:active {
+            box-shadow: inset 10px 10px 30px #bebebe, inset -10px -10px 30px #ffffff;
+        }
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #6c5ce7;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #e0e5ec;
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0;
+            box-shadow: 0 -10px 30px #bebebe, 0 10px 30px #ffffff;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #74b9ff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 12px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #6c5ce7;
+            box-shadow: inset 8px 8px 20px #bebebe, inset -8px -8px 20px #ffffff;
+        }
+        .nav-item i {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .btn-neu {
+            background: #e0e5ec;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 15px;
+            box-shadow: 8px 8px 20px #bebebe, -8px -8px 20px #ffffff;
+            font-weight: 600;
+            color: #6c5ce7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-neu:hover {
+            box-shadow: 10px 10px 25px #bebebe, -10px -10px 25px #ffffff;
+        }
+        .btn-neu:active {
+            box-shadow: inset 8px 8px 20px #bebebe, inset -8px -8px 20px #ffffff;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 8px 8px 20px #bebebe, -8px -8px 20px #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div>9:41</div>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header-neu">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face&auto=format" 
+                     alt="Profile" class="profile-pic">
+                <div>
+                    <div class="text-sm text-gray-600">Good morning</div>
+                    <div class="text-lg font-semibold text-gray-800">Nurul Ng</div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center neumorphic-small">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </div>
+                <div class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Card -->
+    <div class="points-card-neu">
+        <div class="points-display">
+            <div class="text-sm text-gray-600 mb-2">Available Points</div>
+            <div class="text-3xl font-bold text-gray-800 mb-4">200</div>
+            <button class="btn-neu">Redeem Points</button>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="service-grid">
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Warranty Registration</div>
+        </div>
+        
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Service Booking</div>
+        </div>
+        
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Warranty Claims</div>
+        </div>
+        
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Service Centers</div>
+        </div>
+        
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Rewards</div>
+        </div>
+        
+        <div class="service-card-neu">
+            <div class="service-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="font-semibold text-sm text-gray-800">Support</div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 gap-4 px-5 pb-24">
+        <div class="neumorphic p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">3</div>
+            <div class="text-sm font-semibold text-gray-600">Active Warranties</div>
+        </div>
+        <div class="neumorphic p-4 text-center">
+            <div class="text-2xl font-bold text-green-600">12</div>
+            <div class="text-sm font-semibold text-gray-600">Service Visits</div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Services</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-gift"></i>
+            <span>Rewards</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </div>
+</body>
+</html>
