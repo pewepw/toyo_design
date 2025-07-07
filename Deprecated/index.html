@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyo Tires Care - B2C App Prototypes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            border: none;
+        }
+        
+        /* Hide iframe scrollbars */
+        .phone-screen::-webkit-scrollbar {
+            display: none;
+        }
+        iframe {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        iframe::-webkit-scrollbar {
+            display: none;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .prototype-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        .prototype-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Toyo Tires Care B2C App</h1>
+            <p class="text-gray-600">10 High-Fidelity Home Screen Prototypes</p>
+        </div>
+        
+        <div class="grid-container">
+            <!-- Option 1: Simple & Functional -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 1: Simple & Functional</h3>
+                    <p class="text-sm opacity-90">Clean, straightforward design</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-1.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 2: Modern Minimalist -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 2: Modern Minimalist</h3>
+                    <p class="text-sm opacity-90">Sleek, contemporary interface</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-2.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 3: Material Design -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 3: Material Design</h3>
+                    <p class="text-sm opacity-90">Google Material Design principles</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-3.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 4: Flat Design -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 4: Flat Design</h3>
+                    <p class="text-sm opacity-90">Vibrant colors, flat elements</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-4.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 5: Neumorphism -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 5: Neumorphism</h3>
+                    <p class="text-sm opacity-90">Soft, tactile design</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-5.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 6: Glassmorphism -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 6: Glassmorphism</h3>
+                    <p class="text-sm opacity-90">Translucent glass effects</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-6.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 7: Card-based Layout -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 7: Card-based Layout</h3>
+                    <p class="text-sm opacity-90">Organized card interface</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-7.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 8: Dashboard Style -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 8: Dashboard Style</h3>
+                    <p class="text-sm opacity-90">Data-focused dashboard</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-8.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 9: Service-focused -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 9: Service-focused</h3>
+                    <p class="text-sm opacity-90">Service-centric design</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-9.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 10: Premium/Luxury -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-xl font-semibold">Option 10: Premium/Luxury</h3>
+                    <p class="text-sm opacity-90">Sophisticated, premium feel</p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <div class="phone-frame">
+                        <iframe src="home-option-10.html" class="phone-screen"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

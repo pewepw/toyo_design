@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Boost-Inspired</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* Hide scrollbar but keep scroll functionality */
+        html, body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .prototype-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 3rem;
+        }
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        .prototype-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* iOS Status Bar */
+        .ios-status-bar {
+            background: white;
+            color: black;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Boost-specific styles */
+        .boost-service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0 0px;
+            background: #f8f9fa;
+        }
+        .boost-service-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 2px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .boost-service-item:hover {
+            transform: translateY(-2px);
+        }
+        .boost-service-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+            border-radius: 0 0 38px 38px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .nav-item.active {
+            color: #dc2626;
+        }
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="text-center py-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">TOYO TIRES CARE</h1>
+        <p class="text-gray-600">Boost-Inspired B2C Prototype - Exact Malaysian/SEA App Matching</p>
+    </div>
+    
+    <div class="grid-container">
+        <!-- Boost-Inspired -->
+        <div class="prototype-card">
+            <div class="prototype-header" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
+                <h3 class="text-xl font-semibold">Boost-Inspired</h3>
+            </div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <!-- Exact Boost Status Bar -->
+                    <div style="background: #dc2626; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                        <div class="flex items-center">
+                            <span>12:44</span>
+                            <i class="fas fa-location-arrow ml-2"></i>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="flex gap-1">
+                                <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                <div class="w-1 h-3 bg-white rounded"></div>
+                            </div>
+                            <i class="fas fa-wifi text-white ml-2"></i>
+                            <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-red-600 font-bold ml-1">81</div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Header -->
+                    <div style="background: #dc2626; color: white; padding: 20px 24px;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-90">Welcome back, Ahmad</div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-star text-yellow-300 text-sm"></i>
+                                        <span class="font-semibold">1,250</span>
+                                        <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-ghost text-white text-lg"></i>
+                                </div>
+                                <div class="absolute -top-2 -right-2 bg-white text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                                    <i class="fas fa-bell text-red-600 text-xs"></i>
+                                </div>
+                                <div class="absolute -top-1 -right-1 bg-white text-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">11</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Main Hero -->
+                    <div style="background: #dc2626; color: white; padding: 0 24px 24px;">
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <div class="text-lg font-bold leading-tight mb-2">Power Up Your Tires with 3.5% savings</div>
+                                <div class="text-lg font-bold leading-tight mb-3">& RM3 Cashback!</div>
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 w-fit">
+                                    <span class="text-sm font-medium mr-2">Learn More</span>
+                                    <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                        <i class="fas fa-chevron-right text-red-600 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-32 h-32 bg-contain bg-no-repeat bg-center" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjY0IiBjeT0iNjQiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjIiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xOC45MiA2LjAxQzE4LjcyIDUuNDIgMTguMTYgNSAxNy41IDVIMTVWM0MxNSAyLjQ1IDE0LjU1IDIgMTQgMkg2QzUuNDUgMiA1IDIuNDUgNSAzVjVIMi41QzEuODQgNSAxLjI4IDUuNDIgMS4wOCA2LjAxQzAuODggNi42IDAuOTUgNy4yNiAxLjMgNy43TDEwIDIwLjVMMTguNyA3LjdDMTkuMDUgNy4yNiAxOS4xMiA2LjYgMTguOTIgNi4wMVpNNyA0SDEzVjVIN1Y0WiIvPgo8L3N2Zz4KPC9zdmc+Cg==')"></div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Wallet Section -->
+                    <div style="background: #f8f9fa; margin: 0; padding: 16px 24px;">
+                        <div class="bg-white rounded-xl p-4 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-plus text-red-600 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600">Add Money</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-600">Wallet</div>
+                                    <div class="font-bold text-lg">RM 150.91</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-red-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-gift text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-xs leading-tight break-words">TOYO-Je!</div>
+                                    <div class="text-xs text-gray-600">Unlock more TOYO features</div>
+                                    <div class="text-xs text-gray-600">- explore them now!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Services Grid -->
+                    <div style="background: #f8f9fa; padding: 0 24px;">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-lg text-gray-900">Do more with TOYO</h3>
+                            <span class="text-red-600 font-semibold text-xs leading-tight break-words">Edit</span>
+                        </div>
+                        <div class="boost-service-grid">
+                            <!-- Row 1 -->
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-paper-plane text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Find Tires</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-credit-card text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYO PayFlex</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-receipt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Bills</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-mobile-alt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words leading-tight">Mobile Service</div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-pie text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYO My Tires</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-umbrella text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Insurance</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shield-alt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Beyond Care</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-ellipsis-h text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">More</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Bottom Promotion -->
+                    <div class="bg-black text-white mx-6 rounded-xl overflow-hidden" style="margin-top: 24px; margin-bottom: 120px;">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div style="font-family: cursive; font-style: italic; font-size: 18px; line-height: 1.2;">
+                                        <div>Stay Protected.</div>
+                                        <div>Enjoy Double Rewards!</div>
+                                    </div>
+                                    <div class="bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mt-3 w-fit">
+                                        10% Cashback
+                                    </div>
+                                    <div class="bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mt-1 w-fit">
+                                        RM50 Rebate
+                                    </div>
+                                    <div class="text-xs text-gray-300 mt-2">Renew Your Tire Insurance in 3 Minutes</div>
+                                    <div class="text-xs text-gray-300">via TOYO & get 24/7 Tire Assistance!</div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="relative">
+                                        <div class="w-24 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-lg"></div>
+                                        <i class="fas fa-car absolute inset-0 flex items-center justify-center text-white text-2xl"></i>
+                                        <div class="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full"></div>
+                                        <div class="absolute bottom-1 left-1 w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-600 px-4 py-2">
+                            <i class="fas fa-chevron-right text-white float-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active" style="color: #dc2626;">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-university"></i>
+                            <span>Bank</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-qrcode text-white text-sm"></i>
+                            </div>
+                            <span>Scan</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-star"></i>
+                            <span>TOYOUP</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
