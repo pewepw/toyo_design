@@ -43,10 +43,14 @@ def replace_images_in_html(html_file: str, image_mappings: Dict[str, str]) -> No
         # Replace each image reference
         for img_filename, data_uri in image_mappings.items():
             if data_uri:
-                # Replace src="filename" with src="data:..."
-                pattern = f'src="{img_filename}"'
-                replacement = f'src="{data_uri}"'
-                content = content.replace(pattern, replacement)
+                # Replace src="../filename" with src="data:..." (for files in subdirectories)
+                relative_pattern = f'src="../{img_filename}"'
+                content = content.replace(relative_pattern, f'src="{data_uri}"')
+                
+                # Also replace src="filename" with src="data:..." (for files in root)
+                direct_pattern = f'src="{img_filename}"'
+                content = content.replace(direct_pattern, f'src="{data_uri}"')
+                
                 print(f"Replaced {img_filename} in {html_file}")
         
         # Write back to file
@@ -61,30 +65,30 @@ def replace_images_in_html(html_file: str, image_mappings: Dict[str, str]) -> No
 def main():
     # Define the images to convert
     target_images = [
-        'screenshots/campaign1.jpg',
-        'screenshots/campaign2.jpg',
-        'screenshots/campaign3.jpg',
-        'screenshots/campaign4.jpg',
-        'screenshots/campaign5.jpg',
-        'screenshots/campaign6.jpg',
-        'toyo-tires.png',
-        'CARE.png',
-        'ETEN.png',
-        'toyo-tires-white.png',
-        'CARE-white.png',
-        'ETEN-white.png',
-        'ic_warranty_plus.png',
-        'profile-placeholder.png',
-        'screenshots/image-event-1.png',
-        'screenshots/image-event-2.jpg',
-        'screenshots/image-speaker.png'
+        'images/campaign1.jpg',
+        'images/campaign2.jpg',
+        'images/campaign3.jpg',
+        'images/campaign4.jpg',
+        'images/campaign5.jpg',
+        'images/campaign6.jpg',
+        'images/toyo-tires.png',
+        'images/CARE.png',
+        'images/ETEN.png',
+        'images/toyo-tires-white.png',
+        'images/CARE-white.png',
+        'images/ETEN-white.png',
+        'images/ic_warranty_plus.png',
+        'images/profile-placeholder.png',
+        'images/image-event-1.png',
+        'images/image-event-2.jpg',
+        'images/image-speaker.png'
     ]
     
     # HTML files to update
     html_files = [
-        'campaign.html',
-        'home-main.html',
-        'games.html'
+        'design-1/campaign.html',
+        'design-1/home-main.html',
+        'design-1/games.html'
     ]
     
     print("Converting images to base64 data URIs...")
