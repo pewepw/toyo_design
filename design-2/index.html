@@ -41,20 +41,32 @@
         
         .iframe-container {
             width: 100%;
-            height: 1300px;
+            height: 1800px;
             overflow: hidden;
             position: relative;
             background: #f8f9fa;
         }
         
+        /* Individual heights for different prototypes */
+        .iframe-container.dashboard { height: 1800px; }
+        .iframe-container.sales-forecast { height: 1800px; }
+        .iframe-container.credit-balance { height: 1800px; }
+        .iframe-container.claims { height: 1800px; }
+        .iframe-container.appointments { height: 1800px; }
+        .iframe-container.order-tires { height: 1800px; }
+        .iframe-container.order-history { height: 1800px; }
+        .iframe-container.warranty { height: 1800px; }
+        .iframe-container.campaigns { height: 1800px; }
+        .iframe-container.support { height: 1800px; }
+        
         .prototype-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            transform: scale(0.6);
+            transform: scale(0.75);
             transform-origin: 0 0;
-            width: 166.67%;
-            height: 166.67%;
+            width: 133.33%;
+            height: 133.33%;
         }
         
         .loading-spinner {
@@ -105,7 +117,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">B2B Dashboard</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container dashboard">
                 <div class="loading-spinner"></div>
                 <iframe src="home-main.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -116,7 +128,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Sales Forecast</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container sales-forecast">
                 <div class="loading-spinner"></div>
                 <iframe src="sales-forecast.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -127,7 +139,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Credit Balance</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container credit-balance">
                 <div class="loading-spinner"></div>
                 <iframe src="credit-balance.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -138,7 +150,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Claims Management</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container claims">
                 <div class="loading-spinner"></div>
                 <iframe src="claims.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -149,7 +161,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Manage Appointments</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container appointments">
                 <div class="loading-spinner"></div>
                 <iframe src="manage-appointments.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -160,7 +172,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Order Tires</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container order-tires">
                 <div class="loading-spinner"></div>
                 <iframe src="order-tires.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -171,7 +183,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Order History</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container order-history">
                 <div class="loading-spinner"></div>
                 <iframe src="order-history.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -182,7 +194,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">Warranty Submission</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container warranty">
                 <div class="loading-spinner"></div>
                 <iframe src="warranty-submission.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -193,7 +205,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">B2B Campaigns</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container campaigns">
                 <div class="loading-spinner"></div>
                 <iframe src="campaign.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -204,7 +216,7 @@
             <div class="prototype-header">
                 <h3 class="text-xl font-semibold">B2B Support</h3>
             </div>
-            <div class="iframe-container">
+            <div class="iframe-container support">
                 <div class="loading-spinner"></div>
                 <iframe src="support.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
