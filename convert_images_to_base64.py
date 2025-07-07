@@ -115,23 +115,25 @@ def main():
     
     # HTML files to update
     html_files = [
-        'design-1/campaign.html',
-        'design-1/home-main.html',
-        'design-1/games.html',
-        'design-1/appointments-claim.html',
-        'design-1/membership-tier.html',
-        'design-1/rewards.html',
-        'design-1/service-centre-finder.html',
-        'design-1/support.html',
-        'design-1/warranty-claim.html',
-        'design-1/warranty-registration.html',
-        'design-2/claims.html',
-        'design-2/credit-balance.html',
-        'design-2/home-main.html',
-        'design-2/manage-appointments.html',
-        'design-2/order-history.html',
-        'design-2/order-tires.html',
-        'design-2/sales-forecast.html'
+        'design-1/combined-index.html',
+        # 'design-1/campaign.html',
+        # 'design-1/home-main.html',
+        # 'design-1/games.html',
+        # 'design-1/appointments-claim.html',
+        # 'design-1/membership-tier.html',
+        # 'design-1/rewards.html',
+        # 'design-1/service-centre-finder.html',
+        # 'design-1/support.html',
+        # 'design-1/warranty-claim.html',
+        # 'design-1/warranty-registration.html',
+         'design-2/combined-index.html',
+        # 'design-2/claims.html',
+        # 'design-2/credit-balance.html',
+        # 'design-2/home-main.html',
+        # 'design-2/manage-appointments.html',
+        # 'design-2/order-history.html',
+        # 'design-2/order-tires.html',
+        # 'design-2/sales-forecast.html'
     ]
     
     print("Converting images to base64 data URIs...")
