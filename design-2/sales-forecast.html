@@ -86,14 +86,14 @@
 
         .chart-placeholder {
             height: 160px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: white;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed #cbd5e1;
             position: relative;
             overflow: hidden;
+            padding: 20px;
         }
 
         .chart-bars {
@@ -212,15 +212,62 @@
                         </div>
                     </div>
                     <div class="chart-placeholder">
-                        <div class="chart-bars">
-                            <div class="bar" style="height: 60%; background: #3b82f6;"></div>
-                            <div class="bar" style="height: 75%; background: #3b82f6;"></div>
-                            <div class="bar" style="height: 45%; background: #3b82f6;"></div>
-                            <div class="bar" style="height: 80%; background: #3b82f6;"></div>
-                            <div class="bar" style="height: 65%; background: #3b82f6;"></div>
-                            <div class="bar" style="height: 85%; background: #10b981;"></div>
-                            <div class="bar" style="height: 90%; background: #10b981;"></div>
-                        </div>
+                        <svg width="100%" height="120" viewBox="0 0 300 120" style="overflow: visible;">
+                            <!-- Grid lines -->
+                            <defs>
+                                <pattern id="grid" width="50" height="30" patternUnits="userSpaceOnUse">
+                                    <path d="M 50 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="300" height="120" fill="url(#grid)" />
+                            
+                            <!-- Sales line (blue) -->
+                            <polyline 
+                                fill="none" 
+                                stroke="#3b82f6" 
+                                stroke-width="3" 
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                points="25,72 75,54 125,84 175,36 225,66 275,30"
+                            />
+                            
+                            <!-- Forecast line (green, dashed) -->
+                            <polyline 
+                                fill="none" 
+                                stroke="#10b981" 
+                                stroke-width="3" 
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-dasharray="8,4"
+                                points="225,66 275,30 325,24"
+                            />
+                            
+                            <!-- Data points for sales -->
+                            <circle cx="25" cy="72" r="4" fill="#3b82f6"/>
+                            <circle cx="75" cy="54" r="4" fill="#3b82f6"/>
+                            <circle cx="125" cy="84" r="4" fill="#3b82f6"/>
+                            <circle cx="175" cy="36" r="4" fill="#3b82f6"/>
+                            <circle cx="225" cy="66" r="4" fill="#3b82f6"/>
+                            
+                            <!-- Data points for forecast -->
+                            <circle cx="275" cy="30" r="4" fill="#10b981"/>
+                            <circle cx="325" cy="24" r="4" fill="#10b981"/>
+                            
+                            <!-- Subtle area fill under sales line -->
+                            <path 
+                                d="M25,72 L75,54 L125,84 L175,36 L225,66 L225,120 L25,120 Z" 
+                                fill="url(#salesGradient)" 
+                                opacity="0.1"
+                            />
+                            
+                            <!-- Gradient definition -->
+                            <defs>
+                                <linearGradient id="salesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+                                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
                     </div>
                     <div class="flex justify-between text-xs text-gray-500 mt-2">
                         <span>Jan</span>
