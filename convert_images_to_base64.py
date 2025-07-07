@@ -35,23 +35,48 @@ def image_to_base64(image_path: str) -> str:
         return None
 
 def replace_images_in_html(html_file: str, image_mappings: Dict[str, str]) -> None:
-    """Replace image src attributes with base64 data URIs."""
+    """Replace image src attributes and CSS background-image URLs with base64 data URIs."""
     try:
         with open(html_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
         # Replace each image reference
-        for img_filename, data_uri in image_mappings.items():
+        for img_path, data_uri in image_mappings.items():
             if data_uri:
-                # Replace src="../filename" with src="data:..." (for files in subdirectories)
-                relative_pattern = f'src="../{img_filename}"'
+                # Extract just the filename from the full path for pattern matching
+                img_filename = os.path.basename(img_path)
+                
+                # Replace src="../images/filename" with src="data:..." (for files in subdirectories)
+                relative_pattern = f'src="../images/{img_filename}"'
                 content = content.replace(relative_pattern, f'src="{data_uri}"')
                 
-                # Also replace src="filename" with src="data:..." (for files in root)
-                direct_pattern = f'src="{img_filename}"'
+                # Replace src="images/filename" with src="data:..." (for files in root)
+                direct_pattern = f'src="images/{img_filename}"'
                 content = content.replace(direct_pattern, f'src="{data_uri}"')
                 
-                print(f"Replaced {img_filename} in {html_file}")
+                # Replace CSS background-image: url('../images/filename')
+                css_relative_pattern = f"url('../images/{img_filename}')"
+                content = content.replace(css_relative_pattern, f"url('{data_uri}')")
+                
+                # Replace CSS background-image: url('images/filename')
+                css_direct_pattern = f"url('images/{img_filename}')"
+                content = content.replace(css_direct_pattern, f"url('{data_uri}')")
+                
+                # Also handle double quotes in CSS
+                css_relative_pattern_dq = f'url("../images/{img_filename}")'
+                content = content.replace(css_relative_pattern_dq, f"url('{data_uri}')")
+                
+                css_direct_pattern_dq = f'url("images/{img_filename}")'
+                content = content.replace(css_direct_pattern_dq, f"url('{data_uri}')")
+                
+                # Handle CSS without quotes
+                css_relative_pattern_nq = f"url(../images/{img_filename})"
+                content = content.replace(css_relative_pattern_nq, f"url('{data_uri}')")
+                
+                css_direct_pattern_nq = f"url(images/{img_filename})"
+                content = content.replace(css_direct_pattern_nq, f"url('{data_uri}')")
+                
+                print(f"Replaced {img_filename} references in {html_file}")
         
         # Write back to file
         with open(html_file, 'w', encoding='utf-8') as f:
@@ -81,14 +106,32 @@ def main():
         'images/profile-placeholder.png',
         'images/image-event-1.png',
         'images/image-event-2.jpg',
-        'images/image-speaker.png'
+        'images/image-speaker.png',
+        'images/image-look.webp',
+        'images/image-pointing.webp',
+        'images/image-promo1.jpg',
+        'images/image-promo2.jpg'
     ]
     
     # HTML files to update
     html_files = [
         'design-1/campaign.html',
         'design-1/home-main.html',
-        'design-1/games.html'
+        'design-1/games.html',
+        'design-1/appointments-claim.html',
+        'design-1/membership-tier.html',
+        'design-1/rewards.html',
+        'design-1/service-centre-finder.html',
+        'design-1/support.html',
+        'design-1/warranty-claim.html',
+        'design-1/warranty-registration.html',
+        'design-2/claims.html',
+        'design-2/credit-balance.html',
+        'design-2/home-main.html',
+        'design-2/manage-appointments.html',
+        'design-2/order-history.html',
+        'design-2/order-tires.html',
+        'design-2/sales-forecast.html'
     ]
     
     print("Converting images to base64 data URIs...")

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2B Support - TOYO TIRES B2B</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1800px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #2563EB;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: #2563EB;
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-method {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 8px 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin: 8px 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .priority-badge {
+            background: #dc2626;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .business-badge {
+            background: #2563EB;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </span>
+            </div>
+            
+            <!-- Header -->
+            <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">B2B Support</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-headset text-xl"></i>
+                        <i class="fas fa-ellipsis-v text-xl"></i>
+                    </div>
+                </div>
+                <p class="text-sm opacity-90 mt-2">Business support and assistance</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-1" style="padding: 20px;">
+                
+                <!-- Support Overview -->
+                <div class="p-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <div class="text-lg font-bold text-blue-600">Business Support</div>
+                                <div class="text-sm text-gray-600">Priority assistance for AutoMart Solutions</div>
+                            </div>
+                            <div class="business-badge">PREMIUM</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div>
+                                <div class="text-xl font-bold text-green-600">2h</div>
+                                <div class="text-xs text-gray-600">Response Time</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold text-blue-600">24/7</div>
+                                <div class="text-xs text-gray-600">Availability</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold text-purple-600">Dedicated</div>
+                                <div class="text-xs text-gray-600">Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Emergency Contact -->
+                <div class="support-card">
+                    <div class="bg-red-500 text-white p-4 text-center">
+                        <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+                        <div class="font-bold">Emergency Support</div>
+                        <div class="text-sm opacity-90">24/7 Critical Issue Hotline</div>
+                    </div>
+                    <div class="p-4">
+                        <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            Call Emergency Line
+                        </button>
+                        <div class="text-center text-xs text-gray-500 mt-2">
+                            For fleet breakdowns, urgent delivery issues
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Methods -->
+                <div class="mt-4">
+                    <div class="mx-4 mb-3">
+                        <h3 class="font-semibold text-gray-800">Contact Your Account Team</h3>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user-tie text-blue-600 text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Ahmad Rizal</div>
+                            <div class="text-sm text-gray-600">Dedicated Account Manager</div>
+                            <div class="text-xs text-green-600 mt-1">
+                                <i class="fas fa-circle text-xs mr-1"></i>Available Now
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-sm"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-comment text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-tools text-purple-600 text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Technical Support</div>
+                            <div class="text-sm text-gray-600">Installation & Technical Issues</div>
+                            <div class="text-xs text-orange-600 mt-1">
+                                <i class="fas fa-clock text-xs mr-1"></i>Avg response: 30 min
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-ticket-alt text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-shipping-fast text-green-600 text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Logistics Support</div>
+                            <div class="text-sm text-gray-600">Delivery & Order Tracking</div>
+                            <div class="text-xs text-blue-600 mt-1">
+                                <i class="fas fa-truck text-xs mr-1"></i>Real-time tracking
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Support Categories -->
+                <div class="mt-6">
+                    <div class="mx-4 mb-3">
+                        <h3 class="font-semibold text-gray-800">Quick Support Options</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mx-4">
+                        <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                            <i class="fas fa-file-invoice text-blue-500 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Billing Inquiry</div>
+                        </button>
+                        <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                            <i class="fas fa-exchange-alt text-green-500 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Return Request</div>
+                        </button>
+                        <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                            <i class="fas fa-calendar-alt text-purple-500 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Schedule Service</div>
+                        </button>
+                        <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                            <i class="fas fa-chart-line text-orange-500 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Account Review</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recent Tickets -->
+                <div class="mt-6">
+                    <div class="mx-4 mb-3">
+                        <h3 class="font-semibold text-gray-800">Recent Support Tickets</h3>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="p-4 border-b">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="font-medium">#B2B-2024-0892</div>
+                                    <div class="text-sm text-gray-600">Bulk delivery scheduling</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="priority-badge">HIGH</span>
+                                    <span class="text-xs text-green-600 font-medium">RESOLVED</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Resolved 2 hours ago</div>
+                        </div>
+                        
+                        <div class="p-4 border-b">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="font-medium">#B2B-2024-0891</div>
+                                    <div class="text-sm text-gray-600">Invoice discrepancy query</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="business-badge">NORMAL</span>
+                                    <span class="text-xs text-blue-600 font-medium">IN PROGRESS</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Updated 1 day ago</div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <button class="w-full text-blue-600 font-medium text-sm">View All Tickets</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business FAQ -->
+                <div class="mt-6">
+                    <div class="mx-4 mb-3">
+                        <h3 class="font-semibold text-gray-800">Business FAQ</h3>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="p-4 border-b bg-gray-50">
+                            <div class="font-medium text-sm">How do I modify my bulk order?</div>
+                        </div>
+                        <div class="p-4 text-sm text-gray-600">
+                            Contact your account manager within 24 hours of placing the order. Modifications are subject to availability and may affect pricing.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="p-4 border-b bg-gray-50">
+                            <div class="font-medium text-sm">What are the credit terms?</div>
+                        </div>
+                        <div class="p-4 text-sm text-gray-600">
+                            Standard terms are Net 30. Extended terms available for qualified accounts. Contact billing for more information.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="p-4 bg-gray-50">
+                            <div class="font-medium text-sm">How do I track fleet installations?</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Knowledge Base -->
+                <div class="mx-4 my-6">
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                        <i class="fas fa-book mr-2"></i>
+                        Access Business Knowledge Base
+                    </button>
+                </div>
+                
+                <div class="p-4 text-center text-xs text-gray-500">
+                    Business Support Hours: 24/7 for Premium Accounts<br>
+                    Standard Support: Mon-Fri 8AM-6PM
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
