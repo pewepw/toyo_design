@@ -9,7 +9,9 @@
       "Bash(ls:*)",
       "Bash(/usr/bin/python3:*)",
       "Bash(grep:*)",
-      "WebFetch(domain:www.toyotires.com.my)"
+      "WebFetch(domain:www.toyotires.com.my)",
+      "Bash(sed:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

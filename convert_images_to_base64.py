@@ -61,18 +61,26 @@ def replace_images_in_html(html_file: str, image_mappings: Dict[str, str]) -> No
 def main():
     # Define the images to convert
     target_images = [
-        'CARE.png',
-        'ETEN.png', 
+        'screenshots/campaign1.jpg',
+        'screenshots/campaign2.jpg',
+        'screenshots/campaign3.jpg',
+        'screenshots/campaign4.jpg',
+        'screenshots/campaign5.jpg',
+        'screenshots/campaign6.jpg',
         'toyo-tires.png',
-        'profile-placeholder.png'
+        'CARE.png',
+        'ic_warranty_plus.png',
+        'profile-placeholder.png',
+        'screenshots/image-event-1.png',
+        'screenshots/image-event-2.jpg',
+        'screenshots/image-speaker.png'
     ]
     
     # HTML files to update
     html_files = [
-        'all-15-b2c-prototypes.html',
-        'all-15-b2b-prototypes.html',
-        'bonus-b2c-prototypes.html',
-        'bonus-b2b-prototypes.html'
+        'campaign.html',
+        'home-main.html',
+        'games.html'
     ]
     
     print("Converting images to base64 data URIs...")
