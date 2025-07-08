@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Complete Prototype System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .prototype-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prototype-header {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: 1300px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+        
+        .prototype-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.6);
+            transform-origin: 0 0;
+            width: 166.67%;
+            height: 166.67%;
+        }
+        
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563EB;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+    <!-- Prototype Grid -->
+    <div class="prototype-grid">
+        <!-- Dashboard -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Dashboard</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="home-main.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Campaign -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Campaign</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="campaign.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Games -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Games</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="games.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Rewards -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Rewards</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="rewards.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Membership Tier -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Membership Tier</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="membership-tier.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Warranty Registration -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Registration</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="warranty-registration.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Warranty Claim -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Claim</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="warranty-claim.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Appointments for Claim -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Appointments for Claim</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="appointments-claim.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Service Centre Finder -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Service Centre Finder</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="service-centre-finder.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Support</h3>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-spinner"></div>
+                <iframe src="support.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

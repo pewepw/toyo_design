@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES B2B PORTAL - Complete Prototype System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .prototype-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prototype-header {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: 1800px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+        
+        /* Individual heights for different prototypes */
+        .iframe-container.dashboard { height: 1800px; }
+        .iframe-container.sales-forecast { height: 1800px; }
+        .iframe-container.credit-balance { height: 1800px; }
+        .iframe-container.claims { height: 1800px; }
+        .iframe-container.appointments { height: 1800px; }
+        .iframe-container.order-tires { height: 1800px; }
+        .iframe-container.order-history { height: 1800px; }
+        .iframe-container.warranty { height: 1800px; }
+        .iframe-container.campaigns { height: 1800px; }
+        .iframe-container.support { height: 1800px; }
+        
+        .prototype-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.75);
+            transform-origin: 0 0;
+            width: 133.33%;
+            height: 133.33%;
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563EB;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #1e40af 0%, #2563EB 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .b2b-badge {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+
+
+    <!-- Prototype Grid -->
+    <div class="prototype-grid">
+        <!-- Dashboard -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Dashboard</h3>
+            </div>
+            <div class="iframe-container dashboard">
+                <div class="loading-spinner"></div>
+                <iframe src="home-main.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Sales Forecast -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Sales Forecast</h3>
+            </div>
+            <div class="iframe-container sales-forecast">
+                <div class="loading-spinner"></div>
+                <iframe src="sales-forecast.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Credit Balance -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Credit Balance</h3>
+            </div>
+            <div class="iframe-container credit-balance">
+                <div class="loading-spinner"></div>
+                <iframe src="credit-balance.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Claims Management -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Claims Management</h3>
+            </div>
+            <div class="iframe-container claims">
+                <div class="loading-spinner"></div>
+                <iframe src="claims.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Manage Appointments -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Manage Appointments</h3>
+            </div>
+            <div class="iframe-container appointments">
+                <div class="loading-spinner"></div>
+                <iframe src="manage-appointments.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Order Tires -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Order Tires</h3>
+            </div>
+            <div class="iframe-container order-tires">
+                <div class="loading-spinner"></div>
+                <iframe src="order-tires.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Order History/Delivery -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Order History</h3>
+            </div>
+            <div class="iframe-container order-history">
+                <div class="loading-spinner"></div>
+                <iframe src="order-history.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Warranty Submission -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Submission</h3>
+            </div>
+            <div class="iframe-container warranty">
+                <div class="loading-spinner"></div>
+                <iframe src="warranty-submission.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Campaigns -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Campaigns</h3>
+            </div>
+            <div class="iframe-container campaigns">
+                <div class="loading-spinner"></div>
+                <iframe src="campaign.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Support</h3>
+            </div>
+            <div class="iframe-container support">
+                <div class="loading-spinner"></div>
+                <iframe src="support.html" class="prototype-iframe" onload="this.previousElementSibling.style.display='none'"></iframe>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Warranty Claim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1500px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .claim-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .status-approved {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .status-processing {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- iOS Status Bar -->
+            <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                <div class="flex items-center">
+                    <span>12:44</span>
+                    <i class="fas fa-signal ml-2"></i>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                        <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                        <div class="w-1 h-3 bg-white rounded"></div>
+                    </div>
+                    <i class="fas fa-wifi text-white ml-2"></i>
+                    <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div style="background: #2563EB; color: white; padding: 20px 24px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Warranty Claims</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-plus text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="p-4">
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <button class="bg-blue-600 text-white p-4 rounded-xl text-center">
+                        <i class="fas fa-plus text-2xl mb-2"></i>
+                        <div class="text-sm font-semibold">New Claim</div>
+                    </button>
+                    <button class="bg-white border-2 border-blue-600 text-blue-600 p-4 rounded-xl text-center">
+                        <i class="fas fa-search text-2xl mb-2"></i>
+                        <div class="text-sm font-semibold">Track Claim</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1" style="padding: 0 20px;">
+                <!-- Active Claims -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Active Claims</h3>
+                    
+                    <!-- Claim 1 -->
+                    <div class="claim-card">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <div class="font-semibold text-gray-900">Claim #WC240315001</div>
+                                    <div class="text-sm text-gray-600">PROXES T1 Sport - Sidewall damage</div>
+                                </div>
+                                <span class="status-badge status-processing">Processing</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="text-sm text-gray-600">Submitted: 15 Mar 2024</div>
+                                <div class="text-sm font-semibold text-blue-600">Est. completion: 5 days</div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-gray-500">Step 3 of 5: Technical Review</span>
+                                <button class="text-blue-600 font-semibold text-sm">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Claim 2 -->
+                    <div class="claim-card">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <div class="font-semibold text-gray-900">Claim #WC240310002</div>
+                                    <div class="text-sm text-gray-600">NANOENERGY 3 - Premature wear</div>
+                                </div>
+                                <span class="status-badge status-approved">Approved</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="text-sm text-gray-600">Submitted: 10 Mar 2024</div>
+                                <div class="text-sm font-semibold text-green-600">Ready for pickup</div>
+                            </div>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-check-circle text-green-600"></i>
+                                    <span class="text-sm text-green-700 font-medium">Replacement tires ready at KL Service Center</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claim History -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Recent Claims</h3>
+                    
+                    <!-- Completed Claim -->
+                    <div class="claim-card">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <div class="font-semibold text-gray-900">Claim #WC240205003</div>
+                                    <div class="text-sm text-gray-600">Open Country R/T - Manufacturing defect</div>
+                                </div>
+                                <span class="status-badge bg-gray-100 text-gray-600">Completed</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-sm text-gray-600">Completed: 25 Feb 2024</div>
+                                <div class="text-sm text-gray-600">Resolution: Full replacement</div>
+                            </div>
+                            <button class="text-blue-600 font-semibold text-sm">Download Certificate</button>
+                        </div>
+                    </div>
+
+                    <!-- Rejected Claim -->
+                    <div class="claim-card">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <div class="font-semibold text-gray-900">Claim #WC240120004</div>
+                                    <div class="text-sm text-gray-600">PROXES CF2 - Tread separation</div>
+                                </div>
+                                <span class="status-badge bg-red-100 text-red-600">Declined</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-sm text-gray-600">Decided: 30 Jan 2024</div>
+                            </div>
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-2">
+                                <div class="text-sm text-red-700">Reason: Damage caused by external factors (road hazard)</div>
+                            </div>
+                            <button class="text-blue-600 font-semibold text-sm">Appeal Decision</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="mb-4">
+                    <div class="bg-blue-50 rounded-xl p-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-question-circle text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-900 mb-1">Need Help?</h4>
+                                <p class="text-sm text-gray-600 mb-3">Our warranty specialists are here to assist you with your claim process.</p>
+                                <div class="flex gap-2">
+                                    <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">
+                                        <i class="fas fa-phone mr-1"></i>Call Support
+                                    </button>
+                                    <button class="border border-blue-600 text-blue-600 px-3 py-2 rounded-lg text-sm font-semibold">
+                                        <i class="fas fa-comment mr-1"></i>Live Chat
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claim Guidelines -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Claim Guidelines</h3>
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                                    <i class="fas fa-check text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-sm text-gray-900">Manufacturing defects</div>
+                                    <div class="text-xs text-gray-600">Covered under warranty</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                                    <i class="fas fa-check text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-sm text-gray-900">Premature wear</div>
+                                    <div class="text-xs text-gray-600">Subject to mileage and inspection</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mt-0.5">
+                                    <i class="fas fa-times text-red-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-sm text-gray-900">Road hazard damage</div>
+                                    <div class="text-xs text-gray-600">Not covered by standard warranty</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

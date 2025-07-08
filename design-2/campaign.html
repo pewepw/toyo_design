@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns - TOYO TIRES B2B</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 2000px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #2563EB;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: #2563EB;
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .campaign-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .campaign-header {
+            background: #2563EB;
+            color: white;
+            padding: 16px;
+            position: relative;
+        }
+        
+        .campaign-content {
+            padding: 16px;
+        }
+        
+        .timer-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </span>
+            </div>
+            
+            <!-- Header -->
+            <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Campaigns</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-filter text-xl"></i>
+                        <i class="fas fa-bell text-xl"></i>
+                    </div>
+                </div>
+                <p class="text-sm opacity-90 mt-2">Business promotions and special offers</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-1" style="padding: 20px 10px;">
+                
+                <!-- Active Campaigns Counter -->
+                <div class="p-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-2xl font-bold text-blue-600">5</div>
+                                <div class="text-sm text-gray-600">Active Campaigns</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-green-600">RM 12,500</div>
+                                <div class="text-sm text-gray-600">Total Savings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Campaign -->
+                <div class="campaign-card">
+                    <div class="campaign-header">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold">Fleet Special</h3>
+                                <p class="text-blue-100 text-sm mt-1">Buy 20 Get 5 FREE</p>
+                                <div class="timer-box">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Ends in 15 days
+                                </div>
+                            </div>
+                            <div class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                FEATURED
+                            </div>
+                        </div>
+                    </div>
+                    <div class="campaign-content">
+                        <p class="text-gray-600 text-sm mb-3">Perfect for fleet operators! Purchase 20 or more commercial tires and get 5 additional tires absolutely free.</p>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-gray-500">Minimum Order: 20 tires</span>
+                            <span class="text-sm font-bold text-green-600">25% Savings</span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold">
+                            <i class="fas fa-shopping-cart mr-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Volume Discount Campaign -->
+                <div class="campaign-card">
+                    <div class="campaign-header" style="background: #059669;">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold">Volume Discount</h3>
+                                <p class="text-green-100 text-sm mt-1">Up to 20% OFF</p>
+                                <div class="timer-box">
+                                    <i class="fas fa-infinity mr-1"></i>
+                                    Ongoing
+                                </div>
+                            </div>
+                            <i class="fas fa-chart-line text-2xl opacity-50"></i>
+                        </div>
+                    </div>
+                    <div class="campaign-content">
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between">
+                                <span class="text-sm">50-99 tires</span>
+                                <span class="font-bold text-green-600">5% OFF</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm">100-199 tires</span>
+                                <span class="font-bold text-green-600">10% OFF</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm">200+ tires</span>
+                                <span class="font-bold text-green-600">20% OFF</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-green-600 text-white py-4 rounded-lg font-semibold">
+                            Calculate Savings
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Seasonal Campaign -->
+                <div class="campaign-card">
+                    <div class="campaign-header" style="background: #DC2626;">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold">Winter Prep 2024</h3>
+                                <p class="text-red-100 text-sm mt-1">Free Installation</p>
+                                <div class="timer-box">
+                                    <i class="fas fa-snowflake mr-1"></i>
+                                    Until Dec 31
+                                </div>
+                            </div>
+                            <i class="fas fa-snowflake text-2xl opacity-50"></i>
+                        </div>
+                    </div>
+                    <div class="campaign-content">
+                        <p class="text-gray-600 text-sm mb-3">Prepare your fleet for winter! Free installation service for all winter tire purchases over RM 5,000.</p>
+                        <div class="bg-red-50 p-3 rounded-lg mb-3">
+                            <div class="text-sm font-medium text-red-800">Includes:</div>
+                            <ul class="text-sm text-red-700 mt-1">
+                                <li>• Free mounting & balancing</li>
+                                <li>• On-site installation available</li>
+                                <li>• Winter driving safety check</li>
+                            </ul>
+                        </div>
+                        <button class="w-full bg-red-600 text-white py-4 rounded-lg font-semibold">
+                            Book Installation
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Loyalty Program -->
+                <div class="campaign-card">
+                    <div class="campaign-header" style="background: #7C3AED;">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold">Business Plus</h3>
+                                <p class="text-purple-100 text-sm mt-1">Loyalty Program</p>
+                                <div class="timer-box">
+                                    <i class="fas fa-star mr-1"></i>
+                                    Join Today
+                                </div>
+                            </div>
+                            <i class="fas fa-crown text-2xl opacity-50"></i>
+                        </div>
+                    </div>
+                    <div class="campaign-content">
+                        <p class="text-gray-600 text-sm mb-3">Earn points on every purchase, get exclusive pricing, and enjoy priority support.</p>
+                        <div class="grid grid-cols-3 gap-2 mb-3">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-purple-600">2x</div>
+                                <div class="text-xs text-gray-500">Points</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-purple-600">VIP</div>
+                                <div class="text-xs text-gray-500">Support</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-purple-600">15%</div>
+                                <div class="text-xs text-gray-500">Extra Off</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-purple-600 text-white py-4 rounded-lg font-semibold">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-history text-blue-600 text-xl mb-2"></i>
+                        <div class="text-sm font-medium">My Campaigns</div>
+                        <div class="text-xs text-gray-500">View joined</div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bell text-blue-600 text-xl mb-2"></i>
+                        <div class="text-sm font-medium">Notifications</div>
+                        <div class="text-xs text-gray-500">Set alerts</div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-calculator text-blue-600 text-xl mb-2"></i>
+                        <div class="text-sm font-medium">ROI Calculator</div>
+                        <div class="text-xs text-gray-500">Check savings</div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users text-blue-600 text-xl mb-2"></i>
+                        <div class="text-sm font-medium">Refer Partner</div>
+                        <div class="text-xs text-gray-500">Earn bonus</div>
+                    </div>
+                </div>
+                
+                <div class="p-4 text-center text-xs text-gray-500">
+                    Terms and conditions apply to all campaigns<br>
+                    Contact your account manager for details
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

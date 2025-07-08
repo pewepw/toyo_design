@@ -1,0 +1,3427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES B2B PORTAL - Complete Prototype System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .prototype-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prototype-header {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .embedded-container {
+            width: 100%;
+            height: 2050px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+            transform: scale(0.75);
+            transform-origin: 0 0;
+            width: 133.33%;
+            height: 133.33%;
+        }
+        
+        /* Individual heights for different prototypes */
+        .embedded-container.dashboard { height: 2050px; }
+        .embedded-container.sales-forecast { height: 2050px; }
+        .embedded-container.credit-balance { height: 2050px; }
+        .embedded-container.claims { height: 2050px; }
+        .embedded-container.appointments { height: 2050px; }
+        .embedded-container.order-tires { height: 2050px; }
+        .embedded-container.order-history { height: 2050px; }
+        .embedded-container.warranty { height: 2050px; }
+        .embedded-container.campaigns { height: 2050px; }
+        .embedded-container.support { height: 2050px; }
+
+        .header-section {
+            background: linear-gradient(135deg, #1e40af 0%, #2563EB 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .b2b-badge {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Embedded styles from individual pages */
+        
+        /* Home Main styles */
+        .home-main-phone-frame {
+            width: 480px;
+            height: 1450px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .home-main-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .home-main-phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .home-main-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 8px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .metrics-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Sales Forecast Styles */
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: #f3f4f6;
+            border-radius: 50px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.3s ease;
+        }
+
+        .chart-placeholder {
+            height: 160px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            height: 100px;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .bar {
+            background: #3b82f6;
+            border-radius: 4px 4px 0 0;
+            flex: 1;
+            min-height: 20px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        /* Credit Balance Styles */
+        .balance-card {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            border-radius: 20px;
+            padding: 24px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .action-button {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .progress-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#10b981 0deg 216deg, #e5e7eb 216deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-inner {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* Claims Styles */
+        .overview-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .claim-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+            border-left: 4px solid transparent;
+        }
+
+        .claim-card.pending {
+            border-left-color: #f59e0b;
+        }
+
+        .claim-card.in-review {
+            border-left-color: #3b82f6;
+        }
+
+        .claim-card.approved {
+            border-left-color: #10b981;
+        }
+
+        .claim-card.rejected {
+            border-left-color: #ef4444;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-in-review {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .status-approved {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .claim-type-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .step {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+        }
+
+        .step.active {
+            background: #3b82f6;
+        }
+
+        .step.completed {
+            background: #10b981;
+        }
+
+        /* Manage Appointments Styles */
+        .appointment-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            border-left: 4px solid transparent;
+        }
+
+        .appointment-card.confirmed {
+            border-left-color: #10b981;
+        }
+
+        .appointment-card.pending {
+            border-left-color: #f59e0b;
+        }
+
+        .appointment-card.cancelled {
+            border-left-color: #ef4444;
+        }
+
+        .service-type-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .service-type-card:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 16px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-day.selected {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .calendar-day.has-appointment {
+            background: #fef3c7;
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .time-slot:hover {
+            border-color: #3B82F6;
+        }
+
+        .time-slot.selected {
+            border-color: #3B82F6;
+            background: #eff6ff;
+        }
+
+        .time-slot.unavailable {
+            background: #f3f4f6;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Order Tires Styles */
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: #3B82F6;
+        }
+
+        .category-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .category-tab.active {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .category-tab:not(.active) {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9fafb;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .quantity-btn:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 32px;
+            text-align: center;
+            border: none;
+            font-weight: 600;
+        }
+
+        .discount-tier {
+            background: #10b981;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3B82F6;
+            color: white;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            cursor: pointer;
+        }
+
+        .filter-chip {
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip.active {
+            background: #3B82F6;
+            color: white;
+        }
+
+        /* Order History Styles */
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        /* Warranty Submission Styles */
+        .form-section {
+            background: white;
+            margin: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .input-group {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .input-group:last-child {
+            border-bottom: none;
+        }
+
+        .file-upload {
+            border: 1px dashed #2563EB;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            background: #f8faff;
+            margin: 16px;
+        }
+
+        .submit-button {
+            background: #2563EB;
+            color: white;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            width: calc(100% - 32px);
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Campaign Styles */
+        .campaign-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .campaign-header {
+            background: #2563EB;
+            color: white;
+            padding: 16px;
+            position: relative;
+        }
+
+        .campaign-content {
+            padding: 16px;
+        }
+
+        .timer-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Support Styles */
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .contact-method {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 6px;
+            margin: 8px 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .priority-badge {
+            background: #dc2626;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .business-badge {
+            background: #2563EB;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #2563EB;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Support Styles */
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-method {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 6px;
+            margin: 8px 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        
+        .priority-badge {
+            background: #dc2626;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+    <!-- Prototype Grid -->
+    <div class="prototype-grid">
+        <!-- Dashboard -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Dashboard</h3>
+            </div>
+            <div class="embedded-container dashboard">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        
+                        <!-- Status Bar -->
+                        <div style="height: 44px; background: #2563EB; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px; margin-top: -1px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAAhCAYAAABjlJYfAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAhOAAAITgBRZYxYAAADlxJREFUeJzVXQlQVEca7gdoZObNDKCEDaICjoAOjA7DNVyS6BoPJKJLQBKISRRQ3MS4xi2TrWwON1trKpvVGE2saNxErUhcNdnEI5F4oAEFRQheK/HAAzWRKIKi5lh6fA/eDG9m3vzdM2/yVU0VVVR//9d/d//dr0+E5IO3g/8z3M+MIL1eqYkcE6Yanp2qSSl9VGMqKlYllcw/eOJC3ZcHTu7Dv6oj5w7FPr7wFXXyjFkp0xYVsdGTMlRR4yMCtFq1LV4BfCjkyR68CNOL+csiL/0iU1SqqFERbEz2yIHj5hdgP/QfM++FvfVnq3kfHTpxsU6TXDJfk1Rcgv1o9ueQUeFBQXqlLV4AXO1LR8C+gur3QfLpd6RZbr9i2Gq33dp1ut7KsMQgTcwkozrhiQmq5JJp6sRpc7759uwBXAc37W7YhX/47xeWfb5SnfTkc5qUounqjNI8pT5nrDo2N4kdMnpo34iH+vuHh2uQ0diri/tXmYC0iWqxXPMO8Q8framoO1NB225F3elPOTteyCqIQDkVxqJYB4XsowwbFUSi26pimH3EGp4M/PHGrWskvGLYXnn8LUFZgBo+bU3OANvvDMQR0LRy6M+et7xAis/drcsaIpLMdTEg/gmdW+y7w4ioYfGMM/7GooFu1tAVvaE85dWN2+y0XYa0omn0BWGcf8w97Jw3yyaS8DkDLg/O9OwM7ozcpc8aSzbsWQT1d8edn253JvXSRE8aTFuXMxDWGwuEhvaRU9eba3cuFugyd5ya1Hx/d2rwlIDVi7RRE+rA9plXVmxZQMgjBu9TF1u2EWr08gAfOfqE7wpYL6+E+5FYa+gIP6iflMZpMdjXJ5p+aKStyxnc/ennm6jnFAKjSSsdJacudnDy/ah7usBLDg2yNABVcrFJEKlla4g8unqMyBQVIYc1vEjzxvH0NhqLepHwkEJisEIeUZZGI8hXnqCfh6f51UqTt2waZDHa3Xt4e0JBtLTePEcaXGwFLCjf7Z9+4Tn7eIKP2JRSHZI4ypJTJ7bvlzZzJDQtSZnRBKsdF+hJfsXgZPiw2rRA2TTIYtSDCoEHJ4chTC+ED9Jq74Pyrf5ifwni5o6gHLQhIVYxflFjQ+XSpxppHrmD/HXoxMUqrF+VXGqirQsC1jRzpNCvKNyokVPPO59UvIQozMeSwu3Gv7vQcprLuJd/3NPR7rZvC6qoUX3NFTahEFRhUWhGH5o9Ikch29BbDAhlOJp8Z6qPna+RTx98lKwYkBVM0mHRBmssyBH61ZD3aq6celBkpAr793JLW7WsOtxtUD10yhCSiuUqBKTNfvhe3YDNfygifx8sqGDe/okz9VAtHIdHja4wfIdn9ncQsGT/HEQDU0GrVp6gXwg29vFHPcWvGB6jw+0G78Fr6Sd7nnO3bXvIfHbpSySFojIWpvK9IUnBht4bqeFg5RFzKUL46jITPDVgnb10rQnbn7d4458h6c3iQ0wBtHVBoUmdOdoT/MoD12vSvYRUdLjdIOUCWF9eV0mDJ2TsvPm8tqNnrhx3Nv1rq7Yt4ZITfcZxwYraXEH18QuNhxubT9Hg8h0+MRXZwZot1XNp2IFAHZulhfqs4K+rC3HaVz7YthCS3hUBHG985SgYOSe5L7X+/GvWM0snYB1l5XUfk3AdOX2lTjkiZwTeHoFPZQQbjQr8C9TpWE1Mqr9iUNoD6hH5Q/BOd5WpJLvh1OV6aw7ExhX+QfhTxRU+0nz1xnWIIDYuL8Oaj/+pEwrzNZHpYeZInTgd/LlkFu2C3n3S3GV8wGL6GCYPAuoiCjS8/c6fV2dh7YHyCLio+khpyB5ur3EqBj9oZBMKcmzVAXZEXgbEbu3J5uNsbP5kW7zZc5fPJckfP/8ISaswFRqQ2CbP7rKEadLpevMcz7654S8gDnog7kCFPNRBKMpl/AIbYufyiObF2MSiB0k1UvCdD4l9ARf2hVjlINpGgs92SS1jETC4BwXlx/Kco03+gOgxA0D8BD634WcLkGiCprfmoAGoDoEWzwlYivhp8RIE0RiB2D1EDOX2Gzp+ECkP6hzeQtIFxOcNQN17nBhfbUYIhMesQeBn2j7CCxIOytcemJpjF0BnQ6Xy7zp0aieQ3wsvBrlAG6iDuNbW0YIEZQjRpY6fFQ8rJtuA6BCi+G/rFqgSpppUxilRGn1OWIA2MUQxwBCsGGR8AB+W7vxG7Bdqudpuq+PtAsNGZw+FiEHSbiNg1m6tAc0T/HD95gUkYeMidL4GoRwhN/PaSth8Bsy2he+Y1vbbNyA82c8vH+2ogDEIdBLB1XYh3MrYQn1nUq/z37dedDZt+607+AiNLX+DRvyCDcPmxkrSedEAq8+OJi0/KE5dbKniTNvsKGlunKRWqQT87mqMDL4tAsoFsEvl1gg3lQEYEJt+6aXpSOKnBEmeIGnxqMCWFjxSgHBymrpG2+t3HF4P5aEBgRa5zx2LD1YghNwpd5dVKoFot/JDuZy0abkZMyTEl4BP0p1bEO6y8rrPEHwOgoHegCDxM5RhDY8Ng/Gb4TEbdPn8kJSVC/TIrsVmwUPI2LiCaCRh/so3IrM/hH/RRzuelcAPdurzSzYVi/FDuKTiwNGmN5BIrzHhmbczIXx+URmhUsoAukSOL0+UWgZido+d+f4oxK5U/ivX2q86y72l8vhWnFaVNjsFoo02uLxY1AkP0YTh1Td9Fmi6iAYCdRlsj0JXGEtjIWRSa23O/BWlIP4Qky+S0BjVybPiYfrNvbg1P8OaZoyE8EmzKY62W3du0uSzglfT5ev/cyG/TUBsOmMXwo3nh5AHHMfxD8/RoJ4XSnaOSsfJei+X0pCLt7EI24VsvlKnFI//TVQqWfkJDi9LsCf6+UbIKXsZ0LSrSDLf5CplVAf6pCP1ibNQRmfpFcOyDCrj1Cg8R8qZN++7E8kTU3vyYq27tIlBRJNZ582Ou5fcraX+u0sNVCrV5Za2SxIrlSsbixde5YNw760786k9/VDNtqDVjrsP2bnBE8orwUfe6tjHtRBu/mI7CTbEwLD6XNAhd6k2I7JeTAPyI1X/hL6QtBBoYvL9kfSLED3pc9CiPPk8+CVPG3G9vQO0ou0sdlQ31ljpgB36xZOpSP6ARbq6aVP/uSutzVBuG/bs3nhAmA+b/nGx/+3abr5644or7UK44/Jfm4LTrvrv/mWQ9FBwkl22OMImPjYMUEa2QLLvzgLBwbA9ijz+s7N+owUhPi8EIXJGNFQsN4dlq6F7+0bngXY4S9DP4LNNUG4btuwFd9LAa+tlHe9rbR2guStuEyPRiz8Qu+e/b2124Csifq5OgdIGEN5ZLyFfDBudC90PSQu0d6X7KHUZv4P6TJE43WjBBiVyRjHUhsBODydq0meHQTnxUREkoTGS6LbS7/AxBwo2eviovrF5DSEnScAC3TrBxuYOFcuLFRik07EE+YLv3QqeCB4xvL95H77ryl5dYNo77rRDuBX6zNh7Z3rhP7Xp6bGc7xm812ze4o0LVDFTovDns8WTW04C6i+MHnYhJNXHzlcgJyIxiWAeL6/Y+uGyjfu+oMElUTbxykiAfjJejXLb9cJ5C1a+/U1DUx0NLkQWrBhFwlNxQLuS+F9857M5QH5GNTyX5Ckwout/OA7qc5m0wOtoaZX2jNyt23fv8n//48PyzQtXfVn2+uqv1u0+fJrKwoFFoUN7Kd97h2HdGrBoQR3ycAByHER8goLGKEltIScaPY280QInye2fgwLbLuFXGorNy/WQNx0/2nbwPSRY2YPY58FlQaz9yLrVorymcSsinPekicqGs7uEfmImzVv+GITIybrLvLtx7+u0MwOFjYoiBJUHMjiu32rAkryiRTM/lQ1N5vvVXcVPklbw1BWG95xF67MgPAIt1j5mFHFPG0g4SYE3eHN5lH2PGgbvF6JCFxBJBYPvBKeZEQjaOn6REkSo9C4cl1OPkKqMU/vRyCcphH4AA7iPTaOfKGVXPfy6GjNgdVFMCISni8/Uc0GJhI8GeP/ijaNya8FA1m0VQvLG2vK/S6hU1pD12t+r7T//ijLMDyk4CiI+V35sO0Bia9GaL/Gd3KARCq38QsHJIF3SZl5/f/sMAvsO+b+qPvmZs9y7Dn23E6eNnPjCQ5S0+QTqckBTKlacXY2ShIsGPEUHhrVvwBvnVBHGfggQsOR0BF/BHGjshYMavuaD0BZ0dCLrW41dPqAAQg0u4feNHoPvHgN96vxzzc6FSLxciTti1NUo5f0K+Wh71xyd7AGL861lXVxStmcRARkEbn8N5u2Pd/9JNPMiFY+GNiEXEG5/DfuZt8rSOdvE81Y8IDo+rThShjx0/sq8rG8jYEE5efQ1FeJ5I5/5b22S9TkvfDjenEejsdexy3cdJ3AROL/2bK+EhFDcO+gZCFudlIqA6EcGcPa8bVQ0av7ggXQ5vUUd7TzMgcOVF7jVNV46qorK7iu0Rwt+oRl+EE2q4AxJI3eSG0JZ/Zj7oWntwOdf674uhPAK+UnS00B3doy9AjKeGws9pQBFgHacGgmO/9AEDcLuK1A7I3qfmAnhSkP+aFVS0fQVmyo3f/J1/b5/b6mp+uDz6prFZRX78W/V59UH126vrfn4q8P7Dxw736A2zZzDpsyarNA/HKsOMQUg9DI/smGQ859lzkyQ2wJtR3f5CB9vuG94doQ6Ln88m/RUSdWRc7VlX9d/s3TDvr1CH727qXL/e5urKtfvqKuqPNJ0WJ0044+qpBlZyuixev9wo0bADfGRVED9IDUddATr44QNazjqiEh92eMxXhnA51E8Lzk53v7+Ro3v4PQBirg8g3JY5ih16ux8NqFw9u7aU5Ubdn5bgV+yWr2lZv+abbUHcXvFdRLXT9yWv6g8Xr1ue+0Wv+SZT7KGqSN9wycOxIszApt2y/X/jf0Lc2yE3lIAAAAASUVORK5CYII=" alt="Toyo Tires" class="h-5">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAAAeAQMAAADkYPmNAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAhOAAAITgBRZYxYAAAAAZQTFRFAAAA////pdmf3QAAAAJ0Uk5TAP9bkSK1AAAAz0lEQVR4nIXQvQ7BUBwF8P9RN21zQyNGQyMmT4FYvIbRaDS1jcVr2DwGb+ARMBlVSNpcvde9rc8gzvbLmc6Bd6A8Kho2Be7KpuPab014Cn/zVVZm50IQBaHRGf68SwoKpBT7L1kyIidGZ5mVtSiuIpcqGR0rmI0f3bESOSMjlhUatAtZUqs3exHvL9xcgknaNVprIEAIwUQZorWJH7LS+uFdW72GrPRddqrFkxedPaNQP2Bf6MT4ZQtF+gH+KVc+lcCVKyMea+1rjrrJSwpdAaH1qr+s0M/oAAAAAElFTkSuQmCC" alt="Toyo Tires" class="h-5">
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bell text-white text-lg"></i>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">5</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-building text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-90">Welcome back,</div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-semibold">AutoMart Solutions Sdn Bhd</span>
+                                        <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Metrics Cards -->
+                        <div style="background: #f8f9fa; padding: 16px 20px;">
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="metrics-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs text-gray-600 font-medium">CREDIT BALANCE</div>
+                                        <i class="fas fa-credit-card text-blue-600"></i>
+                                    </div>
+                                    <div class="text-xl font-bold text-gray-900">RM 45,800</div>
+                                    <div class="text-xs text-green-600 font-medium">+15% this month</div>
+                                </div>
+                                
+                                <div class="metrics-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs text-gray-600 font-medium">MONTHLY SALES</div>
+                                        <i class="fas fa-chart-line text-green-600"></i>
+                                    </div>
+                                    <div class="text-xl font-bold text-gray-900">RM 28,950</div>
+                                    <div class="text-xs text-green-600 font-medium">+8% vs last month</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-blue-600">12</div>
+                                    <div class="text-xs text-gray-600">New Orders</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-orange-600">8</div>
+                                    <div class="text-xs text-gray-600">In Transit</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-green-600">3</div>
+                                    <div class="text-xs text-gray-600">Appointments</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- B2B Services Grid -->
+                        <div style="background: #f8f9fa; padding: 0 20px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Business Services</h3>
+                                <span class="text-blue-600 font-semibold text-sm">View All</span>
+                            </div>
+                            <div class="service-grid mb-6">
+                                <!-- Row 1 -->
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Sales Forecast</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Credit Balance</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Claims</div>
+                                </div>
+                                
+                                <!-- Row 2 -->
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Appointments</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Order Tires</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Delivery</div>
+                                </div>
+                                
+                                <!-- Row 3 -->
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Warranty</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Campaigns</div>
+                                </div>
+                                <div class="service-item">
+                                    <div class="service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Support</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Business Activity -->
+                        <div style="background: #f8f9fa; padding: 0 20px 20px;">
+                            <h3 class="font-bold text-lg text-gray-900 mb-4">Recent Business Activity</h3>
+                            <div class="bg-white rounded-xl p-4">
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-green-100 text-green-600">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Order #ORD-2024-156 Completed</div>
+                                        <div class="text-xs text-gray-600">240 PROXES tires delivered to Warehouse A</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">2h ago</div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Payment Received</div>
+                                        <div class="text-xs text-gray-600">RM 15,600 credited to account</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">1d ago</div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-orange-100 text-orange-600">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Campaign Enrolled</div>
+                                        <div class="text-xs text-gray-600">Buy 100 Get 10 Free - Spring Promotion</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">2d ago</div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-purple-100 text-purple-600">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Appointment Scheduled</div>
+                                        <div class="text-xs text-gray-600">Fleet inspection on Mar 15, 2024</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">3d ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Growth Program -->
+                        <div style="background: #f8f9fa; padding: 0 20px 20px;">
+                            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 text-white relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fas fa-rocket text-yellow-300"></i>
+                                        <span class="text-sm font-semibold">BUSINESS GROWTH</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-1">Scale Your Fleet</h3>
+                                    <p class="text-sm opacity-90 mb-3">Unlock volume discounts and premium services for large orders</p>
+                                    <button class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-sm">
+                                        Learn More
+                                    </button>
+                                </div>
+                                <div class="absolute -top-2 -right-2 opacity-20">
+                                    <i class="fas fa-chart-line text-6xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Forecast -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Sales Forecast</h3>
+            </div>
+            <div class="embedded-container sales-forecast">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        
+                        <!-- Status Bar -->
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Sales Forecast</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-filter text-xl"></i>
+                                    <i class="fas fa-download text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Business analytics and sales projections</p>
+                        </div>
+
+                        <!-- Time Period Selector -->
+                        <div class="p-4 bg-white border-b border-gray-200">
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-2 px-3 bg-blue-600 text-white rounded-lg font-semibold text-sm">
+                                    Monthly
+                                </button>
+                                <button class="flex-1 py-2 px-3 bg-gray-100 text-gray-600 rounded-lg font-semibold text-sm">
+                                    Quarterly
+                                </button>
+                                <button class="flex-1 py-2 px-3 bg-gray-100 text-gray-600 rounded-lg font-semibold text-sm">
+                                    Yearly
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 20px;">
+                            
+                            <!-- Key Metrics -->
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="metric-card">
+                                    <div class="text-2xl font-bold text-green-600">RM 156K</div>
+                                    <div class="text-sm text-gray-600">This Month</div>
+                                    <div class="text-xs text-green-600 font-medium mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i>+18%
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="text-2xl font-bold text-blue-600">RM 189K</div>
+                                    <div class="text-sm text-gray-600">Projected</div>
+                                    <div class="text-xs text-blue-600 font-medium mt-1">
+                                        <i class="fas fa-chart-line mr-1"></i>Next Month
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sales Trend Chart -->
+                            <div class="chart-container">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-gray-900">Sales Trend</h3>
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                        <span class="text-gray-600">Sales</span>
+                                        <div class="w-3 h-3 bg-green-500 rounded-full ml-2"></div>
+                                        <span class="text-gray-600">Forecast</span>
+                                    </div>
+                                </div>
+                                <div class="chart-placeholder">
+                                    <svg width="100%" height="120" viewBox="0 0 300 120" style="overflow: visible;">
+                                        <!-- Grid lines -->
+                                        <defs>
+                                            <pattern id="grid" width="50" height="30" patternUnits="userSpaceOnUse">
+                                                <path d="M 50 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                            </pattern>
+                                        </defs>
+                                        <rect width="300" height="120" fill="url(#grid)" />
+                                        
+                                        <!-- Sales line (blue) -->
+                                        <polyline 
+                                            fill="none" 
+                                            stroke="#3b82f6" 
+                                            stroke-width="3" 
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            points="25,72 75,54 125,84 175,36 225,66 275,30"
+                                        />
+                                        
+                                        <!-- Forecast line (green, dashed) -->
+                                        <polyline 
+                                            fill="none" 
+                                            stroke="#10b981" 
+                                            stroke-width="3" 
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-dasharray="8,4"
+                                            points="225,66 275,30 325,24"
+                                        />
+                                        
+                                        <!-- Data points for sales -->
+                                        <circle cx="25" cy="72" r="4" fill="#3b82f6"/>
+                                        <circle cx="75" cy="54" r="4" fill="#3b82f6"/>
+                                        <circle cx="125" cy="84" r="4" fill="#3b82f6"/>
+                                        <circle cx="175" cy="36" r="4" fill="#3b82f6"/>
+                                        <circle cx="225" cy="66" r="4" fill="#3b82f6"/>
+                                        
+                                        <!-- Data points for forecast -->
+                                        <circle cx="275" cy="30" r="4" fill="#10b981"/>
+                                        <circle cx="325" cy="24" r="4" fill="#10b981"/>
+                                        
+                                        <!-- Subtle area fill under sales line -->
+                                        <path 
+                                            d="M25,72 L75,54 L125,84 L175,36 L225,66 L225,120 L25,120 Z" 
+                                            fill="url(#salesGradient)" 
+                                            opacity="0.1"
+                                        />
+                                        
+                                        <!-- Gradient definition -->
+                                        <defs>
+                                            <linearGradient id="salesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+                                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500 mt-2">
+                                    <span>Jan</span>
+                                    <span>Feb</span>
+                                    <span>Mar</span>
+                                    <span>Apr</span>
+                                    <span>May</span>
+                                    <span>Jun</span>
+                                    <span>Jul</span>
+                                </div>
+                            </div>
+
+                            <!-- Product Performance -->
+                            <div class="chart-container">
+                                <h3 class="font-bold text-gray-900 mb-4">Product Performance</h3>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-medium text-gray-900">PROXES T1 Sport</span>
+                                            <span class="text-sm text-gray-600">68%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill bg-blue-500" style="width: 68%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-medium text-gray-900">NANOENERGY 3</span>
+                                            <span class="text-sm text-gray-600">52%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill bg-green-500" style="width: 52%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-medium text-gray-900">Open Country R/T</span>
+                                            <span class="text-sm text-gray-600">45%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill bg-orange-500" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm font-medium text-gray-900">PROXES CF2</span>
+                                            <span class="text-sm text-gray-600">38%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill bg-purple-500" style="width: 38%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quarterly Forecast -->
+                            <div class="chart-container">
+                                <h3 class="font-bold text-gray-900 mb-4">Quarterly Forecast</h3>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="text-lg font-bold text-blue-600">Q2 2024</div>
+                                        <div class="text-sm text-gray-600">RM 485K</div>
+                                        <div class="text-xs text-green-600">+12% growth</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                                        <div class="text-lg font-bold text-green-600">Q3 2024</div>
+                                        <div class="text-sm text-gray-600">RM 542K</div>
+                                        <div class="text-xs text-green-600">+15% growth</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Insights -->
+                            <div class="chart-container">
+                                <h3 class="font-bold text-gray-900 mb-4">Key Insights</h3>
+                                
+                                <div class="insight-item">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-arrow-up text-green-600 text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm text-gray-900">Strong Performance</div>
+                                        <div class="text-xs text-gray-600">PROXES series showing 18% growth this quarter</div>
+                                    </div>
+                                </div>
+
+                                <div class="insight-item">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-chart-line text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm text-gray-900">Seasonal Opportunity</div>
+                                        <div class="text-xs text-gray-600">Summer tire demand expected to peak in May-June</div>
+                                    </div>
+                                </div>
+
+                                <div class="insight-item">
+                                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bullseye text-orange-600 text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm text-gray-900">Action Recommended</div>
+                                        <div class="text-xs text-gray-600">Increase Open Country inventory for off-road season</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="flex gap-3 mt-6">
+                                <button class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Export Report
+                                </button>
+                                <button class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-cog mr-2"></i>
+                                    Settings
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Balance -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Credit Balance</h3>
+            </div>
+            <div class="embedded-container credit-balance">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        
+                        <!-- Status Bar -->
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Credit Balance</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-bell text-xl"></i>
+                                    <i class="fas fa-ellipsis-v text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Manage your business credit account</p>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 20px;">
+                            
+                            <!-- Credit Overview Card -->
+                            <div class="balance-card">
+                                <div class="relative z-10">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <div class="text-sm opacity-80 mb-1">Available Credit</div>
+                                            <div class="text-3xl font-bold">RM 45,800</div>
+                                        </div>
+                                        <div class="progress-ring">
+                                            <div class="progress-circle">
+                                                <div class="progress-inner">
+                                                    <div class="text-sm font-bold text-gray-900">61%</div>
+                                                    <div class="text-xs text-gray-600">Used</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center text-sm opacity-90">
+                                        <span>Credit Limit: RM 75,000</span>
+                                        <span>Used: RM 29,200</span>
+                                    </div>
+                                    
+                                    <div class="mt-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-calendar text-yellow-300"></i>
+                                            <span class="text-sm">Next payment due: Mar 15, 2024</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Summary -->
+                            <div class="info-card">
+                                <h3 class="font-bold text-gray-900 mb-4">Account Summary</h3>
+                                
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                                        <div class="text-xl font-bold text-red-600">RM 8,500</div>
+                                        <div class="text-sm text-gray-600">Outstanding</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="text-xl font-bold text-blue-600">RM 2,100</div>
+                                        <div class="text-sm text-gray-600">This Month</div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">Payment Schedule</span>
+                                        <span class="text-sm font-semibold text-gray-900">Monthly - 15th</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">Interest Rate</span>
+                                        <span class="text-sm font-semibold text-gray-900">2.5% per month</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">Account Status</span>
+                                        <span class="text-sm font-semibold text-green-600">
+                                            <i class="fas fa-check-circle mr-1"></i>Good Standing
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="action-button">
+                                    <i class="fas fa-credit-card text-blue-600 text-2xl mb-2"></i>
+                                    <div class="font-semibold text-sm text-gray-900">Make Payment</div>
+                                    <div class="text-xs text-gray-600">Pay outstanding balance</div>
+                                </div>
+                                <div class="action-button">
+                                    <i class="fas fa-file-invoice text-green-600 text-2xl mb-2"></i>
+                                    <div class="font-semibold text-sm text-gray-900">View Statement</div>
+                                    <div class="text-xs text-gray-600">Download monthly statement</div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Transactions -->
+                            <div class="info-card">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-900">Recent Transactions</h3>
+                                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                                </div>
+                                
+                                <div class="transaction-item">
+                                    <div class="transaction-icon bg-green-100 text-green-600">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Payment Received</div>
+                                        <div class="text-xs text-gray-600">Bank Transfer - CIMB Bank</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-green-600">+RM 15,000</div>
+                                        <div class="text-xs text-gray-500">Mar 1, 2024</div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction-item">
+                                    <div class="transaction-icon bg-red-100 text-red-600">
+                                        <i class="fas fa-minus"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Tire Purchase</div>
+                                        <div class="text-xs text-gray-600">Order #ORD-2024-156</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-red-600">-RM 12,800</div>
+                                        <div class="text-xs text-gray-500">Feb 28, 2024</div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction-item">
+                                    <div class="transaction-icon bg-orange-100 text-orange-600">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Interest Charge</div>
+                                        <div class="text-xs text-gray-600">Monthly interest on balance</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-orange-600">-RM 215</div>
+                                        <div class="text-xs text-gray-500">Feb 15, 2024</div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction-item">
+                                    <div class="transaction-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Bulk Order</div>
+                                        <div class="text-xs text-gray-600">Order #ORD-2024-142</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-red-600">-RM 8,950</div>
+                                        <div class="text-xs text-gray-500">Feb 10, 2024</div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction-item">
+                                    <div class="transaction-icon bg-green-100 text-green-600">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Credit Adjustment</div>
+                                        <div class="text-xs text-gray-600">Campaign discount applied</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-green-600">+RM 1,200</div>
+                                        <div class="text-xs text-gray-500">Feb 5, 2024</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Options -->
+                            <div class="info-card">
+                                <h3 class="font-bold text-gray-900 mb-4">Payment Options</h3>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-university text-blue-600"></i>
+                                            <div>
+                                                <div class="font-semibold text-sm text-gray-900">Bank Transfer</div>
+                                                <div class="text-xs text-gray-600">Direct to TOYO account</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
+                                    </div>
+
+                                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-credit-card text-green-600"></i>
+                                            <div>
+                                                <div class="font-semibold text-sm text-gray-900">Online Banking</div>
+                                                <div class="text-xs text-gray-600">Instant payment processing</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
+                                    </div>
+
+                                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-file-invoice text-purple-600"></i>
+                                            <div>
+                                                <div class="font-semibold text-sm text-gray-900">Cheque Payment</div>
+                                                <div class="text-xs text-gray-600">Mail to TOYO office</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Button -->
+                            <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg mt-6">
+                                <i class="fas fa-credit-card mr-2"></i>
+                                Make Payment Now
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claims Management -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Claims Management</h3>
+            </div>
+            <div class="embedded-container claims">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        
+                        <!-- Status Bar -->
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Claims Management</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-search text-xl"></i>
+                                    <i class="fas fa-filter text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Manage business warranty and claims</p>
+                        </div>
+
+                        <!-- Claims Overview -->
+                        <div style="padding: 20px 20px 0;">
+                            <div class="overview-card">
+                                <h3 class="font-bold text-gray-900 mb-4">Claims Overview</h3>
+                                
+                                <div class="grid grid-cols-4 gap-3">
+                                    <div class="text-center p-3 bg-orange-50 rounded-lg">
+                                        <div class="text-lg font-bold text-orange-600">8</div>
+                                        <div class="text-xs text-gray-600">Pending</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="text-lg font-bold text-blue-600">3</div>
+                                        <div class="text-xs text-gray-600">In Review</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                                        <div class="text-lg font-bold text-green-600">12</div>
+                                        <div class="text-xs text-gray-600">Approved</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                                        <div class="text-lg font-bold text-red-600">2</div>
+                                        <div class="text-xs text-gray-600">Rejected</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 0 20px 20px;">
+                            
+                            <!-- Active Claims Section -->
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Active Claims</h3>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm">
+                                    <i class="fas fa-plus mr-1"></i>New Claim
+                                </button>
+                            </div>
+
+                            <!-- Claim 1 - Pending -->
+                            <div class="claim-card pending">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="font-bold text-gray-900">Claim #CL-2024-089</span>
+                                                <span class="status-badge status-pending">Pending</span>
+                                            </div>
+                                            <div class="text-sm text-gray-600 mb-1">Premature tire wear - PROXES T1 Sport</div>
+                                            <div class="text-xs text-gray-500">Submitted: Mar 8, 2024</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-lg text-gray-900">RM 2,400</div>
+                                            <div class="text-xs text-gray-600">Claim Value</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                                        <div class="text-xs text-gray-600 mb-1">Fleet Vehicle: Truck #FL-08</div>
+                                        <div class="text-xs text-gray-600">Mileage: 15,000 km (Expected: 40,000 km)</div>
+                                    </div>
+
+                                    <div class="progress-steps">
+                                        <div class="step completed"></div>
+                                        <div class="step active"></div>
+                                        <div class="step"></div>
+                                        <div class="step"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-2">Awaiting technical review</div>
+                                </div>
+                            </div>
+
+                            <!-- Claim 2 - In Review -->
+                            <div class="claim-card in-review">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="font-bold text-gray-900">Claim #CL-2024-076</span>
+                                                <span class="status-badge status-in-review">In Review</span>
+                                            </div>
+                                            <div class="text-sm text-gray-600 mb-1">Manufacturing defect - Open Country R/T</div>
+                                            <div class="text-xs text-gray-500">Submitted: Feb 28, 2024</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-lg text-gray-900">RM 1,800</div>
+                                            <div class="text-xs text-gray-600">Claim Value</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                                        <div class="text-xs text-gray-600 mb-1">Fleet Vehicle: Van #FL-15</div>
+                                        <div class="text-xs text-gray-600">Issue: Sidewall bulge after 3 months</div>
+                                    </div>
+
+                                    <div class="progress-steps">
+                                        <div class="step completed"></div>
+                                        <div class="step completed"></div>
+                                        <div class="step active"></div>
+                                        <div class="step"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-2">Technical assessment in progress</div>
+                                </div>
+                            </div>
+
+                            <!-- Claim 3 - Approved -->
+                            <div class="claim-card approved">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="font-bold text-gray-900">Claim #CL-2024-065</span>
+                                                <span class="status-badge status-approved">Approved</span>
+                                            </div>
+                                            <div class="text-sm text-gray-600 mb-1">Road hazard damage - NANOENERGY 3</div>
+                                            <div class="text-xs text-gray-500">Submitted: Feb 15, 2024</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-lg text-green-600">RM 950</div>
+                                            <div class="text-xs text-gray-600">Approved</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-green-50 rounded-lg p-3 mb-3">
+                                        <div class="text-xs text-green-700 mb-1">✓ Replacement tire scheduled for delivery</div>
+                                        <div class="text-xs text-green-700">Delivery Date: Mar 12, 2024</div>
+                                    </div>
+
+                                    <div class="progress-steps">
+                                        <div class="step completed"></div>
+                                        <div class="step completed"></div>
+                                        <div class="step completed"></div>
+                                        <div class="step completed"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-2">Claim processed successfully</div>
+                                </div>
+                            </div>
+
+                            <!-- Claim Types Section -->
+                            <div class="mt-6">
+                                <h3 class="font-bold text-lg text-gray-900 mb-4">Submit New Claim</h3>
+                                
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                                        <div class="claim-type-icon bg-blue-100 text-blue-600 mx-auto">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Premature Wear</div>
+                                        <div class="text-xs text-gray-600">Early tire wear issues</div>
+                                    </div>
+
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                                        <div class="claim-type-icon bg-blue-100 text-blue-600 mx-auto">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Manufacturing</div>
+                                        <div class="text-xs text-gray-600">Production defects</div>
+                                    </div>
+
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                                        <div class="claim-type-icon bg-blue-100 text-blue-600 mx-auto">
+                                            <i class="fas fa-road"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Road Hazard</div>
+                                        <div class="text-xs text-gray-600">External damage</div>
+                                    </div>
+
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                                        <div class="claim-type-icon bg-blue-100 text-blue-600 mx-auto">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Warranty</div>
+                                        <div class="text-xs text-gray-600">General warranty</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Claims History -->
+                            <div class="mt-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg text-gray-900">Recent Completed Claims</h3>
+                                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex-1">
+                                                <div class="font-semibold text-sm text-gray-900">Claim #CL-2024-052</div>
+                                                <div class="text-xs text-gray-600">Manufacturing defect - Resolved</div>
+                                                <div class="text-xs text-gray-500">Completed: Feb 8, 2024</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-semibold text-green-600">RM 1,200</div>
+                                                <span class="status-badge status-approved">Approved</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex-1">
+                                                <div class="font-semibold text-sm text-gray-900">Claim #CL-2024-041</div>
+                                                <div class="text-xs text-gray-600">Premature wear - Insufficient evidence</div>
+                                                <div class="text-xs text-gray-500">Completed: Jan 28, 2024</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-semibold text-red-600">RM 0</div>
+                                                <span class="status-badge status-rejected">Rejected</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="mt-6 space-y-3">
+                                <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold">
+                                    <i class="fas fa-file-upload mr-2"></i>
+                                    Submit Documentation
+                                </button>
+                                <button class="w-full bg-gray-100 text-gray-700 py-4 rounded-lg font-semibold">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    Contact Claims Department
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Appointments -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Manage Appointments</h3>
+            </div>
+            <div class="embedded-container appointments">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Manage Appointments</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-calendar-plus text-xl"></i>
+                                    <i class="fas fa-ellipsis-v text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Schedule and manage business appointments</p>
+                        </div>
+                        <div style="padding: 20px 20px 0;">
+                            <div class="overview-card">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-900">This Week</h3>
+                                    <div class="flex items-center gap-2">
+                                        <button class="text-blue-600 font-semibold text-sm">Weekly</button>
+                                        <button class="text-gray-500 font-semibold text-sm">Monthly</button>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                                        <div class="text-lg font-bold text-green-600">8</div>
+                                        <div class="text-xs text-gray-600">Confirmed</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-orange-50 rounded-lg">
+                                        <div class="text-lg font-bold text-orange-600">3</div>
+                                        <div class="text-xs text-gray-600">Pending</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="text-lg font-bold text-blue-600">2</div>
+                                        <div class="text-xs text-gray-600">Today</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 0 20px 20px;">
+                            
+                            <!-- Upcoming Appointments -->
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Upcoming Appointments</h3>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm">
+                                    <i class="fas fa-plus mr-1"></i>New
+                                </button>
+                            </div>
+
+                            <!-- Today's Appointments -->
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2 text-sm">TODAY - March 12</h4>
+                                
+                                <div class="appointment-card confirmed">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-900">Bulk Installation</div>
+                                            <div class="text-sm text-gray-600">Fleet vehicles - 24 tires</div>
+                                            <div class="text-xs text-gray-500 mt-1">
+                                                <i class="fas fa-clock mr-1"></i>9:00 AM - 12:00 PM
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                                Confirmed
+                                            </span>
+                                            <div class="text-xs text-gray-500 mt-1">APT-001</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-600">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>TOYO Service Center KL</span>
+                                        <i class="fas fa-user ml-2"></i>
+                                        <span>Ahmad Rahman</span>
+                                    </div>
+                                </div>
+
+                                <div class="appointment-card confirmed">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-900">Fleet Inspection</div>
+                                            <div class="text-sm text-gray-600">Pre-purchase evaluation</div>
+                                            <div class="text-xs text-gray-500 mt-1">
+                                                <i class="fas fa-clock mr-1"></i>2:30 PM - 4:00 PM
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                                Confirmed
+                                            </span>
+                                            <div class="text-xs text-gray-500 mt-1">APT-002</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-600">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Client Location - Shah Alam</span>
+                                        <i class="fas fa-user ml-2"></i>
+                                        <span>Mobile Team</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tomorrow's Appointments -->
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2 text-sm">TOMORROW - March 13</h4>
+                                
+                                <div class="appointment-card pending">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-900">Bulk Delivery</div>
+                                            <div class="text-sm text-gray-600">Commercial tires - 60 units</div>
+                                            <div class="text-xs text-gray-500 mt-1">
+                                                <i class="fas fa-clock mr-1"></i>8:00 AM - 10:00 AM
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
+                                                Pending
+                                            </span>
+                                            <div class="text-xs text-gray-500 mt-1">APT-003</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-600">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Warehouse B - Subang</span>
+                                        <i class="fas fa-user ml-2"></i>
+                                        <span>Delivery Team</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service Types -->
+                            <div class="mt-6">
+                                <h3 class="font-bold text-lg text-gray-900 mb-4">Schedule New Appointment</h3>
+                                
+                                <div class="grid grid-cols-2 gap-3 mb-6">
+                                    <div class="service-type-card">
+                                        <div class="service-icon bg-blue-100 text-blue-600">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Bulk Installation</div>
+                                        <div class="text-xs text-gray-600">Fleet tire installation</div>
+                                    </div>
+
+                                    <div class="service-type-card">
+                                        <div class="service-icon bg-blue-100 text-blue-600">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Fleet Inspection</div>
+                                        <div class="text-xs text-gray-600">Tire condition assessment</div>
+                                    </div>
+
+                                    <div class="service-type-card">
+                                        <div class="service-icon bg-blue-100 text-blue-600">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Bulk Delivery</div>
+                                        <div class="text-xs text-gray-600">Large quantity delivery</div>
+                                    </div>
+
+                                    <div class="service-type-card">
+                                        <div class="service-icon bg-blue-100 text-blue-600">
+                                            <i class="fas fa-wrench"></i>
+                                        </div>
+                                        <div class="font-semibold text-sm text-gray-900">Maintenance</div>
+                                        <div class="text-xs text-gray-600">Fleet maintenance service</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Calendar View -->
+                            <div class="overview-card">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-gray-900">March 2024</h3>
+                                    <div class="flex items-center gap-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-7 gap-1 text-xs text-gray-500 mb-2">
+                                    <div class="text-center p-2">Sun</div>
+                                    <div class="text-center p-2">Mon</div>
+                                    <div class="text-center p-2">Tue</div>
+                                    <div class="text-center p-2">Wed</div>
+                                    <div class="text-center p-2">Thu</div>
+                                    <div class="text-center p-2">Fri</div>
+                                    <div class="text-center p-2">Sat</div>
+                                </div>
+                                
+                                <div class="calendar-grid">
+                                    <div class="calendar-day text-gray-400">26</div>
+                                    <div class="calendar-day text-gray-400">27</div>
+                                    <div class="calendar-day text-gray-400">28</div>
+                                    <div class="calendar-day text-gray-400">29</div>
+                                    <div class="calendar-day">1</div>
+                                    <div class="calendar-day">2</div>
+                                    <div class="calendar-day">3</div>
+                                    <div class="calendar-day">4</div>
+                                    <div class="calendar-day">5</div>
+                                    <div class="calendar-day">6</div>
+                                    <div class="calendar-day">7</div>
+                                    <div class="calendar-day">8</div>
+                                    <div class="calendar-day">9</div>
+                                    <div class="calendar-day">10</div>
+                                    <div class="calendar-day">11</div>
+                                    <div class="calendar-day selected">12</div>
+                                    <div class="calendar-day has-appointment">13</div>
+                                    <div class="calendar-day">14</div>
+                                    <div class="calendar-day has-appointment">15</div>
+                                    <div class="calendar-day">16</div>
+                                    <div class="calendar-day">17</div>
+                                    <div class="calendar-day">18</div>
+                                    <div class="calendar-day">19</div>
+                                    <div class="calendar-day has-appointment">20</div>
+                                    <div class="calendar-day">21</div>
+                                    <div class="calendar-day">22</div>
+                                    <div class="calendar-day">23</div>
+                                    <div class="calendar-day">24</div>
+                                    <div class="calendar-day">25</div>
+                                    <div class="calendar-day">26</div>
+                                    <div class="calendar-day">27</div>
+                                    <div class="calendar-day">28</div>
+                                    <div class="calendar-day">29</div>
+                                    <div class="calendar-day">30</div>
+                                    <div class="calendar-day">31</div>
+                                </div>
+                            </div>
+
+                            <!-- Available Time Slots -->
+                            <div class="mt-4">
+                                <h4 class="font-semibold text-gray-900 mb-3">Available Time Slots - Today</h4>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="time-slot unavailable">
+                                        <div class="font-semibold text-sm">9:00 AM</div>
+                                        <div class="text-xs">Booked</div>
+                                    </div>
+                                    <div class="time-slot">
+                                        <div class="font-semibold text-sm">11:00 AM</div>
+                                        <div class="text-xs">Available</div>
+                                    </div>
+                                    <div class="time-slot">
+                                        <div class="font-semibold text-sm">1:00 PM</div>
+                                        <div class="text-xs">Available</div>
+                                    </div>
+                                    <div class="time-slot unavailable">
+                                        <div class="font-semibold text-sm">2:30 PM</div>
+                                        <div class="text-xs">Booked</div>
+                                    </div>
+                                    <div class="time-slot">
+                                        <div class="font-semibold text-sm">4:00 PM</div>
+                                        <div class="text-xs">Available</div>
+                                    </div>
+                                    <div class="time-slot">
+                                        <div class="font-semibold text-sm">5:30 PM</div>
+                                        <div class="text-xs">Available</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="mt-6 space-y-3">
+                                <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold">
+                                    <i class="fas fa-calendar-plus mr-2"></i>
+                                    Book New Appointment
+                                </button>
+                                <button class="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    Call Scheduling Team
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Tires -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Order Tires</h3>
+            </div>
+            <div class="embedded-container order-tires">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Order Tires</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-search text-xl"></i>
+                                    <div class="relative">
+                                        <i class="fas fa-shopping-cart text-xl"></i>
+                                        <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Bulk tire ordering</p>
+                        </div>
+                        <div class="p-4 bg-white border-b border-gray-200">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="flex-1 relative">
+                                    <input type="text" placeholder="Search tire models..." 
+                                           class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                                <button class="p-2 border border-gray-300 rounded-lg">
+                                    <i class="fas fa-filter text-gray-600"></i>
+                                </button>
+                            </div>
+                            <div class="flex gap-2 overflow-x-auto">
+                                <div class="filter-chip active">All Tires</div>
+                                <div class="filter-chip">Passenger</div>
+                                <div class="filter-chip">Commercial</div>
+                                <div class="filter-chip">SUV/Truck</div>
+                                <div class="filter-chip">Performance</div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="discount-tier">
+                                <div class="text-center">
+                                    <div class="font-bold text-sm mb-1">Volume Discounts Available</div>
+                                    <div class="text-xs opacity-90">50+ tires: 5% | 100+ tires: 10% | 200+ tires: 15%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 0 20px 20px;">
+                            
+                            <!-- Quick Reorder -->
+                            <div class="summary-card mb-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-gray-900">Quick Reorder</h3>
+                                    <span class="text-blue-600 font-semibold text-sm">View History</span>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-gray-900">PROXES T1 Sport 225/45R17</div>
+                                            <div class="text-xs text-gray-600">Last ordered: Feb 28, 2024 (24 units)</div>
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
+                                            Reorder
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-gray-900">NANOENERGY 3 195/65R15</div>
+                                            <div class="text-xs text-gray-600">Last ordered: Feb 15, 2024 (16 units)</div>
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
+                                            Reorder
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Featured Products -->
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Featured Products</h3>
+                                <span class="text-blue-600 font-semibold text-sm">View All</span>
+                            </div>
+
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <div>
+                                                <h4 class="font-bold text-gray-900">PROXES T1 Sport</h4>
+                                                <div class="text-sm text-gray-600">225/45R17 94W</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-bold text-lg text-gray-900">RM 320</div>
+                                                <div class="text-xs text-gray-500">per tire</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between">
+                                            <div class="quantity-control">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <input type="number" value="0" class="quantity-input" min="0">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="product-card">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <div>
+                                                <h4 class="font-bold text-gray-900">NANOENERGY 3</h4>
+                                                <div class="text-sm text-gray-600">195/65R15 91H</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-bold text-lg text-gray-900">RM 245</div>
+                                                <div class="text-xs text-gray-500">per tire</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between">
+                                            <div class="quantity-control">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <input type="number" value="16" class="quantity-input" min="0">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="product-card">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <div>
+                                                <h4 class="font-bold text-gray-900">Open Country R/T</h4>
+                                                <div class="text-sm text-gray-600">265/70R17 115T</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-bold text-lg text-gray-900">RM 485</div>
+                                                <div class="text-xs text-gray-500">per tire</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between">
+                                            <div class="quantity-control">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <input type="number" value="8" class="quantity-input" min="0">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 4 -->
+                            <div class="product-card">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <div>
+                                                <h4 class="font-bold text-gray-900">PROXES CF2</h4>
+                                                <div class="text-sm text-gray-600">205/55R16 91V</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-bold text-lg text-gray-900">RM 285</div>
+                                                <div class="text-xs text-gray-500">per tire</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between">
+                                            <div class="quantity-control">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <input type="number" value="0" class="quantity-input" min="0">
+                                                <button class="quantity-btn">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cart Summary -->
+                            <div class="summary-card">
+                                <h3 class="font-bold text-gray-900 mb-3">Current Order Summary</h3>
+                                
+                                <div class="cart-item">
+                                    <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">NANOENERGY 3</div>
+                                        <div class="text-xs text-gray-600">195/65R15 - 16 units</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-gray-900">RM 3,920</div>
+                                    </div>
+                                </div>
+
+                                <div class="cart-item">
+                                    <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                                        <i class="fas fa-circle text-gray-400 text-sm"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Open Country R/T</div>
+                                        <div class="text-xs text-gray-600">265/70R17 - 8 units</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-sm text-gray-900">RM 3,880</div>
+                                    </div>
+                                </div>
+
+                                <div class="border-t border-gray-200 pt-3 mt-3">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600">Subtotal (24 tires)</span>
+                                        <span class="text-sm text-gray-900">RM 7,800</span>
+                                    </div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-green-600">Volume Discount (5%)</span>
+                                        <span class="text-sm text-green-600">-RM 390</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-gray-900">Total</span>
+                                        <span class="font-bold text-xl text-gray-900">RM 7,410</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bulk Pricing Info -->
+                            <div class="summary-card">
+                                <h3 class="font-bold text-gray-900 mb-3">Bulk Pricing Tiers</h3>
+                                
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between p-2 bg-yellow-50 rounded-lg">
+                                        <div>
+                                            <div class="font-semibold text-sm text-yellow-800">50-99 tires</div>
+                                            <div class="text-xs text-yellow-600">Current tier</div>
+                                        </div>
+                                        <div class="font-bold text-yellow-800">5% OFF</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                                        <div>
+                                            <div class="font-semibold text-sm text-green-800">100-199 tires</div>
+                                            <div class="text-xs text-green-600">Next tier: +76 tires</div>
+                                        </div>
+                                        <div class="font-bold text-green-800">10% OFF</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-2 bg-blue-50 rounded-lg">
+                                        <div>
+                                            <div class="font-semibold text-sm text-blue-800">200+ tires</div>
+                                            <div class="text-xs text-blue-600">Premium tier: +176 tires</div>
+                                        </div>
+                                        <div class="font-bold text-blue-800">15% OFF</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="space-y-3 mt-6">
+                                <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg">
+                                    <i class="fas fa-shopping-cart mr-2"></i>
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order History/Delivery -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Order History</h3>
+            </div>
+            <div class="embedded-container order-history">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Order History</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-search text-xl"></i>
+                                    <i class="fas fa-filter text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Track orders and manage deliveries</p>
+                        </div>
+                        <div style="background: #f8f9fa; margin: 0; padding: 16px 20px;">
+                            <div class="bg-white rounded-xl p-4 shadow-sm mb-4">
+                                <h3 class="font-bold text-gray-900 mb-3">Order Summary</h3>
+                                <div class="grid grid-cols-4 gap-3">
+                                    <div class="text-center">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                            <i class="fas fa-truck text-blue-600"></i>
+                                        </div>
+                                        <div class="text-lg font-bold text-gray-900">3</div>
+                                        <div class="text-xs text-gray-600">In Transit</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                            <i class="fas fa-check text-green-600"></i>
+                                        </div>
+                                        <div class="text-lg font-bold text-gray-900">28</div>
+                                        <div class="text-xs text-gray-600">Delivered</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                            <i class="fas fa-clock text-yellow-600"></i>
+                                        </div>
+                                        <div class="text-lg font-bold text-gray-900">2</div>
+                                        <div class="text-xs text-gray-600">Pending</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                            <i class="fas fa-redo text-gray-600"></i>
+                                        </div>
+                                        <div class="text-lg font-bold text-gray-900">5</div>
+                                        <div class="text-xs text-gray-600">Returned</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 0 20px;">
+                            <!-- Current Orders -->
+                            <div class="mb-4">
+                                <h3 class="font-bold text-lg text-gray-900 mb-3">Current Orders</h3>
+                                
+                                <!-- Order 1 - In Transit -->
+                                <div class="order-card">
+                                    <div class="bg-blue-600 p-4 text-white">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <h3 class="font-bold text-lg mb-1">Order #TO-240315-001</h3>
+                                                <p class="text-sm opacity-90 mb-2">24 PROXES T1 Sport tires</p>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-white text-blue-600 px-2 py-1 rounded-md text-xs font-bold">
+                                                        IN TRANSIT
+                                                    </div>
+                                                    <span class="text-xs opacity-75">Expected: Today</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-truck text-white text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between text-sm mb-3">
+                                            <span class="text-gray-600">Ordered: March 12, 2024</span>
+                                            <span class="text-gray-900 font-semibold">RM 7,680</span>
+                                        </div>
+                                        <div class="bg-blue-50 p-3 rounded-lg mb-3">
+                                            <div class="text-sm text-blue-800 font-medium mb-1">Package is out for delivery</div>
+                                            <div class="text-xs text-blue-600">Tracking: TK240315001MY</div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                Track Package
+                                            </button>
+                                            <button class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-semibold">
+                                                Contact Driver
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Order 2 - Pending -->
+                                <div class="order-card">
+                                    <div class="bg-yellow-600 p-4 text-white">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <h3 class="font-bold text-lg mb-1">Order #TO-240314-002</h3>
+                                                <p class="text-sm opacity-90 mb-2">16 Open Country A/T III tires</p>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-white text-yellow-600 px-2 py-1 rounded-md text-xs font-bold">
+                                                        PROCESSING
+                                                    </div>
+                                                    <span class="text-xs opacity-75">Processing payment</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-clock text-white text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between text-sm mb-3">
+                                            <span class="text-gray-600">Ordered: March 14, 2024</span>
+                                            <span class="text-gray-900 font-semibold">RM 7,200</span>
+                                        </div>
+                                        <div class="bg-yellow-50 p-3 rounded-lg mb-3">
+                                            <div class="text-sm text-yellow-800 font-medium mb-1">Payment verification in progress</div>
+                                            <div class="text-xs text-yellow-600">Expected processing time: 1-2 business days</div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-yellow-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                Update Payment
+                                            </button>
+                                            <button class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-semibold">
+                                                Cancel Order
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Orders -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-lg text-gray-900">Recent Orders</h3>
+                                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                                </div>
+                                
+                                <!-- Recent Order 1 -->
+                                <div class="order-card">
+                                    <div class="bg-green-600 p-4 text-white">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <h3 class="font-bold text-lg mb-1">Order #TO-240310-005</h3>
+                                                <p class="text-sm opacity-90 mb-2">8 Proxes Sport tires</p>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-white text-green-600 px-2 py-1 rounded-md text-xs font-bold">
+                                                        DELIVERED
+                                                    </div>
+                                                    <span class="text-xs opacity-75">March 12, 2024</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-check text-white text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between text-sm mb-3">
+                                            <span class="text-gray-600">Delivered: March 12, 2024</span>
+                                            <span class="text-gray-900 font-semibold">RM 4,160</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                Reorder
+                                            </button>
+                                            <button class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-semibold">
+                                                View Invoice
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Recent Order 2 -->
+                                <div class="order-card">
+                                    <div class="bg-green-600 p-4 text-white">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <h3 class="font-bold text-lg mb-1">Order #TO-240308-003</h3>
+                                                <p class="text-sm opacity-90 mb-2">12 PROXES CF2 tires</p>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-white text-green-600 px-2 py-1 rounded-md text-xs font-bold">
+                                                        DELIVERED
+                                                    </div>
+                                                    <span class="text-xs opacity-75">March 10, 2024</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-check text-white text-xl"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between text-sm mb-3">
+                                            <span class="text-gray-600">Delivered: March 10, 2024</span>
+                                            <span class="text-gray-900 font-semibold">RM 3,840</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                Reorder
+                                            </button>
+                                            <button class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-semibold">
+                                                View Invoice
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Statistics -->
+                            <div class="mb-4">
+                                <h3 class="font-bold text-lg text-gray-900 mb-3">This Year Summary</h3>
+                                <div class="bg-white rounded-xl p-4 shadow-sm">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                            <div class="text-lg font-bold text-blue-600">38</div>
+                                            <div class="text-sm text-gray-600 mb-1">Total Orders</div>
+                                            <div class="text-xs text-green-600">+12% vs last year</div>
+                                        </div>
+                                        <div class="text-center p-3 bg-green-50 rounded-lg">
+                                            <div class="text-lg font-bold text-green-600">RM 95,480</div>
+                                            <div class="text-sm text-gray-600 mb-1">Total Spent</div>
+                                            <div class="text-xs text-green-600">+18% vs last year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Actions -->
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <button class="bg-blue-600 text-white py-4 rounded-xl font-semibold text-sm">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    New Order
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 py-4 rounded-xl font-semibold text-sm">
+                                    <i class="fas fa-file-download mr-2"></i>
+                                    Export Orders
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warranty Submission -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Submission</h3>
+            </div>
+            <div class="embedded-container warranty">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Warranty Submission</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-upload text-xl"></i>
+                                    <i class="fas fa-ellipsis-v text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Submit business warranty claims</p>
+                        </div>
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 20px 10px;">
+                            
+                            <!-- Quick Stats -->
+                            <div class="p-4">
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="bg-white p-3 rounded-lg text-center">
+                                        <div class="text-lg font-bold text-blue-600">12</div>
+                                        <div class="text-xs text-gray-600">Active Claims</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg text-center">
+                                        <div class="text-lg font-bold text-green-600">89%</div>
+                                        <div class="text-xs text-gray-600">Approval Rate</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg text-center">
+                                        <div class="text-lg font-bold text-orange-600">3 days</div>
+                                        <div class="text-xs text-gray-600">Avg Process</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Business Information -->
+                            <div class="form-section">
+                                <div class="bg-blue-50 p-3 border-b">
+                                    <h3 class="font-semibold text-blue-800">Business Information</h3>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                                    <input type="text" class="w-full p-3 border rounded-lg" placeholder="AutoMart Solutions Sdn Bhd" value="AutoMart Solutions Sdn Bhd" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Business Registration</label>
+                                    <input type="text" class="w-full p-3 border rounded-lg" placeholder="201234567890" value="201234567890" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Contact Person</label>
+                                    <input type="text" class="w-full p-3 border rounded-lg" placeholder="Ahmad Rahman">
+                                </div>
+                            </div>
+                            
+                            <!-- Warranty Details -->
+                            <div class="form-section">
+                                <div class="bg-blue-50 p-3 border-b">
+                                    <h3 class="font-semibold text-blue-800">Warranty Details</h3>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Product Model</label>
+                                    <select class="w-full p-3 border rounded-lg">
+                                        <option>Select tire model</option>
+                                        <option>TOYO PROXES R888R</option>
+                                        <option>TOYO OPEN COUNTRY A/T III</option>
+                                        <option>TOYO CELSIUS CUV</option>
+                                        <option>TOYO OBSERVE GSi-6</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Purchase Date</label>
+                                    <input type="date" class="w-full p-3 border rounded-lg">
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Serial Number</label>
+                                    <input type="text" class="w-full p-3 border rounded-lg" placeholder="Enter tire serial number">
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Issue Description</label>
+                                    <textarea class="w-full p-3 border rounded-lg h-20" placeholder="Describe the issue in detail..."></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Fleet Information -->
+                            <div class="form-section">
+                                <div class="bg-blue-50 p-3 border-b">
+                                    <h3 class="font-semibold text-blue-800">Fleet Information</h3>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
+                                    <select class="w-full p-3 border rounded-lg">
+                                        <option>Select vehicle type</option>
+                                        <option>Commercial Truck</option>
+                                        <option>Delivery Van</option>
+                                        <option>Company Car</option>
+                                        <option>Construction Vehicle</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">License Plate</label>
+                                    <input type="text" class="w-full p-3 border rounded-lg" placeholder="Vehicle license plate">
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mileage at Issue</label>
+                                    <input type="number" class="w-full p-3 border rounded-lg" placeholder="Current mileage">
+                                </div>
+                            </div>
+                            
+                            <!-- Document Upload -->
+                            <div class="file-upload">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-3"></i>
+                                <div class="font-semibold text-gray-700">Upload Supporting Documents</div>
+                                <div class="text-sm text-gray-500 mt-1">Purchase receipt, photos, inspection reports</div>
+                                <button class="mt-3 bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-sm">
+                                    <i class="fas fa-plus mr-2"></i>Choose Files
+                                </button>
+                            </div>
+                            
+                            <!-- Uploaded Files -->
+                            <div class="mx-4 mb-4">
+                                <div class="bg-white p-3 rounded-lg border flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-medium text-sm">purchase_receipt.pdf</div>
+                                            <div class="text-xs text-gray-500">2.1 MB</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-red-500">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-image text-blue-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-medium text-sm">tire_damage_photo.jpg</div>
+                                            <div class="text-xs text-gray-500">4.8 MB</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-red-500">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <button class="submit-button">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Submit Warranty Claim
+                            </button>
+                            
+                            <div class="p-4 text-center text-xs text-gray-500">
+                                Processing typically takes 3-5 business days<br>
+                                You'll receive updates via email and SMS
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaigns -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Campaigns</h3>
+            </div>
+            <div class="embedded-container campaigns">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Campaigns</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-filter text-xl"></i>
+                                    <i class="fas fa-bell text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Business promotions and special offers</p>
+                        </div>
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 20px 10px;">
+                            
+                            <!-- Active Campaigns Counter -->
+                            <div class="p-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-2xl font-bold text-blue-600">5</div>
+                                            <div class="text-sm text-gray-600">Active Campaigns</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-2xl font-bold text-green-600">RM 12,500</div>
+                                            <div class="text-sm text-gray-600">Total Savings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Featured Campaign -->
+                            <div class="campaign-card">
+                                <div class="campaign-header">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-bold">Fleet Special</h3>
+                                            <p class="text-blue-100 text-sm mt-1">Buy 20 Get 5 FREE</p>
+                                            <div class="timer-box">
+                                                <i class="fas fa-clock mr-1"></i>
+                                                Ends in 15 days
+                                            </div>
+                                        </div>
+                                        <div class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                            FEATURED
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="campaign-content">
+                                    <p class="text-gray-600 text-sm mb-3">Perfect for fleet operators! Purchase 20 or more commercial tires and get 5 additional tires absolutely free.</p>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="text-sm text-gray-500">Minimum Order: 20 tires</span>
+                                        <span class="text-sm font-bold text-green-600">25% Savings</span>
+                                    </div>
+                                    <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold">
+                                        <i class="fas fa-shopping-cart mr-2"></i>Order Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Volume Discount Campaign -->
+                            <div class="campaign-card">
+                                <div class="campaign-header" style="background: #059669;">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-lg font-bold">Volume Discount</h3>
+                                            <p class="text-green-100 text-sm mt-1">Up to 20% OFF</p>
+                                            <div class="timer-box">
+                                                <i class="fas fa-infinity mr-1"></i>
+                                                Ongoing
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chart-line text-2xl opacity-50"></i>
+                                    </div>
+                                </div>
+                                <div class="campaign-content">
+                                    <div class="space-y-2 mb-4">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">50-99 tires</span>
+                                            <span class="font-bold text-green-600">5% OFF</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">100-199 tires</span>
+                                            <span class="font-bold text-green-600">10% OFF</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">200+ tires</span>
+                                            <span class="font-bold text-green-600">20% OFF</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full bg-green-600 text-white py-4 rounded-lg font-semibold">
+                                        Calculate Savings
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Seasonal Campaign -->
+                            <div class="campaign-card">
+                                <div class="campaign-header" style="background: #DC2626;">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-lg font-bold">Winter Prep 2024</h3>
+                                            <p class="text-red-100 text-sm mt-1">Free Installation</p>
+                                            <div class="timer-box">
+                                                <i class="fas fa-snowflake mr-1"></i>
+                                                Until Dec 31
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-snowflake text-2xl opacity-50"></i>
+                                    </div>
+                                </div>
+                                <div class="campaign-content">
+                                    <p class="text-gray-600 text-sm mb-3">Prepare your fleet for winter! Free installation service for all winter tire purchases over RM 5,000.</p>
+                                    <div class="bg-red-50 p-3 rounded-lg mb-3">
+                                        <div class="text-sm font-medium text-red-800">Includes:</div>
+                                        <ul class="text-sm text-red-700 mt-1">
+                                            <li>• Free mounting & balancing</li>
+                                            <li>• On-site installation available</li>
+                                            <li>• Winter driving safety check</li>
+                                        </ul>
+                                    </div>
+                                    <button class="w-full bg-red-600 text-white py-4 rounded-lg font-semibold">
+                                        Book Installation
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Loyalty Program -->
+                            <div class="campaign-card">
+                                <div class="campaign-header" style="background: #7C3AED;">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-lg font-bold">Business Plus</h3>
+                                            <p class="text-purple-100 text-sm mt-1">Loyalty Program</p>
+                                            <div class="timer-box">
+                                                <i class="fas fa-star mr-1"></i>
+                                                Join Today
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-crown text-2xl opacity-50"></i>
+                                    </div>
+                                </div>
+                                <div class="campaign-content">
+                                    <p class="text-gray-600 text-sm mb-3">Earn points on every purchase, get exclusive pricing, and enjoy priority support.</p>
+                                    <div class="grid grid-cols-3 gap-2 mb-3">
+                                        <div class="text-center">
+                                            <div class="text-lg font-bold text-purple-600">2x</div>
+                                            <div class="text-xs text-gray-500">Points</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-lg font-bold text-purple-600">VIP</div>
+                                            <div class="text-xs text-gray-500">Support</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-lg font-bold text-purple-600">15%</div>
+                                            <div class="text-xs text-gray-500">Extra Off</div>
+                                        </div>
+                                    </div>
+                                    <button class="w-full bg-purple-600 text-white py-4 rounded-lg font-semibold">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="feature-grid">
+                                <div class="feature-item">
+                                    <i class="fas fa-history text-blue-600 text-xl mb-2"></i>
+                                    <div class="text-sm font-medium">My Campaigns</div>
+                                    <div class="text-xs text-gray-500">View joined</div>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-bell text-blue-600 text-xl mb-2"></i>
+                                    <div class="text-sm font-medium">Notifications</div>
+                                    <div class="text-xs text-gray-500">Set alerts</div>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-calculator text-blue-600 text-xl mb-2"></i>
+                                    <div class="text-sm font-medium">ROI Calculator</div>
+                                    <div class="text-xs text-gray-500">Check savings</div>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-users text-blue-600 text-xl mb-2"></i>
+                                    <div class="text-sm font-medium">Refer Partner</div>
+                                    <div class="text-xs text-gray-500">Earn bonus</div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 text-center text-xs text-gray-500">
+                                Terms and conditions apply to all campaigns<br>
+                                Contact your account manager for details
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Support</h3>
+            </div>
+            <div class="embedded-container support">
+                <div class="home-main-phone-frame">
+                    <div class="home-main-phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Support</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-headset text-xl"></i>
+                                    <i class="fas fa-ellipsis-v text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Business support and assistance</p>
+                        </div>
+                        <div class="flex-1" style="padding: 20px 10px;">
+                            <div class="p-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <div class="text-lg font-bold text-blue-600">Business Support</div>
+                                            <div class="text-sm text-gray-600">Priority assistance for AutoMart Solutions</div>
+                                        </div>
+                                        <div class="business-badge">PREMIUM</div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-3 text-center">
+                                        <div>
+                                            <div class="text-xl font-bold text-green-600">2h</div>
+                                            <div class="text-xs text-gray-600">Response Time</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-xl font-bold text-blue-600">24/7</div>
+                                            <div class="text-xs text-gray-600">Availability</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-xl font-bold text-purple-600">Dedicated</div>
+                                            <div class="text-xs text-gray-600">Manager</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="support-card">
+                                <div class="bg-red-500 text-white p-4 text-center">
+                                    <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+                                    <div class="font-bold">Emergency Support</div>
+                                    <div class="text-sm opacity-90">24/7 Critical Issue Hotline</div>
+                                </div>
+                                <div class="p-4">
+                                    <button class="w-full bg-red-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center">
+                                        <i class="fas fa-phone mr-2"></i>
+                                        Call Emergency Line
+                                    </button>
+                                    <div class="text-center text-xs text-gray-500 mt-2">
+                                        For fleet breakdowns, urgent delivery issues
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Methods -->
+                            <div class="mt-4">
+                                <div class="mx-4 mb-3">
+                                    <h3 class="font-semibold text-gray-800">Contact Your Account Team</h3>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-user-tie text-blue-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Ahmad Rizal</div>
+                                        <div class="text-sm text-gray-600">Dedicated Account Manager</div>
+                                        <div class="text-xs text-blue-600 mt-1">
+                                            <i class="fas fa-circle text-xs mr-1"></i>Available Now
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-phone text-sm"></i>
+                                        </button>
+                                        <button class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-comment text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-tools text-blue-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Technical Support</div>
+                                        <div class="text-sm text-gray-600">Installation & Technical Issues</div>
+                                        <div class="text-xs text-blue-600 mt-1">
+                                            <i class="fas fa-clock text-xs mr-1"></i>Avg response: 30 min
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="w-10 h-10  bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-ticket-alt text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="w-12 h-12  bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-shipping-fast text-blue-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold">Logistics Support</div>
+                                        <div class="text-sm text-gray-600">Delivery & Order Tracking</div>
+                                        <div class="text-xs text-blue-600 mt-1">
+                                            <i class="fas fa-truck text-xs mr-1"></i>Real-time tracking
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-map-marker-alt text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <div class="mx-4 mb-3">
+                                    <h3 class="font-semibold text-gray-800">Quick Support Options</h3>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3 mx-4">
+                                    <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                        <i class="fas fa-file-invoice text-blue-600 text-xl mb-2"></i>
+                                        <div class="text-sm font-medium">Billing Inquiry</div>
+                                    </button>
+                                    <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                        <i class="fas fa-exchange-alt text-blue-600 text-xl mb-2"></i>
+                                        <div class="text-sm font-medium">Return Request</div>
+                                    </button>
+                                    <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                        <i class="fas fa-calendar-alt text-blue-600 text-xl mb-2"></i>
+                                        <div class="text-sm font-medium">Schedule Service</div>
+                                    </button>
+                                    <button class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                        <i class="fas fa-chart-line text-blue-600 text-xl mb-2"></i>
+                                        <div class="text-sm font-medium">Account Review</div>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Tickets -->
+                            <div class="mt-6">
+                                <div class="mx-4 mb-3">
+                                    <h3 class="font-semibold text-gray-800">Recent Support Tickets</h3>
+                                </div>
+                                
+                                <div class="support-card">
+                                    <div class="p-4 border-b">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div>
+                                                <div class="font-medium">#B2B-2024-0892</div>
+                                                <div class="text-sm text-gray-600">Bulk delivery scheduling</div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="priority-badge">HIGH</span>
+                                                <span class="text-xs text-green-600 font-medium">RESOLVED</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-gray-500">Resolved 2 hours ago</div>
+                                    </div>
+                                    
+                                    <div class="p-4 border-b">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div>
+                                                <div class="font-medium">#B2B-2024-0891</div>
+                                                <div class="text-sm text-gray-600">Invoice discrepancy query</div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="business-badge">NORMAL</span>
+                                                <span class="text-xs text-blue-600 font-medium">IN PROGRESS</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-gray-500">Updated 1 day ago</div>
+                                    </div>
+                                    
+                                    <div class="p-4">
+                                        <button class="w-full text-blue-600 font-medium text-sm">View All Tickets</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Business FAQ -->
+                            <div class="mt-6">
+                                <div class="mx-4 mb-3">
+                                    <h3 class="font-semibold text-gray-800">Business FAQ</h3>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="p-4 border-b bg-gray-50">
+                                        <div class="font-medium text-sm">How do I modify my bulk order?</div>
+                                    </div>
+                                    <div class="p-4 text-sm text-gray-600">
+                                        Contact your account manager within 24 hours of placing the order. Modifications are subject to availability and may affect pricing.
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="p-4 border-b bg-gray-50">
+                                        <div class="font-medium text-sm">What are the credit terms?</div>
+                                    </div>
+                                    <div class="p-4 text-sm text-gray-600">
+                                        Standard terms are Net 30. Extended terms available for qualified accounts. Contact billing for more information.
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="p-4 bg-gray-50">
+                                        <div class="font-medium text-sm">How do I track fleet installations?</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Knowledge Base -->
+                            <div class="mx-4 my-6">
+                                <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold">
+                                    <i class="fas fa-book mr-2"></i>
+                                    Access Business Knowledge Base
+                                </button>
+                            </div>
+                            <div class="p-4 text-center text-xs text-gray-500">
+                                Business Support Hours: 24/7 for Premium Accounts<br>
+                                Standard Support: Mon-Fri 8AM-6PM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

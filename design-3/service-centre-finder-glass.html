@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Service Centres Glass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1425px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af 0%, #2563EB 100%);
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        
+        .glass-input {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            color: white;
+            padding: 16px 20px;
+            width: 100%;
+        }
+        
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .glass-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .glass-button.active {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .service-center-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .service-center-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .map-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rating-stars {
+            color: #fbbf24;
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div style="height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: white;">
+                <div class="flex items-center">
+                    <span>12:44</span>
+                    <i class="fas fa-signal ml-2"></i>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                        <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                        <div class="w-1 h-3 bg-white rounded"></div>
+                    </div>
+                    <i class="fas fa-wifi text-white ml-2"></i>
+                    <div class="bg-white bg-opacity-20 rounded px-2 py-1 text-xs font-bold ml-1">89%</div>
+                </div>
+            </div>
+
+            <!-- Glass Header -->
+            <div class="glass-card mx-4 mt-4 p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Service Centres</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-filter text-xl opacity-80"></i>
+                        <i class="fas fa-map text-xl opacity-80"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glass Search -->
+            <div class="px-4 mt-6">
+                <div class="relative mb-4">
+                    <input type="text" class="glass-input pl-14" placeholder="Search locations, postal codes...">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-white opacity-70"></i>
+                </div>
+                
+                <div class="flex gap-3 mb-6">
+                    <button class="glass-button active px-4 py-2 rounded-full text-sm font-semibold">
+                        <i class="fas fa-location-arrow mr-2"></i>Near Me
+                    </button>
+                    <button class="glass-button px-4 py-2 rounded-full text-sm font-semibold">
+                        All Services
+                    </button>
+                    <button class="glass-button px-4 py-2 rounded-full text-sm font-semibold">
+                        24/7 Open
+                    </button>
+                </div>
+            </div>
+
+            <!-- Glass Map -->
+            <div class="px-4 mb-6">
+                <div class="map-glass">
+                    <div class="text-center text-white">
+                        <i class="fas fa-map-marked-alt text-4xl mb-3 opacity-70"></i>
+                        <p class="font-semibold">Interactive Map</p>
+                        <p class="text-sm opacity-70">Tap to expand view</p>
+                    </div>
+                    <!-- Map pins -->
+                    <div class="absolute top-6 left-12 w-3 h-3 bg-blue-400 rounded-full"></div>
+                    <div class="absolute top-16 right-16 w-3 h-3 bg-blue-400 rounded-full"></div>
+                    <div class="absolute bottom-12 left-20 w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div class="absolute bottom-8 right-12 w-3 h-3 bg-green-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Service Centers List -->
+            <div class="px-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-white text-lg font-bold">Nearby Centers (8)</h3>
+                    <button class="text-white text-sm font-semibold opacity-80">Sort by distance</button>
+                </div>
+                
+                <!-- Center 1 -->
+                <div class="service-center-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h3 class="font-bold text-lg">TOYO TIRES Service KL</h3>
+                                <span class="bg-blue-400 bg-opacity-30 text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">1.2 km</span>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">Jalan Bukit Bintang, 50200 KL</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm opacity-80">4.8 (124)</span>
+                            </div>
+                            <div class="text-sm text-green-300 font-semibold">Open • Closes 6:00 PM</div>
+                        </div>
+                        <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-red-300"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-green-400 bg-opacity-20 text-green-200 px-3 py-1 rounded-full text-xs">Warranty</span>
+                        <span class="bg-blue-400 bg-opacity-20 text-blue-200 px-3 py-1 rounded-full text-xs">Installation</span>
+                        <span class="bg-orange-400 bg-opacity-20 text-orange-200 px-3 py-1 rounded-full text-xs">Balancing</span>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                            <i class="fas fa-directions mr-2"></i>Directions
+                        </button>
+                        <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                            <i class="fas fa-phone mr-2"></i>Call
+                        </button>
+                        <button class="glass-button px-4 py-3 rounded-lg">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Center 2 -->
+                <div class="service-center-card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h3 class="font-bold text-lg">TOYO TIRES Premium</h3>
+                                <span class="bg-blue-400 bg-opacity-30 text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">2.8 km</span>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">Jalan Ampang, 50450 KL</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-sm opacity-80">4.6 (89)</span>
+                            </div>
+                            <div class="text-sm text-green-300 font-semibold">Open • Closes 8:00 PM</div>
+                        </div>
+                        <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="far fa-heart text-white opacity-60"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-green-400 bg-opacity-20 text-green-200 px-3 py-1 rounded-full text-xs">Warranty</span>
+                        <span class="bg-red-400 bg-opacity-20 text-red-200 px-3 py-1 rounded-full text-xs">24/7</span>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                            <i class="fas fa-directions mr-2"></i>Directions
+                        </button>
+                        <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                            <i class="fas fa-phone mr-2"></i>Call
+                        </button>
+                        <button class="glass-button px-4 py-3 rounded-lg">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Glass Support Card -->
+                <div class="glass-card p-6 mt-6 text-center text-white">
+                    <i class="fas fa-headset text-3xl mb-3 opacity-80"></i>
+                    <h4 class="font-bold text-lg mb-2">Need Help?</h4>
+                    <p class="text-sm opacity-80 mb-4">Our support team can help you find the perfect service centre.</p>
+                    <button class="glass-button px-6 py-3 rounded-full font-semibold">
+                        <i class="fas fa-phone mr-2"></i>Contact Support
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

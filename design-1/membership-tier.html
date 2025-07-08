@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Membership</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1750px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tier-card {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .current-tier {
+            border: 3px solid #F59E0B;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- iOS Status Bar -->
+            <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                <div class="flex items-center">
+                    <span>12:44</span>
+                    <i class="fas fa-signal ml-2"></i>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                        <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                        <div class="w-1 h-3 bg-white rounded"></div>
+                    </div>
+                    <i class="fas fa-wifi text-white ml-2"></i>
+                    <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div style="background: #2563EB; color: white; padding: 20px 24px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Membership</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-info-circle text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Status -->
+            <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 p-6 m-4 rounded-2xl text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-crown text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-1">Gold Member</h2>
+                    <p class="text-sm opacity-90 mb-4">Ahmad Rahman • Since Jan 2024</p>
+                    <div class="bg-white bg-opacity-20 rounded-full p-3">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Progress to Platinum</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="w-full bg-white bg-opacity-30 rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="text-xs mt-1 opacity-80">RM 2,500 more to upgrade</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1" style="padding: 0 20px;">
+                <!-- Current Benefits -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Your Current Benefits</h3>
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm text-gray-900">15% discount on all tire services</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm text-gray-900">Priority booking for appointments</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm text-gray-900">Extended warranty coverage</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm text-gray-900">Free tire rotation every 6 months</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm text-gray-900">Dedicated customer support line</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membership Tiers -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Membership Tiers</h3>
+                    
+                    <!-- Bronze Tier -->
+                    <div class="tier-card">
+                        <div class="bg-gradient-to-r from-orange-600 to-orange-700 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Bronze</h3>
+                                    <p class="text-sm opacity-90">Entry level membership</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm">Spend</div>
+                                    <div class="font-bold">RM 0+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3">
+                            <div class="text-xs text-gray-600">• 5% discount • Basic support • Standard warranty</div>
+                        </div>
+                    </div>
+
+                    <!-- Silver Tier -->
+                    <div class="tier-card">
+                        <div class="bg-gradient-to-r from-gray-400 to-gray-500 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Silver</h3>
+                                    <p class="text-sm opacity-90">Regular customer benefits</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm">Spend</div>
+                                    <div class="font-bold">RM 2,000+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3">
+                            <div class="text-xs text-gray-600">• 10% discount • Priority support • Extended warranty</div>
+                        </div>
+                    </div>
+
+                    <!-- Gold Tier (Current) -->
+                    <div class="tier-card current-tier">
+                        <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 p-4 text-white relative">
+                            <div class="absolute top-2 right-2">
+                                <div class="bg-white text-yellow-600 rounded-full px-2 py-1 text-xs font-bold">
+                                    CURRENT
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Gold</h3>
+                                    <p class="text-sm opacity-90">Premium membership</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm">Spend</div>
+                                    <div class="font-bold">RM 5,000+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-3">
+                            <div class="text-xs text-gray-700 font-medium">• 15% discount • Priority booking • Free services • Dedicated support</div>
+                        </div>
+                    </div>
+
+                    <!-- Platinum Tier -->
+                    <div class="tier-card">
+                        <div class="bg-gradient-to-r from-slate-600 to-slate-700 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Platinum</h3>
+                                    <p class="text-sm opacity-90">Exclusive VIP benefits</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm">Spend</div>
+                                    <div class="font-bold">RM 10,000+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3">
+                            <div class="text-xs text-gray-600">• 20% discount • VIP treatment • Concierge service • Annual tire checkup</div>
+                        </div>
+                    </div>
+
+                    <!-- Diamond Tier -->
+                    <div class="tier-card">
+                        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Diamond</h3>
+                                    <p class="text-sm opacity-90">Ultimate luxury tier</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm">Spend</div>
+                                    <div class="font-bold">RM 20,000+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3">
+                            <div class="text-xs text-gray-600">• 25% discount • White glove service • Personal tire consultant • Lifetime benefits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Tier Preview -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Unlock Platinum Benefits</h3>
+                    <div class="bg-gradient-to-r from-slate-100 to-slate-200 rounded-xl p-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-star text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-900 mb-1">Only RM 2,500 away!</h4>
+                                <p class="text-sm text-gray-600 mb-3">Upgrade to Platinum and enjoy 20% discounts, VIP treatment, and concierge service.</p>
+                                <button class="bg-slate-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    View Benefits
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

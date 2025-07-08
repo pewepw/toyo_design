@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES B2B - Credit Balance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1650px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            border-radius: 20px;
+            padding: 24px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .action-button {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .progress-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#10b981 0deg 216deg, #e5e7eb 216deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-inner {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #2563EB;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="phone-frame">
+        <div class="phone-screen">
+            
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </span>
+            </div>
+            
+            <!-- Header -->
+            <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Credit Balance</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-bell text-xl"></i>
+                        <i class="fas fa-ellipsis-v text-xl"></i>
+                    </div>
+                </div>
+                <p class="text-sm opacity-90 mt-2">Manage your business credit account</p>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1" style="padding: 20px;">
+                
+                <!-- Credit Overview Card -->
+                <div class="balance-card">
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="text-sm opacity-80 mb-1">Available Credit</div>
+                                <div class="text-3xl font-bold">RM 45,800</div>
+                            </div>
+                            <div class="progress-ring">
+                                <div class="progress-circle">
+                                    <div class="progress-inner">
+                                        <div class="text-sm font-bold text-gray-900">61%</div>
+                                        <div class="text-xs text-gray-600">Used</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center text-sm opacity-90">
+                            <span>Credit Limit: RM 75,000</span>
+                            <span>Used: RM 29,200</span>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-calendar text-yellow-300"></i>
+                                <span class="text-sm">Next payment due: Mar 15, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Summary -->
+                <div class="info-card">
+                    <h3 class="font-bold text-gray-900 mb-4">Account Summary</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="text-center p-3 bg-red-50 rounded-lg">
+                            <div class="text-xl font-bold text-red-600">RM 8,500</div>
+                            <div class="text-sm text-gray-600">Outstanding</div>
+                        </div>
+                        <div class="text-center p-3 bg-blue-50 rounded-lg">
+                            <div class="text-xl font-bold text-blue-600">RM 2,100</div>
+                            <div class="text-sm text-gray-600">This Month</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Payment Schedule</span>
+                            <span class="text-sm font-semibold text-gray-900">Monthly - 15th</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Interest Rate</span>
+                            <span class="text-sm font-semibold text-gray-900">2.5% per month</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Account Status</span>
+                            <span class="text-sm font-semibold text-green-600">
+                                <i class="fas fa-check-circle mr-1"></i>Good Standing
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="action-button">
+                        <i class="fas fa-credit-card text-blue-600 text-2xl mb-2"></i>
+                        <div class="font-semibold text-sm text-gray-900">Make Payment</div>
+                        <div class="text-xs text-gray-600">Pay outstanding balance</div>
+                    </div>
+                    <div class="action-button">
+                        <i class="fas fa-file-invoice text-green-600 text-2xl mb-2"></i>
+                        <div class="font-semibold text-sm text-gray-900">View Statement</div>
+                        <div class="text-xs text-gray-600">Download monthly statement</div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="info-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-gray-900">Recent Transactions</h3>
+                        <span class="text-blue-600 font-semibold text-sm">View All</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon bg-green-100 text-green-600">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900">Payment Received</div>
+                            <div class="text-xs text-gray-600">Bank Transfer - CIMB Bank</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-sm text-green-600">+RM 15,000</div>
+                            <div class="text-xs text-gray-500">Mar 1, 2024</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon bg-red-100 text-red-600">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900">Tire Purchase</div>
+                            <div class="text-xs text-gray-600">Order #ORD-2024-156</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-sm text-red-600">-RM 12,800</div>
+                            <div class="text-xs text-gray-500">Feb 28, 2024</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon bg-orange-100 text-orange-600">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900">Interest Charge</div>
+                            <div class="text-xs text-gray-600">Monthly interest on balance</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-sm text-orange-600">-RM 215</div>
+                            <div class="text-xs text-gray-500">Feb 15, 2024</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900">Bulk Order</div>
+                            <div class="text-xs text-gray-600">Order #ORD-2024-142</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-sm text-red-600">-RM 8,950</div>
+                            <div class="text-xs text-gray-500">Feb 10, 2024</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-icon bg-green-100 text-green-600">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-gray-900">Credit Adjustment</div>
+                            <div class="text-xs text-gray-600">Campaign discount applied</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-sm text-green-600">+RM 1,200</div>
+                            <div class="text-xs text-gray-500">Feb 5, 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Options -->
+                <div class="info-card">
+                    <h3 class="font-bold text-gray-900 mb-4">Payment Options</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-university text-blue-600"></i>
+                                <div>
+                                    <div class="font-semibold text-sm text-gray-900">Bank Transfer</div>
+                                    <div class="text-xs text-gray-600">Direct to TOYO account</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-credit-card text-green-600"></i>
+                                <div>
+                                    <div class="font-semibold text-sm text-gray-900">Online Banking</div>
+                                    <div class="text-xs text-gray-600">Instant payment processing</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-file-invoice text-purple-600"></i>
+                                <div>
+                                    <div class="font-semibold text-sm text-gray-900">Cheque Payment</div>
+                                    <div class="text-xs text-gray-600">Mail to TOYO office</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg mt-6">
+                    <i class="fas fa-credit-card mr-2"></i>
+                    Make Payment Now
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html> 

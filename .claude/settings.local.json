@@ -7,7 +7,12 @@
       "Bash(python:*)",
       "Bash(/opt/homebrew/bin/python3.12:*)",
       "Bash(ls:*)",
-      "Bash(/usr/bin/python3:*)"
+      "Bash(/usr/bin/python3:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:www.toyotires.com.my)",
+      "Bash(sed:*)",
+      "Bash(cp:*)",
+      "Bash(/opt/homebrew/bin/python3:*)"
     ],
     "deny": []
   }

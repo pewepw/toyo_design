@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1400px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .service-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 6px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- iOS Status Bar -->
+            <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                <div class="flex items-center">
+                    <span>12:44</span>
+                    <i class="fas fa-signal ml-2"></i>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                        <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                        <div class="w-1 h-3 bg-white rounded"></div>
+                    </div>
+                    <i class="fas fa-wifi text-white ml-2"></i>
+                    <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                </div>
+            </div>
+
+            <!-- Header with Logos -->
+            <div style="background: #2563EB; color: white; padding: 20px;">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2">
+                            <img src="../images/toyo-tires-white.png" alt="CARE" class="h-5">
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-bell text-white text-lg"></i>
+                        </div>
+                        <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm opacity-90">Welcome back, Ahmad</div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-crown text-yellow-300 text-sm"></i>
+                            <span class="font-semibold">Gold Member</span>
+                            <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Hero Section -->
+            <div style="background: #2563EB; color: white; padding: 0 20px 20px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                        <div class="text-lg font-bold leading-tight mb-2">Premium Tire Care</div>
+                        <div class="text-lg font-bold leading-tight mb-3">& Extended Warranty!</div>
+                        <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 w-fit">
+                            <span class="text-sm font-medium mr-2">Explore Services</span>
+                            <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-chevron-right text-blue-600 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <img src="../images/ic_warranty_plus.png" alt="Warranty Plus" class="w-20 h-20">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards Section -->
+            <div style="background: #f8f9fa; margin: 0; padding: 16px 20px;">
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-star text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm">Rewards Points</div>
+                            <div class="text-xs text-gray-600">2,580 points available</div>
+                            <div class="text-xs text-blue-600">Redeem rewards now!</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                            Redeem
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div style="background: #f8f9fa; padding: 0 12px;">
+                <div class="flex items-center justify-between mb-4" style="padding: 0 8px;">
+                    <h3 class="font-bold text-lg text-gray-900">TOYO Services</h3>
+                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                </div>
+                <div class="service-grid">
+                    <!-- Row 1 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Campaign</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Games</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Rewards</div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Membership</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Warranty Reg</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Warranty Claim</div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Appointments</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Service Centre</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="text-xs font-medium text-gray-900">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Section -->
+            <div style="background: #f8f9fa; margin: 0; padding: 20px 20px;">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-lg text-gray-900">Events</h3>
+                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                </div>
+
+                <!-- Featured Event Banner -->
+                <div class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl overflow-hidden shadow-sm mb-4">
+                    <div class="flex items-center p-4">
+                       
+                        <div class="flex-1 text-white">
+                            <h4 class="font-bold text-sm mb-1">Join Our Community Events!</h4>
+                            <p class="text-xs opacity-90">Connect with fellow tire enthusiasts and industry experts</p>
+                        </div>
+                        <img src="../images/image-speaker.png" alt="Event Speaker" class="w-20 h-22 rounded-lg ml-4">
+                        <!-- <i class="fas fa-chevron-right text-white opacity-70"></i> -->
+                    </div>
+                </div>
+                
+                <div class="space-y-3">
+                    <!-- Event 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <div class="flex h-20">
+                            <img src="../images/image-event-1.png" alt="Sustainable Materials" class="w-20 h-full object-cover">
+                            <div class="flex-1 p-3 flex flex-col justify-center">
+                                <h4 class="font-semibold text-sm text-gray-900 mb-1">CONCEPT TYRE WITH 90% SUSTAINABLE MATERIALS</h4>
+                                <p class="text-xs text-gray-600">January 12, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <div class="flex h-24">
+                            <img src="../images/image-event-2.jpg" alt="Toyo Tires HQ Visit" class="w-20 h-full object-cover">
+                            <div class="flex-1 p-3 flex flex-col justify-center">
+                                <h4 class="font-semibold text-sm text-gray-900 mb-1">Visit to Toyo Tires HQ</h4>
+                                <p class="text-xs text-gray-600 mb-1">March 02, 2023</p>
+                                <p class="text-xs text-gray-500 line-clamp-2">Let's follow Tengku Djan's short visit to Toyo Tires Japan and experience his battle with...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Promotion -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white mx-4 rounded-xl overflow-hidden" style="margin-top: 20px; margin-bottom: 30px;">
+                <div class="p-4">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="text-lg font-bold mb-2">Premium Tire Protection</div>
+                            <div class="text-sm opacity-90 mb-3">Extended warranty coverage for your peace of mind</div>
+                            <div class="bg-white text-blue-600 px-3 py-1 rounded-md text-xs font-bold mt-2 w-fit">
+                                Learn More
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-white text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
