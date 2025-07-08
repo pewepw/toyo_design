@@ -1,0 +1,3174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Combined Design Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .prototype-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prototype-header {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .prototype-container {
+            width: 100%;
+            height: 1900px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+            transform: scale(0.9);
+            transform-origin: 0 0;
+            width: 111.11%;
+            height: 111.11%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        /* BOOST SERIES STYLES */
+        .boost-phone-frame {
+            width: 480px;
+            height: 1400px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+        }
+        .boost-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .boost-phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .boost-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .boost-service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .boost-service-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .boost-service-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .boost-service-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 6px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .boost-service-center-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+        
+        .boost-map-placeholder {
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .boost-rating-stars {
+            color: #fbbf24;
+        }
+        
+        .boost-distance-badge {
+            background: #eff6ff;
+            color: #2563EB;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .boost-status-open {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .boost-status-closed {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .boost-form-group {
+            margin-bottom: 16px;
+        }
+        
+        .boost-form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        
+        .boost-form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        .boost-form-input:focus {
+            outline: none;
+            border-color: #2563EB;
+        }
+        
+        /* GLASS SERIES STYLES */
+        .glass-phone-frame {
+            width: 480px;
+            height: 1400px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+        }
+        .glass-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .glass-phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .glass-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af 0%, #2563EB 100%);
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        
+        .glass-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .glass-service-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .glass-service-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .glass-input {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            color: white;
+            padding: 14px 20px;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .glass-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .glass-service-center-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-service-center-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .glass-map-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-rating-stars {
+            color: #fbbf24;
+        }
+        
+        .glass-form-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .glass-form-label {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+            opacity: 0.9;
+        }
+        
+        .glass-upload-area {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-upload-area:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .glass-qr-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-qr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            z-index: -1;
+        }
+        
+        /* B2B SERIES STYLES */
+        .b2b-phone-frame {
+            width: 480px;
+            height: 1420px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+        }
+        .b2b-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .b2b-phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .b2b-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .b2b-service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .b2b-service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 8px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .b2b-service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .b2b-service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .b2b-metrics-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+        }
+
+        .b2b-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .b2b-activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .b2b-activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .b2b-status-bar {
+            height: 44px;
+            background: #2563EB;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .b2b-summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+        .b2b-product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .b2b-product-card:hover {
+            border-color: #3B82F6;
+        }
+        .b2b-quantity-control {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .b2b-quantity-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9fafb;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .b2b-quantity-btn:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        .b2b-quantity-input {
+            width: 60px;
+            height: 32px;
+            text-align: center;
+            border: none;
+            font-weight: 600;
+        }
+        .b2b-discount-tier {
+            background: #10b981;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .b2b-cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .b2b-cart-item:last-child {
+            border-bottom: none;
+        }
+        .b2b-filter-chip {
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .b2b-filter-chip-active {
+            padding: 6px 12px;
+            background: #3B82F6;
+            color: white;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .b2b-chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+        .b2b-chart-placeholder {
+            height: 160px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .b2b-progress-bar {
+            background: #f3f4f6;
+            border-radius: 50px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .b2b-progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.3s ease;
+        }
+        .b2b-insight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        
+        /* B2B DARK SERIES STYLES */
+        .b2b-dark-phone-frame {
+            width: 480px;
+            height: 1530px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+        }
+        .b2b-dark-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .b2b-dark-phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .b2b-dark-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #121212;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        .b2b-dark-service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .b2b-dark-service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 8px;
+            background: #1f2937;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .b2b-dark-service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            background: #374151;
+        }
+        .b2b-dark-service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        .b2b-dark-metrics-card {
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 12px;
+        }
+        .b2b-dark-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #374151;
+        }
+        .b2b-dark-activity-item:last-child {
+            border-bottom: none;
+        }
+        .b2b-dark-activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .b2b-dark-status-bar {
+            height: 44px;
+            background: #121212;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .b2b-dark-summary-card {
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 16px;
+        }
+        .b2b-dark-product-card {
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .b2b-dark-product-card:hover {
+            border-color: #3B82F6;
+            background: #374151;
+        }
+        .b2b-dark-quantity-control {
+            display: flex;
+            align-items: center;
+            border: 2px solid #4b5563;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #374151;
+        }
+        .b2b-dark-quantity-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4b5563;
+            border: none;
+            cursor: pointer;
+            color: #d1d5db;
+        }
+        .b2b-dark-quantity-btn:hover {
+            background: #6b7280;
+            color: #f3f4f6;
+        }
+        .b2b-dark-quantity-input {
+            width: 60px;
+            height: 32px;
+            text-align: center;
+            border: none;
+            font-weight: 600;
+            background: #374151;
+            color: white;
+        }
+        .b2b-dark-discount-tier {
+            background: #3B82F6;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .b2b-dark-cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #374151;
+        }
+        .b2b-dark-cart-item:last-child {
+            border-bottom: none;
+        }
+        .b2b-dark-filter-chip {
+            padding: 6px 12px;
+            background: #374151;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .b2b-dark-filter-chip-active {
+            padding: 6px 12px;
+            background: #3B82F6;
+            color: white;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .b2b-dark-input {
+            background: #374151;
+            border: 1px solid #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+        .b2b-dark-input::placeholder {
+            color: #9ca3af;
+        }
+        .b2b-dark-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+        .b2b-dark-chart-container {
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 16px;
+        }
+        .b2b-dark-chart-placeholder {
+            height: 160px;
+            background: #374151;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .b2b-dark-progress-bar {
+            background: #374151;
+            border-radius: 50px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .b2b-dark-progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.3s ease;
+        }
+        .b2b-dark-insight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #374151;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="prototype-grid">
+        <!-- Boost Design Series -->
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Home - Main Boost</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="boost-phone-frame">
+                    <div class="boost-phone-screen">
+                        <!-- iOS Status Bar -->
+                        <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Header with Logos -->
+                        <div style="background: #2563EB; color: white; padding: 20px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <img src="../images/toyo-tires-white.png" alt="CARE" class="h-5">
+                                        <img src="../images/CARE-white.png" alt="CARE" class="h-5">
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bell text-white text-lg"></i>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-90">Welcome back, Ahmad</div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-crown text-yellow-300 text-sm"></i>
+                                        <span class="font-semibold">Gold Member</span>
+                                        <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Hero Section -->
+                        <div style="background: #2563EB; color: white; padding: 0 20px 20px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1">
+                                    <div class="text-lg font-bold leading-tight mb-2">Premium Tire Care</div>
+                                    <div class="text-lg font-bold leading-tight mb-3">& Extended Warranty!</div>
+                                    <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 w-fit">
+                                        <span class="text-sm font-medium mr-2">Explore Services</span>
+                                        <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                            <i class="fas fa-chevron-right text-blue-600 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <img src="../images/ic_warranty_plus.png" alt="Warranty Plus" class="w-20 h-20">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rewards Section -->
+                        <div style="background: #f8f9fa; margin: 0; padding: 16px 20px;">
+                            <div class="bg-white rounded-xl p-4 shadow-sm">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-star text-white"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm">Rewards Points</div>
+                                        <div class="text-xs text-gray-600">2,580 points available</div>
+                                        <div class="text-xs text-blue-600">Redeem rewards now!</div>
+                                    </div>
+                                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                                        Redeem
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services Grid -->
+                        <div style="background: #f8f9fa; padding: 0 12px;">
+                            <div class="flex items-center justify-between mb-4" style="padding: 0 8px;">
+                                <h3 class="font-bold text-lg text-gray-900">TOYO Services</h3>
+                                <span class="text-blue-600 font-semibold text-sm">View All</span>
+                            </div>
+                            <div class="boost-service-grid">
+                                <!-- Row 1 -->
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Campaign</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-gamepad"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Games</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-gift"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Rewards</div>
+                                </div>
+                                
+                                <!-- Row 2 -->
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Membership</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Warranty Reg</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Warranty Claim</div>
+                                </div>
+                                
+                                <!-- Row 3 -->
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Appointments</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Service Centre</div>
+                                </div>
+                                <div class="boost-service-item">
+                                    <div class="boost-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900">Support</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Events Section -->
+                        <div style="background: #f8f9fa; margin: 0; padding: 20px 20px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Events</h3>
+                                <span class="text-blue-600 font-semibold text-sm">View All</span>
+                            </div>
+
+                            <!-- Featured Event Banner -->
+                            <div class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl overflow-hidden shadow-sm mb-4">
+                                <div class="flex items-center p-4">
+                                   
+                                    <div class="flex-1 text-white">
+                                        <h4 class="font-bold text-sm mb-1">Join Our Community Events!</h4>
+                                        <p class="text-xs opacity-90">Connect with fellow tire enthusiasts and industry experts</p>
+                                    </div>
+                                    <img src="../images/image-speaker.png" alt="Event Speaker" class="w-20 h-22 rounded-lg ml-4">
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <!-- Event 1 -->
+                                <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                                    <div class="flex h-20">
+                                        <img src="../images/image-event-1.png" alt="Sustainable Materials" class="w-20 h-full object-cover">
+                                        <div class="flex-1 p-3 flex flex-col justify-center">
+                                            <h4 class="font-semibold text-sm text-gray-900 mb-1">CONCEPT TYRE WITH 90% SUSTAINABLE MATERIALS</h4>
+                                            <p class="text-xs text-gray-600">January 12, 2024</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Event 2 -->
+                                <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                                    <div class="flex h-24">
+                                        <img src="../images/image-event-2.jpg" alt="Toyo Tires HQ Visit" class="w-20 h-full object-cover">
+                                        <div class="flex-1 p-3 flex flex-col justify-center">
+                                            <h4 class="font-semibold text-sm text-gray-900 mb-1">Visit to Toyo Tires HQ</h4>
+                                            <p class="text-xs text-gray-600 mb-1">March 02, 2023</p>
+                                            <p class="text-xs text-gray-500 line-clamp-2">Let's follow Tengku Djan's short visit to Toyo Tires Japan and experience his battle with...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Promotion -->
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white mx-4 rounded-xl overflow-hidden" style="margin-top: 20px; margin-bottom: 30px;">
+                            <div class="p-4">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="text-lg font-bold mb-2">Premium Tire Protection</div>
+                                        <div class="text-sm opacity-90 mb-3">Extended warranty coverage for your peace of mind</div>
+                                        <div class="bg-white text-blue-600 px-3 py-1 rounded-md text-xs font-bold mt-2 w-fit">
+                                            Learn More
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Service Centre Finder - Boost</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="boost-phone-frame" style="height: 1600px;">
+                    <div class="boost-phone-screen">
+                        <!-- iOS Status Bar -->
+                        <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px 24px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Service Centres</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-filter text-xl"></i>
+                                    <i class="fas fa-map text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search and Filter -->
+                        <div class="p-4">
+                            <div class="relative mb-4">
+                                <input type="text" class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl" placeholder="Search by location, postal code...">
+                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            </div>
+                            
+                            <div class="flex gap-2 mb-4">
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-location-arrow mr-1"></i>Near Me
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                                    All Services
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                                    24/7 Open
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Map View Toggle -->
+                        <div class="px-4 mb-4">
+                            <div class="boost-map-placeholder rounded-xl">
+                                <div class="text-center">
+                                    <i class="fas fa-map-marked-alt text-6xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-600 font-medium">Interactive Map View</p>
+                                    <p class="text-sm text-gray-500">Tap to expand full map</p>
+                                </div>
+                                <!-- Map pins simulation -->
+                                <div class="absolute top-4 left-8 w-4 h-4 bg-blue-600 rounded-full"></div>
+                                <div class="absolute top-12 right-12 w-4 h-4 bg-blue-600 rounded-full"></div>
+                                <div class="absolute bottom-8 left-16 w-4 h-4 bg-blue-600 rounded-full"></div>
+                                <div class="absolute bottom-4 right-8 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 0 20px;">
+                            <!-- Service Centers List -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-lg text-gray-900">Nearby Centers (8)</h3>
+                                    <button class="text-blue-600 font-semibold text-sm">Sort by distance</button>
+                                </div>
+                                
+                                <!-- Center 1 - Closest -->
+                                <div class="boost-service-center-card">
+                                    <div class="p-4">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <div class="flex-1">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <h3 class="font-bold text-lg text-gray-900">TOYO TYRE Service Center KL</h3>
+                                                    <span class="boost-distance-badge">1.2 km</span>
+                                                </div>
+                                                <p class="text-sm text-gray-600 mb-2">Jalan Bukit Bintang, 50200 Kuala Lumpur</p>
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <div class="boost-rating-stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <span class="text-sm text-gray-600">4.8 (124 reviews)</span>
+                                                </div>
+                                                <div class="text-sm boost-status-open">Open • Closes at 6:00 PM</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <button class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                                                    <i class="fas fa-heart text-blue-600"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Services -->
+                                        <div class="flex flex-wrap gap-1 mb-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-md text-xs font-medium">Warranty Claims</span>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs font-medium">Installation</span>
+                                            <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-md text-xs font-medium">Balancing</span>
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded-md text-xs font-medium">Alignment</span>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-directions mr-1"></i>Directions
+                                            </button>
+                                            <button class="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-phone mr-1"></i>Call
+                                            </button>
+                                            <button class="border border-gray-300 text-gray-700 px-3 py-2 rounded-lg">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Center 2 -->
+                                <div class="boost-service-center-card">
+                                    <div class="p-4">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <div class="flex-1">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <h3 class="font-bold text-lg text-gray-900">TOYO Premium Service</h3>
+                                                    <span class="boost-distance-badge">2.8 km</span>
+                                                </div>
+                                                <p class="text-sm text-gray-600 mb-2">Jalan Ampang, 50450 Kuala Lumpur</p>
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <div class="boost-rating-stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                    </div>
+                                                    <span class="text-sm text-gray-600">4.6 (89 reviews)</span>
+                                                </div>
+                                                <div class="text-sm boost-status-open">Open • Closes at 8:00 PM</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                                                    <i class="far fa-heart text-gray-400"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Services -->
+                                        <div class="flex flex-wrap gap-1 mb-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-md text-xs font-medium">Warranty Claims</span>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs font-medium">Installation</span>
+                                            <span class="bg-red-100 text-red-700 px-2 py-1 rounded-md text-xs font-medium">24/7 Service</span>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-directions mr-1"></i>Directions
+                                            </button>
+                                            <button class="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-phone mr-1"></i>Call
+                                            </button>
+                                            <button class="border border-gray-300 text-gray-700 px-3 py-2 rounded-lg">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Center 3 -->
+                                <div class="boost-service-center-card">
+                                    <div class="p-4">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <div class="flex-1">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <h3 class="font-bold text-lg text-gray-900">TOYO TYRE Service Shah Alam</h3>
+                                                    <span class="boost-distance-badge">15.3 km</span>
+                                                </div>
+                                                <p class="text-sm text-gray-600 mb-2">Section 13, 40100 Shah Alam, Selangor</p>
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <div class="boost-rating-stars">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                    </div>
+                                                    <span class="text-sm text-gray-600">4.7 (156 reviews)</span>
+                                                </div>
+                                                <div class="text-sm boost-status-closed">Closed • Opens at 8:00 AM</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                                                    <i class="far fa-heart text-gray-400"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Services -->
+                                        <div class="flex flex-wrap gap-1 mb-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-md text-xs font-medium">Warranty Claims</span>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs font-medium">Installation</span>
+                                            <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-md text-xs font-medium">Balancing</span>
+                                            <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-md text-xs font-medium">Inspection</span>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-directions mr-1"></i>Directions
+                                            </button>
+                                            <button class="flex-1 border border-blue-600 text-blue-600 py-2 rounded-lg text-sm font-semibold">
+                                                <i class="fas fa-phone mr-1"></i>Call
+                                            </button>
+                                            <button class="border border-gray-300 text-gray-700 px-3 py-2 rounded-lg">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Contact -->
+                                <div class="bg-blue-50 rounded-xl p-4 mt-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-headset text-blue-600 text-2xl mb-2"></i>
+                                        <h4 class="font-semibold text-gray-900 mb-1">Need Help Finding a Centre?</h4>
+                                        <p class="text-sm text-gray-600 mb-3">Our customer service team can help you find the nearest service centre.</p>
+                                        <button class="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                                            <i class="fas fa-phone mr-1"></i>Contact Support
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Registration - Boost</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="boost-phone-frame" style="height: 1300px;">
+                    <div class="boost-phone-screen">
+                        <!-- iOS Status Bar -->
+                        <div style="background: #2563EB; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px 24px;">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Warranty Registration</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-qrcode text-xl"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm opacity-90 mt-2">Register your TOYO tires for warranty protection</p>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1" style="padding: 20px;">
+                            <!-- Quick Scan Option -->
+                            <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <i class="fas fa-qrcode text-white text-2xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-lg text-gray-900 mb-2">Quick Registration</h3>
+                                    <p class="text-sm text-gray-600 mb-4">Scan your tire sidewall QR code for instant registration</p>
+                                    <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold w-full">
+                                        <i class="fas fa-camera mr-2"></i>Scan Tire QR Code
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="text-center mb-6">
+                                <span class="text-gray-500 text-sm">OR</span>
+                            </div>
+
+                            <!-- Manual Registration Form -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <h3 class="font-bold text-lg text-gray-900 mb-4">Manual Registration</h3>
+                                
+                                <!-- Customer Information -->
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Customer Information</h4>
+                                    
+                                    <div class="boost-form-group">
+                                        <label class="boost-form-label">Full Name</label>
+                                        <input type="text" class="boost-form-input" placeholder="Enter your full name" value="Ahmad Rahman">
+                                    </div>
+                                    
+                                    <div class="boost-form-group">
+                                        <label class="boost-form-label">Phone Number</label>
+                                        <input type="tel" class="boost-form-input" placeholder="+60 12-345 6789" value="+60 12-345 6789">
+                                    </div>
+                                </div>
+
+                                <!-- Vehicle Information -->
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Vehicle Information</h4>
+                                    
+                                    <div class="boost-form-group">
+                                        <label class="boost-form-label">Vehicle</label>
+                                        <input type="text" class="boost-form-input" placeholder="e.g., Honda Civic 2023" value="Honda Civic 2023">
+                                    </div>
+                                </div>
+
+                                <!-- Tire Information -->
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Tire Information</h4>
+                                    
+                                    <div class="boost-form-group">
+                                        <label class="boost-form-label">TOYO TIRES Model</label>
+                                        <select class="boost-form-input">
+                                            <option>Select tire model</option>
+                                            <option selected>PROXES T1 Sport</option>
+                                            <option>PROXES CF2</option>
+                                            <option>NANOENERGY 3</option>
+                                            <option>Open Country R/T</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="boost-form-group">
+                                        <label class="boost-form-label">Purchase Date</label>
+                                        <input type="date" class="boost-form-input" value="2024-01-15">
+                                    </div>
+                                </div>
+
+                                <!-- Upload Documents -->
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Purchase Receipt</h4>
+                                    
+                                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
+                                        <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
+                                        <p class="text-sm text-gray-600 mb-2">Upload purchase receipt</p>
+                                        <button class="text-blue-600 font-semibold text-sm">Choose File</button>
+                                    </div>
+                                </div>
+
+                                <!-- Terms and Conditions -->
+                                <div class="mb-6">
+                                    <label class="flex items-start gap-3">
+                                        <input type="checkbox" class="mt-1" checked>
+                                        <span class="text-sm text-gray-600">
+                                            I agree to the <span class="text-blue-600 font-semibold">Terms and Conditions</span> and 
+                                            <span class="text-blue-600 font-semibold">Privacy Policy</span> for warranty registration.
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button class="bg-blue-600 text-white px-6 py-4 rounded-full font-bold w-full text-lg">
+                                    Register Warranty
+                                </button>
+                                
+                                <p class="text-xs text-gray-500 text-center mt-3">
+                                    Registration confirmation will be sent to your email within 24 hours.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Home - Main Glass</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="glass-phone-frame">
+                    <div class="glass-phone-screen">
+                        <!-- Status Bar -->
+                        <div style="height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: white;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-20 rounded px-2 py-1 text-xs font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Glass Header -->
+                        <div class="glass-card mx-4 mt-4 p-6 color-white">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <img src="../images/toyo-tires-white.png" alt="TOYO TIRES" class="h-5" style="filter: brightness(0) invert(1);">
+                                    <img src="../images/CARE-white.png" alt="CARE" class="h-5">
+                                </div>
+                                <div class="relative">
+                                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bell text-white text-lg"></i>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-2xl"></i>
+                                </div>
+                                <div class="text-white">
+                                    <div class="text-sm opacity-90">Welcome back</div>
+                                    <div class="text-xl font-bold">Ahmad Rahman</div>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <i class="fas fa-crown text-yellow-300 text-sm"></i>
+                                        <span class="text-sm font-semibold">Gold Member</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Points Card -->
+                        <div class="glass-card mx-4 mt-6 p-6 text-center text-white">
+                            <div class="text-sm opacity-90 mb-2">Your Reward Points</div>
+                            <div class="text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">2,580</div>
+                            <div class="flex justify-center gap-3">
+                                <button class="glass-button px-6 py-3 rounded-full font-semibold text-sm">
+                                    <i class="fas fa-gift mr-2"></i>Redeem
+                                </button>
+                                <button class="glass-button px-6 py-3 rounded-full font-semibold text-sm">
+                                    <i class="fas fa-plus mr-2"></i>Earn More
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Main Hero Promotion -->
+                        <div class="px-4 mt-6">
+                            <div class="glass-card p-6 text-white">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1">
+                                        <div class="text-lg font-bold leading-tight mb-2">Premium Tire Care</div>
+                                        <div class="text-lg font-bold leading-tight mb-3">& Extended Warranty!</div>
+                                        <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 w-fit">
+                                            <span class="text-sm font-medium mr-2">Explore Services</span>
+                                            <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                                <i class="fas fa-chevron-right text-blue-600 text-xs"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <img src="../images/ic_warranty_plus.png" alt="Warranty Plus" class="w-12 h-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services Grid -->
+                        <div class="px-4 mt-6">
+                            <h3 class="text-white text-xl font-bold mb-4 text-center">TOYO TIRES Services</h3>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Campaign</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-gamepad"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Games</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-gift"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Rewards</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Membership</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Warranty Reg</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Warranty Claim</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Appointments</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Service Centre</div>
+                                </div>
+                                
+                                <div class="glass-service-card">
+                                    <div class="text-2xl mb-2">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div class="font-semibold text-xs">Support</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Events Section -->
+                        <div class="px-4 mt-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-white text-lg font-bold">Events</h3>
+                                <span class="text-white font-semibold text-sm opacity-80">View All</span>
+                            </div>
+
+                            <!-- Featured Event Banner -->
+                            <div class="glass-card p-4 mb-4 text-white">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-sm mb-1">Join Our Community Events!</h4>
+                                        <p class="text-xs opacity-90">Connect with fellow tire enthusiasts and industry experts</p>
+                                    </div>
+                                    <img src="../images/image-speaker.png" alt="Event Speaker" class="w-16 h-16 rounded-lg ml-4">
+                                </div>
+                            </div>
+                            
+                            <!-- Event Cards -->
+                            <div class="space-y-3">
+                                <div class="glass-card overflow-hidden">
+                                    <div class="flex h-16">
+                                        <img src="../images/image-event-1.png" alt="Sustainable Materials" class="w-16 h-full object-cover rounded-l">
+                                        <div class="flex-1 p-3 flex flex-col justify-center text-white">
+                                            <h4 class="font-semibold text-xs mb-1">CONCEPT TYRE WITH 90% SUSTAINABLE MATERIALS</h4>
+                                            <p class="text-xs opacity-80">January 12, 2024</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="glass-card overflow-hidden">
+                                    <div class="flex h-16">
+                                        <img src="../images/image-event-2.jpg" alt="Toyo Tires HQ Visit" class="w-16 h-full object-cover rounded-l">
+                                        <div class="flex-1 p-3 flex flex-col justify-center text-white">
+                                            <h4 class="font-semibold text-xs mb-1">Visit to Toyo Tires HQ</h4>
+                                            <p class="text-xs opacity-80">March 02, 2023</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Promotion -->
+                        <div class="px-4 mt-6 mb-20">
+                            <div class="glass-card p-4 text-white">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="text-lg font-bold mb-2">Premium Tire Protection</div>
+                                        <div class="text-sm opacity-90 mb-3">Extended warranty coverage for your peace of mind</div>
+                                        <div class="bg-white text-blue-600 px-3 py-1 rounded-md text-xs font-bold mt-2 w-fit">
+                                            Learn More
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Service Centre Finder - Glass</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="glass-phone-frame" style="height: 1600px;">
+                    <div class="glass-phone-screen">
+                        <!-- Status Bar -->
+                        <div style="height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: white;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-20 rounded px-2 py-1 text-xs font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Glass Header -->
+                        <div class="glass-card mx-4 mt-4 p-6 text-white">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Service Centres</h1>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-filter text-xl opacity-80"></i>
+                                    <i class="fas fa-map text-xl opacity-80"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Glass Search -->
+                        <div class="px-4 mt-6">
+                            <div class="relative mb-4">
+                                <input type="text" class="glass-input pl-14" placeholder="Search locations, postal codes...">
+                                <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-white opacity-70"></i>
+                            </div>
+                            
+                            <div class="flex gap-3 mb-6">
+                                <button class="glass-button active px-4 py-2 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-location-arrow mr-2"></i>Near Me
+                                </button>
+                                <button class="glass-button px-4 py-2 rounded-full text-sm font-semibold">
+                                    All Services
+                                </button>
+                                <button class="glass-button px-4 py-2 rounded-full text-sm font-semibold">
+                                    24/7 Open
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Glass Map -->
+                        <div class="px-4 mb-6">
+                            <div class="glass-map-placeholder">
+                                <div class="text-center text-white">
+                                    <i class="fas fa-map-marked-alt text-4xl mb-3 opacity-70"></i>
+                                    <p class="font-semibold">Interactive Map</p>
+                                    <p class="text-sm opacity-70">Tap to expand view</p>
+                                </div>
+                                <!-- Map pins -->
+                                <div class="absolute top-6 left-12 w-3 h-3 bg-blue-400 rounded-full"></div>
+                                <div class="absolute top-16 right-16 w-3 h-3 bg-blue-400 rounded-full"></div>
+                                <div class="absolute bottom-12 left-20 w-3 h-3 bg-red-400 rounded-full"></div>
+                                <div class="absolute bottom-8 right-12 w-3 h-3 bg-green-400 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Service Centers List -->
+                        <div class="px-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-white text-lg font-bold">Nearby Centers (8)</h3>
+                                <button class="text-white text-sm font-semibold opacity-80">Sort by distance</button>
+                            </div>
+                            
+                            <!-- Center 1 -->
+                            <div class="glass-service-center-card">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <h3 class="font-bold text-lg">TOYO TIRES Service KL</h3>
+                                            <span class="bg-blue-400 bg-opacity-30 text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">1.2 km</span>
+                                        </div>
+                                        <p class="text-sm opacity-80 mb-2">Jalan Bukit Bintang, 50200 KL</p>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <div class="glass-rating-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="text-sm opacity-80">4.8 (124)</span>
+                                        </div>
+                                        <div class="text-sm text-green-300 font-semibold">Open • Closes 6:00 PM</div>
+                                    </div>
+                                    <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-heart text-red-300"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-green-400 bg-opacity-20 text-green-200 px-3 py-1 rounded-full text-xs">Warranty</span>
+                                    <span class="bg-blue-400 bg-opacity-20 text-blue-200 px-3 py-1 rounded-full text-xs">Installation</span>
+                                    <span class="bg-orange-400 bg-opacity-20 text-orange-200 px-3 py-1 rounded-full text-xs">Balancing</span>
+                                </div>
+                                
+                                <div class="flex gap-3">
+                                    <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                                        <i class="fas fa-directions mr-2"></i>Directions
+                                    </button>
+                                    <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                                        <i class="fas fa-phone mr-2"></i>Call
+                                    </button>
+                                    <button class="glass-button px-4 py-3 rounded-lg">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Center 2 -->
+                            <div class="glass-service-center-card">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <h3 class="font-bold text-lg">TOYO TIRES Premium</h3>
+                                            <span class="bg-blue-400 bg-opacity-30 text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">2.8 km</span>
+                                        </div>
+                                        <p class="text-sm opacity-80 mb-2">Jalan Ampang, 50450 KL</p>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <div class="glass-rating-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <span class="text-sm opacity-80">4.6 (89)</span>
+                                        </div>
+                                        <div class="text-sm text-green-300 font-semibold">Open • Closes 8:00 PM</div>
+                                    </div>
+                                    <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="far fa-heart text-white opacity-60"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-green-400 bg-opacity-20 text-green-200 px-3 py-1 rounded-full text-xs">Warranty</span>
+                                    <span class="bg-red-400 bg-opacity-20 text-red-200 px-3 py-1 rounded-full text-xs">24/7</span>
+                                </div>
+                                
+                                <div class="flex gap-3">
+                                    <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                                        <i class="fas fa-directions mr-2"></i>Directions
+                                    </button>
+                                    <button class="glass-button flex-1 py-3 rounded-lg font-semibold text-sm">
+                                        <i class="fas fa-phone mr-2"></i>Call
+                                    </button>
+                                    <button class="glass-button px-4 py-3 rounded-lg">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Glass Support Card -->
+                            <div class="glass-card p-6 mt-6 text-center text-white">
+                                <i class="fas fa-headset text-3xl mb-3 opacity-80"></i>
+                                <h4 class="font-bold text-lg mb-2">Need Help?</h4>
+                                <p class="text-sm opacity-80 mb-4">Our support team can help you find the perfect service centre.</p>
+                                <button class="glass-button px-6 py-3 rounded-full font-semibold">
+                                    <i class="fas fa-phone mr-2"></i>Contact Support
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">Warranty Registration - Glass</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="glass-phone-frame" style="height: 2260px;">
+                    <div class="glass-phone-screen">
+                        <!-- Status Bar -->
+                        <div style="height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: white;">
+                            <div class="flex items-center">
+                                <span>12:44</span>
+                                <i class="fas fa-signal ml-2"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="flex gap-1">
+                                    <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                    <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                    <div class="w-1 h-3 bg-white rounded"></div>
+                                </div>
+                                <i class="fas fa-wifi text-white ml-2"></i>
+                                <div class="bg-white bg-opacity-20 rounded px-2 py-1 text-xs font-bold ml-1">89%</div>
+                            </div>
+                        </div>
+
+                        <!-- Glass Header -->
+                        <div class="glass-card mx-4 mt-4 p-6 text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chevron-left text-xl"></i>
+                                    <h1 class="text-xl font-bold">Warranty Registration</h1>
+                                </div>
+                                <i class="fas fa-qrcode text-xl"></i>
+                            </div>
+                            <p class="text-sm opacity-80">Protect your TOYO TIRES investment</p>
+                        </div>
+
+                        <!-- QR Scan Card -->
+                        <div class="px-4 mt-6">
+                            <div class="glass-qr-card text-white">
+                                <div class="w-20 h-20 mx-auto mb-4 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-qrcode text-3xl text-white"></i>
+                                </div>
+                                <h3 class="font-bold text-lg mb-3">Quick Registration</h3>
+                                <p class="text-sm mb-6 opacity-80">Scan your tire sidewall QR code for instant warranty registration</p>
+                                <button class="glass-button px-8 py-4 rounded-full font-bold text-lg w-full">
+                                    <i class="fas fa-camera mr-3"></i>Scan QR Code
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="text-center my-6">
+                            <span class="text-sm font-semibold text-white opacity-70">OR REGISTER MANUALLY</span>
+                        </div>
+
+                        <!-- Manual Form -->
+                        <div class="px-4">
+                            <!-- Customer Info -->
+                            <div class="glass-form-section text-white">
+                                <h4 class="font-bold text-lg mb-4">Customer Information</h4>
+                                
+                                <div class="mb-4">
+                                    <label class="glass-form-label">Full Name</label>
+                                    <input type="text" class="glass-input" placeholder="Enter your full name" value="Ahmad Rahman">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="glass-form-label">Phone Number</label>
+                                    <input type="tel" class="glass-input" placeholder="+60 12-345 6789" value="+60 12-345 6789">
+                                </div>
+                                
+                                <div>
+                                    <label class="glass-form-label">Email Address</label>
+                                    <input type="email" class="glass-input" placeholder="your.email@example.com">
+                                </div>
+                            </div>
+
+                            <!-- Vehicle Info -->
+                            <div class="glass-form-section text-white">
+                                <h4 class="font-bold text-lg mb-4">Vehicle Information</h4>
+                                
+                                <div class="mb-4">
+                                    <label class="glass-form-label">Vehicle Make & Model</label>
+                                    <input type="text" class="glass-input" placeholder="e.g., Honda Civic 2023" value="Honda Civic 2023">
+                                </div>
+                                
+                                <div>
+                                    <label class="glass-form-label">License Plate</label>
+                                    <input type="text" class="glass-input" placeholder="ABC 1234">
+                                </div>
+                            </div>
+
+                            <!-- Tire Info -->
+                            <div class="glass-form-section text-white">
+                                <h4 class="font-bold text-lg mb-4">Tire Information</h4>
+                                
+                                <div class="mb-4">
+                                    <label class="glass-form-label">TOYO TIRES Model</label>
+                                    <select class="glass-input">
+                                        <option>Select tire model</option>
+                                        <option selected>PROXES T1 Sport</option>
+                                        <option>PROXES CF2</option>
+                                        <option>NANOENERGY 3</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="glass-form-label">Purchase Date</label>
+                                    <input type="date" class="glass-input" value="2024-01-15">
+                                </div>
+                                
+                                <div>
+                                    <label class="glass-form-label">Tire Size</label>
+                                    <input type="text" class="glass-input" placeholder="e.g., 225/45R17" value="225/45R17">
+                                </div>
+                            </div>
+
+                            <!-- Upload Receipt -->
+                            <div class="glass-form-section text-white">
+                                <h4 class="font-bold text-lg mb-4">Purchase Receipt</h4>
+                                
+                                <div class="glass-upload-area">
+                                    <i class="fas fa-cloud-upload-alt text-3xl mb-3 opacity-70"></i>
+                                    <p class="font-semibold mb-2">Upload Receipt</p>
+                                    <p class="text-sm opacity-70 mb-3">Drag & drop or tap to select</p>
+                                    <button class="glass-button px-6 py-2 rounded-lg">Choose File</button>
+                                </div>
+                            </div>
+
+                            <!-- Terms -->
+                            <div class="glass-form-section">
+                                <label class="flex items-start gap-3 text-white">
+                                    <input type="checkbox" class="mt-1" checked>
+                                    <span class="text-sm">
+                                        I agree to the <span class="font-semibold text-yellow-300">Terms and Conditions</span> and 
+                                        <span class="font-semibold text-yellow-300">Privacy Policy</span> for warranty registration.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="pb-8">
+                                <button class="glass-button w-full py-4 rounded-2xl text-lg font-bold">
+                                    <i class="fas fa-shield-alt mr-3"></i>Register Warranty
+                                </button>
+                                
+                                <p class="text-xs text-center mt-4 text-white opacity-70">
+                                    Registration confirmation will be sent within 24 hours
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prototype-card">
+            <div class="prototype-header">
+                <h3 class="text-xl font-semibold">B2B Home - Main Boost</h3>
+            </div>
+            <div class="prototype-container">
+                <div class="b2b-phone-frame">
+                    <div class="b2b-phone-screen">
+                        <!-- Status Bar -->
+                        <div style="height: 44px; background: #2563EB; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                            <span>9:41</span>
+                            <span>
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </span>
+                        </div>
+                        
+                        <!-- Header -->
+                        <div style="background: #2563EB; color: white; padding: 20px; margin-top: -1px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <img src="../images/toyo-tires-white.png" alt="Toyo Tires" class="h-5">
+                                        <img src="../images/ETEN-white.png" alt="Toyo Tires" class="h-5">
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bell text-white text-lg"></i>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">5</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-building text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-90">Welcome back,</div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-semibold">AutoMart Solutions Sdn Bhd</span>
+                                        <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Metrics Cards -->
+                        <div style="background: #f8f9fa; padding: 16px 20px;">
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="b2b-metrics-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs text-gray-600 font-medium">CREDIT BALANCE</div>
+                                        <i class="fas fa-credit-card text-blue-600"></i>
+                                    </div>
+                                    <div class="text-xl font-bold text-gray-900">RM 45,800</div>
+                                    <div class="text-xs text-green-600 font-medium">+15% this month</div>
+                                </div>
+                                
+                                <div class="b2b-metrics-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs text-gray-600 font-medium">MONTHLY SALES</div>
+                                        <i class="fas fa-chart-line text-green-600"></i>
+                                    </div>
+                                    <div class="text-xl font-bold text-gray-900">RM 28,950</div>
+                                    <div class="text-xs text-green-600 font-medium">+8% vs last month</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-blue-600">12</div>
+                                    <div class="text-xs text-gray-600">New Orders</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-orange-600">8</div>
+                                    <div class="text-xs text-gray-600">In Transit</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 text-center">
+                                    <div class="text-lg font-bold text-green-600">3</div>
+                                    <div class="text-xs text-gray-600">Appointments</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- B2B Services Grid -->
+                        <div style="background: #f8f9fa; padding: 0 20px;">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-lg text-gray-900">Business Services</h3>
+                                <span class="text-blue-600 font-semibold text-sm">View All</span>
+                            </div>
+                            <div class="b2b-service-grid mb-6">
+                                <!-- Row 1 -->
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Sales Forecast</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Credit Balance</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Claims</div>
+                                </div>
+                                
+                                <!-- Row 2 -->
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Appointments</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Order Tires</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Delivery</div>
+                                </div>
+                                
+                                <!-- Row 3 -->
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Warranty</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Campaigns</div>
+                                </div>
+                                <div class="b2b-service-item">
+                                    <div class="b2b-service-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div class="text-xs font-medium text-gray-900 text-center">Support</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Business Activity -->
+                        <div style="background: #f8f9fa; padding: 0 20px 20px;">
+                            <h3 class="font-bold text-lg text-gray-900 mb-4">Recent Business Activity</h3>
+                            <div class="bg-white rounded-xl p-4">
+                                <div class="b2b-activity-item">
+                                    <div class="b2b-activity-icon bg-green-100 text-green-600">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Order #ORD-2024-156 Completed</div>
+                                        <div class="text-xs text-gray-600">240 PROXES tires delivered to Warehouse A</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">2h ago</div>
+                                </div>
+
+                                <div class="b2b-activity-item">
+                                    <div class="b2b-activity-icon bg-blue-100 text-blue-600">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Payment Received</div>
+                                        <div class="text-xs text-gray-600">RM 15,600 credited to account</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">1d ago</div>
+                                </div>
+
+                                <div class="b2b-activity-item">
+                                    <div class="b2b-activity-icon bg-orange-100 text-orange-600">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Campaign Enrolled</div>
+                                        <div class="text-xs text-gray-600">Buy 100 Get 10 Free - Spring Promotion</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">2d ago</div>
+                                </div>
+
+                                <div class="b2b-activity-item">
+                                    <div class="b2b-activity-icon bg-purple-100 text-purple-600">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-sm text-gray-900">Appointment Scheduled</div>
+                                        <div class="text-xs text-gray-600">Fleet inspection on Mar 15, 2024</div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">3d ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Growth Program -->
+                        <div style="background: #f8f9fa; padding: 0 20px 20px;">
+                            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 text-white relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fas fa-rocket text-yellow-300"></i>
+                                        <span class="text-sm font-semibold">BUSINESS GROWTH</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-1">Scale Your Fleet</h3>
+                                    <p class="text-sm opacity-90 mb-3">Unlock volume discounts and premium services for large orders</p>
+                                    <button class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-sm">
+                                        Learn More
+                                    </button>
+                                </div>
+                                <div class="absolute -top-2 -right-2 opacity-20">
+                                    <i class="fas fa-chart-line text-6xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9th Prototype: B2B Sales Forecast -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-lg font-bold">B2B Sales Forecast</h3>
+                    <p class="text-sm opacity-90">Business analytics and sales projections</p>
+                </div>
+                <div class="prototype-container" style="height: 1480px;">
+                    <div class="b2b-phone-frame" style="height: 1480px;">
+                        <div class="b2b-phone-screen">
+                            <!-- Status Bar -->
+                            <div class="b2b-status-bar">
+                                <span>9:41</span>
+                                <span>
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-three-quarters"></i>
+                                </span>
+                            </div>
+                            
+                            <!-- Header -->
+                            <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-chevron-left text-xl"></i>
+                                        <h1 class="text-xl font-bold">Sales Forecast</h1>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-filter text-xl"></i>
+                                        <i class="fas fa-download text-xl"></i>
+                                    </div>
+                                </div>
+                                <p class="text-sm opacity-90 mt-2">Business analytics and sales projections</p>
+                            </div>
+
+                            <!-- Time Period Selector -->
+                            <div class="p-4 bg-white border-b border-gray-200">
+                                <div class="flex gap-2">
+                                    <button class="flex-1 py-2 px-3 bg-blue-600 text-white rounded-lg font-semibold text-sm">
+                                        Monthly
+                                    </button>
+                                    <button class="flex-1 py-2 px-3 bg-gray-100 text-gray-600 rounded-lg font-semibold text-sm">
+                                        Quarterly
+                                    </button>
+                                    <button class="flex-1 py-2 px-3 bg-gray-100 text-gray-600 rounded-lg font-semibold text-sm">
+                                        Yearly
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="flex-1" style="padding: 20px;">
+                                
+                                <!-- Key Metrics -->
+                                <div class="grid grid-cols-2 gap-3 mb-6">
+                                    <div class="b2b-metrics-card text-center">
+                                        <div class="text-2xl font-bold text-green-600">RM 156K</div>
+                                        <div class="text-sm text-gray-600">This Month</div>
+                                        <div class="text-xs text-green-600 font-medium mt-1">
+                                            <i class="fas fa-arrow-up mr-1"></i>+18%
+                                        </div>
+                                    </div>
+                                    <div class="b2b-metrics-card text-center">
+                                        <div class="text-2xl font-bold text-blue-600">RM 189K</div>
+                                        <div class="text-sm text-gray-600">Projected</div>
+                                        <div class="text-xs text-blue-600 font-medium mt-1">
+                                            <i class="fas fa-chart-line mr-1"></i>Next Month
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sales Trend Chart -->
+                                <div class="b2b-chart-container">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="font-bold text-gray-900">Sales Trend</h3>
+                                        <div class="flex items-center gap-2 text-xs">
+                                            <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                            <span class="text-gray-600">Sales</span>
+                                            <div class="w-3 h-3 bg-green-500 rounded-full ml-2"></div>
+                                            <span class="text-gray-600">Forecast</span>
+                                        </div>
+                                    </div>
+                                    <div class="b2b-chart-placeholder">
+                                        <svg width="100%" height="120" viewBox="0 0 300 120" style="overflow: visible;">
+                                            <!-- Grid lines -->
+                                            <defs>
+                                                <pattern id="b2b-grid" width="50" height="30" patternUnits="userSpaceOnUse">
+                                                    <path d="M 50 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                                </pattern>
+                                            </defs>
+                                            <rect width="300" height="120" fill="url(#b2b-grid)" />
+                                            
+                                            <!-- Sales line (blue) -->
+                                            <polyline 
+                                                fill="none" 
+                                                stroke="#3b82f6" 
+                                                stroke-width="3" 
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                points="25,72 75,54 125,84 175,36 225,66 275,30"
+                                            />
+                                            
+                                            <!-- Forecast line (green, dashed) -->
+                                            <polyline 
+                                                fill="none" 
+                                                stroke="#10b981" 
+                                                stroke-width="3" 
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-dasharray="8,4"
+                                                points="225,66 275,30 325,24"
+                                            />
+                                            
+                                            <!-- Data points for sales -->
+                                            <circle cx="25" cy="72" r="4" fill="#3b82f6"/>
+                                            <circle cx="75" cy="54" r="4" fill="#3b82f6"/>
+                                            <circle cx="125" cy="84" r="4" fill="#3b82f6"/>
+                                            <circle cx="175" cy="36" r="4" fill="#3b82f6"/>
+                                            <circle cx="225" cy="66" r="4" fill="#3b82f6"/>
+                                            
+                                            <!-- Data points for forecast -->
+                                            <circle cx="275" cy="30" r="4" fill="#10b981"/>
+                                            <circle cx="325" cy="24" r="4" fill="#10b981"/>
+                                            
+                                            <!-- Subtle area fill under sales line -->
+                                            <path 
+                                                d="M25,72 L75,54 L125,84 L175,36 L225,66 L225,120 L25,120 Z" 
+                                                fill="url(#b2bSalesGradient)" 
+                                                opacity="0.1"
+                                            />
+                                            
+                                            <!-- Gradient definition -->
+                                            <defs>
+                                                <linearGradient id="b2bSalesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+                                                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-gray-500 mt-2">
+                                        <span>Jan</span>
+                                        <span>Feb</span>
+                                        <span>Mar</span>
+                                        <span>Apr</span>
+                                        <span>May</span>
+                                        <span>Jun</span>
+                                        <span>Jul</span>
+                                    </div>
+                                </div>
+
+                                <!-- Product Performance -->
+                                <div class="b2b-chart-container">
+                                    <h3 class="font-bold text-gray-900 mb-4">Product Performance</h3>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium text-gray-900">PROXES T1 Sport</span>
+                                                <span class="text-sm text-gray-600">68%</span>
+                                            </div>
+                                            <div class="b2b-progress-bar">
+                                                <div class="b2b-progress-fill bg-blue-500" style="width: 68%"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium text-gray-900">NANOENERGY 3</span>
+                                                <span class="text-sm text-gray-600">52%</span>
+                                            </div>
+                                            <div class="b2b-progress-bar">
+                                                <div class="b2b-progress-fill bg-green-500" style="width: 52%"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium text-gray-900">Open Country R/T</span>
+                                                <span class="text-sm text-gray-600">45%</span>
+                                            </div>
+                                            <div class="b2b-progress-bar">
+                                                <div class="b2b-progress-fill bg-orange-500" style="width: 45%"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium text-gray-900">PROXES CF2</span>
+                                                <span class="text-sm text-gray-600">38%</span>
+                                            </div>
+                                            <div class="b2b-progress-bar">
+                                                <div class="b2b-progress-fill bg-purple-500" style="width: 38%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quarterly Forecast -->
+                                <div class="b2b-chart-container">
+                                    <h3 class="font-bold text-gray-900 mb-4">Quarterly Forecast</h3>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                            <div class="text-lg font-bold text-blue-600">Q2 2024</div>
+                                            <div class="text-sm text-gray-600">RM 485K</div>
+                                            <div class="text-xs text-green-600">+12% growth</div>
+                                        </div>
+                                        <div class="text-center p-3 bg-green-50 rounded-lg">
+                                            <div class="text-lg font-bold text-green-600">Q3 2024</div>
+                                            <div class="text-sm text-gray-600">RM 542K</div>
+                                            <div class="text-xs text-green-600">+15% growth</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Business Insights -->
+                                <div class="b2b-chart-container">
+                                    <h3 class="font-bold text-gray-900 mb-4">Key Insights</h3>
+                                    
+                                    <div class="b2b-insight-item">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-arrow-up text-green-600 text-sm"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium text-sm text-gray-900">Strong Performance</div>
+                                            <div class="text-xs text-gray-600">PROXES series showing 18% growth this quarter</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="b2b-insight-item">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-chart-line text-blue-600 text-sm"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium text-sm text-gray-900">Seasonal Opportunity</div>
+                                            <div class="text-xs text-gray-600">Summer tire demand expected to peak in May-June</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="b2b-insight-item">
+                                        <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-bullseye text-orange-600 text-sm"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium text-sm text-gray-900">Action Recommended</div>
+                                            <div class="text-xs text-gray-600">Increase Open Country inventory for off-road season</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Actions -->
+                                <div class="flex gap-3 mt-6">
+                                    <button class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                                        <i class="fas fa-download mr-2"></i>
+                                        Export Report
+                                    </button>
+                                    <button class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                                        <i class="fas fa-cog mr-2"></i>
+                                        Settings
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10th Prototype: B2B Home - Main Dark -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-lg font-bold">B2B Home - Main Dark</h3>
+                    <p class="text-sm opacity-90">Dark theme business dashboard</p>
+                </div>
+                <div class="prototype-container" style="height: 1530px;">
+                    <div class="b2b-dark-phone-frame">
+                        <div class="b2b-dark-phone-screen">
+                            <!-- Status Bar -->
+                            <div class="b2b-dark-status-bar">
+                                <span>9:41</span>
+                                <span>
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-three-quarters"></i>
+                                </span>
+                            </div>
+                            
+                            <!-- Header -->
+                            <div class="px-4 pt-4 pb-3">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <img src="../images/toyo-tires-white.png" alt="TOYO TIRES" class="h-4">
+                                            <img src="../images/ETEN-white.png" alt="ETEN" class="h-4">
+                                        </div>
+                                        <p class="text-sm text-gray-400">AutoMart Solutions Sdn Bhd</p>
+                                    </div>
+                                    <button class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-xl">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Categories -->
+                            <div class="flex gap-3 px-4 pb-2">
+                                <button class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Dashboard</button>
+                                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Active Orders</button>
+                                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Shipments</button>
+                                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Reports</button>
+                            </div>
+
+                            <!-- Business Metrics Cards -->
+                            <div class="p-4">
+                                <div class="grid grid-cols-2 gap-3 mb-4">
+                                    <div class="b2b-dark-metrics-card">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="text-xs text-gray-400 font-medium">CREDIT BALANCE</div>
+                                            <i class="fas fa-credit-card text-blue-500"></i>
+                                        </div>
+                                        <div class="text-xl font-bold text-white">RM 45,800</div>
+                                        <div class="text-xs text-blue-400 font-medium">+15% this month</div>
+                                    </div>
+                                    
+                                    <div class="b2b-dark-metrics-card">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="text-xs text-gray-400 font-medium">MONTHLY SALES</div>
+                                            <i class="fas fa-chart-line text-blue-500"></i>
+                                        </div>
+                                        <div class="text-xl font-bold text-white">RM 28,950</div>
+                                        <div class="text-xs text-blue-400 font-medium">+8% vs last month</div>
+                                    </div>
+                                </div>
+
+                                <!-- Content Cards -->
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div class="col-span-2 bg-gray-800 rounded-xl p-4">
+                                        <div class="h-24 bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                                           <i class="fas fa-chart-pie text-5xl text-gray-500"></i>
+                                        </div>
+                                        <p class="font-bold">Top Selling Models</p>
+                                        <p class="text-xs text-gray-400">Q3 2024 Report</p>
+                                    </div>
+                                    <div class="bg-gray-800 rounded-xl p-4">
+                                        <div class="h-20 bg-gray-700 rounded-lg mb-3 flex flex-col items-center justify-center">
+                                           <p class="text-3xl font-bold">1,240</p>
+                                           <p class="text-xs text-gray-400">Units</p>
+                                        </div>
+                                        <p class="font-bold text-sm text-center">Open Country H/T</p>
+                                    </div>
+                                    <div class="bg-gray-800 rounded-xl p-4">
+                                         <div class="h-20 bg-gray-700 rounded-lg mb-3 flex flex-col items-center justify-center">
+                                           <p class="text-lg font-bold text-red-400">52 Units</p>
+                                           <p class="text-xs text-gray-400">Remaining</p>
+                                        </div>
+                                        <p class="font-bold text-sm text-center">Proxes ST III (Low Stock)</p>
+                                    </div>
+                                </div>
+
+                                <!-- Stats -->
+                                <div class="mb-4">
+                                    <p class="text-lg font-semibold mb-2">Business Stats</p>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="bg-gray-800 p-3 rounded-xl">
+                                            <p class="text-sm text-gray-400">Revenue</p>
+                                            <p class="text-xl font-bold">$1.2M</p>
+                                            <p class="text-xs text-blue-400">+5.2%</p>
+                                        </div>
+                                        <div class="bg-gray-800 p-3 rounded-xl">
+                                            <p class="text-sm text-gray-400">Units Sold</p>
+                                            <p class="text-xl font-bold">5.4k</p>
+                                            <p class="text-xs text-blue-400">+8.1%</p>
+                                        </div>
+                                        <div class="bg-gray-800 p-3 rounded-xl">
+                                            <p class="text-sm text-gray-400">Margin</p>
+                                            <p class="text-xl font-bold">18.2%</p>
+                                            <p class="text-xs text-red-400">-0.5%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- B2B Services Grid -->
+                            <div class="px-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg text-white">Business Services</h3>
+                                    <span class="text-blue-500 font-semibold text-sm">View All</span>
+                                </div>
+                                <div class="b2b-dark-service-grid mb-6">
+                                    <!-- Row 1 -->
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Sales Forecast</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Credit Balance</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Claims</div>
+                                    </div>
+                                    
+                                    <!-- Row 2 -->
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Appointments</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Order Tires</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Delivery</div>
+                                    </div>
+                                    
+                                    <!-- Row 3 -->
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Warranty</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-bullhorn"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Campaigns</div>
+                                    </div>
+                                    <div class="b2b-dark-service-item">
+                                        <div class="b2b-dark-service-icon bg-blue-600 text-white">
+                                            <i class="fas fa-headset"></i>
+                                        </div>
+                                        <div class="text-xs font-medium text-white text-center">Support</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Business Activity -->
+                            <div class="px-4 pb-6">
+                                <h3 class="font-bold text-lg text-white mb-4">Recent Business Activity</h3>
+                                <div class="bg-gray-800 rounded-xl p-4">
+                                    <div class="b2b-dark-activity-item">
+                                        <div class="b2b-dark-activity-icon bg-blue-600 text-white">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-white">Order #ORD-2024-156 Completed</div>
+                                            <div class="text-xs text-gray-400">240 PROXES tires delivered to Warehouse A</div>
+                                        </div>
+                                        <div class="text-xs text-gray-500">2h ago</div>
+                                    </div>
+
+                                    <div class="b2b-dark-activity-item">
+                                        <div class="b2b-dark-activity-icon bg-blue-600 text-white">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-white">Payment Received</div>
+                                            <div class="text-xs text-gray-400">RM 15,600 credited to account</div>
+                                        </div>
+                                        <div class="text-xs text-gray-500">1d ago</div>
+                                    </div>
+
+                                    <div class="b2b-dark-activity-item">
+                                        <div class="b2b-dark-activity-icon bg-orange-600 text-white">
+                                            <i class="fas fa-bullhorn"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-white">Campaign Enrolled</div>
+                                            <div class="text-xs text-gray-400">Buy 100 Get 10 Free - Spring Promotion</div>
+                                        </div>
+                                        <div class="text-xs text-gray-500">2d ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11th Prototype: B2B Order Tires - Dark -->
+            <div class="prototype-card">
+                <div class="prototype-header">
+                    <h3 class="text-lg font-bold">B2B Order Tires - Dark</h3>
+                    <p class="text-sm opacity-90">Dark theme bulk tire ordering</p>
+                </div>
+                <div class="prototype-container" style="height: 1870px;">
+                    <div class="b2b-dark-phone-frame" style="height: 1870px;">
+                        <div class="b2b-dark-phone-screen">
+                            <!-- Status Bar -->
+                            <div class="b2b-dark-status-bar">
+                                <span>9:41</span>
+                                <span>
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-three-quarters"></i>
+                                </span>
+                            </div>
+                            
+                            <!-- Header -->
+                            <div style="background: #1f2937; color: white; padding: 20px 24px; margin-top: -1px;">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-chevron-left text-xl"></i>
+                                        <h1 class="text-xl font-bold">Order Tires</h1>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-search text-xl"></i>
+                                        <div class="relative">
+                                            <i class="fas fa-shopping-cart text-xl"></i>
+                                            <div class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-sm opacity-90 mt-2">Bulk tire ordering</p>
+                            </div>
+
+                            <!-- Search & Filter -->
+                            <div class="p-4 bg-gray-800 border-b border-gray-700">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="flex-1 relative">
+                                        <input type="text" placeholder="Search tire models..." 
+                                               class="w-full pl-10 pr-4 py-2 b2b-dark-input">
+                                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                    </div>
+                                    <button class="p-2 border border-gray-600 rounded-lg bg-gray-700">
+                                        <i class="fas fa-filter text-gray-300"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex gap-2">
+                                    <div class="b2b-dark-filter-chip-active">All</div>
+                                    <div class="b2b-dark-filter-chip">Passenger</div>
+                                    <div class="b2b-dark-filter-chip">Commercial</div>
+                                    <div class="b2b-dark-filter-chip">SUV/Truck</div>
+                                    <div class="b2b-dark-filter-chip">Performance</div>
+                                </div>
+                            </div>
+
+                            <!-- Volume Discount Banner -->
+                            <div class="p-4">
+                                <div class="b2b-dark-discount-tier">
+                                    <div class="text-center">
+                                        <div class="font-bold text-sm mb-1">Volume Discounts Available</div>
+                                        <div class="text-xs opacity-90">50+ tires: 5% | 100+ tires: 10% | 200+ tires: 15%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="flex-1" style="padding: 0 20px 20px;">
+                                
+                                <!-- Quick Reorder -->
+                                <div class="b2b-dark-summary-card mb-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="font-bold text-white">Quick Reorder</h3>
+                                        <span class="text-blue-400 font-semibold text-sm">View History</span>
+                                    </div>
+                                    
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+                                            <div class="flex-1">
+                                                <div class="font-semibold text-sm text-white">PROXES T1 Sport 225/45R17</div>
+                                                <div class="text-xs text-gray-400">Last ordered: Feb 28, 2024 (24 units)</div>
+                                            </div>
+                                            <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
+                                                Reorder
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+                                            <div class="flex-1">
+                                                <div class="font-semibold text-sm text-white">NANOENERGY 3 195/65R15</div>
+                                                <div class="text-xs text-gray-400">Last ordered: Feb 15, 2024 (16 units)</div>
+                                            </div>
+                                            <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
+                                                Reorder
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Featured Products -->
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg text-white">Featured Products</h3>
+                                    <span class="text-blue-400 font-semibold text-sm">View All</span>
+                                </div>
+
+                                <!-- Product 1 -->
+                                <div class="b2b-dark-product-card">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <h4 class="font-bold text-white">PROXES T1 Sport</h4>
+                                                    <div class="text-sm text-gray-400">225/45R17 94W</div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <div class="font-bold text-lg text-white">RM 320</div>
+                                                    <div class="text-xs text-gray-400">per tire</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-end justify-between">
+                                                <div class="b2b-dark-quantity-control">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-minus text-xs"></i>
+                                                    </button>
+                                                    <input type="number" value="0" class="b2b-dark-quantity-input" min="0">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-plus text-xs"></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                                                    Add to Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product 2 -->
+                                <div class="b2b-dark-product-card">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <h4 class="font-bold text-white">NANOENERGY 3</h4>
+                                                    <div class="text-sm text-gray-400">195/65R15 91H</div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <div class="font-bold text-lg text-white">RM 245</div>
+                                                    <div class="text-xs text-gray-400">per tire</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-end justify-between">
+                                                <div class="b2b-dark-quantity-control">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-minus text-xs"></i>
+                                                    </button>
+                                                    <input type="number" value="16" class="b2b-dark-quantity-input" min="0">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-plus text-xs"></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                <button class="bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-semibold">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product 3 -->
+                                <div class="b2b-dark-product-card">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <h4 class="font-bold text-white">Open Country R/T</h4>
+                                                    <div class="text-sm text-gray-400">265/70R17 115T</div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <div class="font-bold text-lg text-white">RM 485</div>
+                                                    <div class="text-xs text-gray-400">per tire</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-end justify-between">
+                                                <div class="b2b-dark-quantity-control">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-minus text-xs"></i>
+                                                    </button>
+                                                    <input type="number" value="8" class="b2b-dark-quantity-input" min="0">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-plus text-xs"></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                <button class="bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-semibold">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product 4 -->
+                                <div class="b2b-dark-product-card">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <h4 class="font-bold text-white">PROXES CF2</h4>
+                                                    <div class="text-sm text-gray-400">205/55R16 91V</div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <div class="font-bold text-lg text-white">RM 285</div>
+                                                    <div class="text-xs text-gray-400">per tire</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-end justify-between">
+                                                <div class="b2b-dark-quantity-control">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-minus text-xs"></i>
+                                                    </button>
+                                                    <input type="number" value="0" class="b2b-dark-quantity-input" min="0">
+                                                    <button class="b2b-dark-quantity-btn">
+                                                        <i class="fas fa-plus text-xs"></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                                                    Add to Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cart Summary -->
+                                <div class="b2b-dark-summary-card">
+                                    <h3 class="font-bold text-white mb-3">Current Order Summary</h3>
+                                    
+                                    <div class="b2b-dark-cart-item">
+                                        <div class="w-8 h-8 bg-gray-700 rounded flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-6 h-6 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-white">NANOENERGY 3</div>
+                                            <div class="text-xs text-gray-400">195/65R15 - 16 units</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-sm text-white">RM 3,920</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="b2b-dark-cart-item">
+                                        <div class="w-8 h-8 bg-gray-700 rounded flex items-center justify-center">
+                                            <img src="../images/image-tires-1.png" alt="Tire" class="w-6 h-6 object-contain">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-white">Open Country R/T</div>
+                                            <div class="text-xs text-gray-400">265/70R17 - 8 units</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-semibold text-sm text-white">RM 3,880</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-gray-600 pt-3 mt-3">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm text-gray-400">Subtotal (24 tires)</span>
+                                            <span class="text-sm text-white">RM 7,800</span>
+                                        </div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm text-blue-400">Volume Discount (5%)</span>
+                                            <span class="text-sm text-blue-400">-RM 390</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-bold text-white">Total</span>
+                                            <span class="font-bold text-xl text-white">RM 7,410</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bulk Pricing Info -->
+                                <div class="b2b-dark-summary-card">
+                                    <h3 class="font-bold text-white mb-3">Bulk Pricing Tiers</h3>
+                                    
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between p-2 bg-yellow-900 bg-opacity-50 rounded-lg">
+                                            <div>
+                                                <div class="font-semibold text-sm text-yellow-300">50-99 tires</div>
+                                                <div class="text-xs text-yellow-400">Current tier</div>
+                                            </div>
+                                            <div class="font-bold text-yellow-300">5% OFF</div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between p-2 bg-blue-900 bg-opacity-50 rounded-lg">
+                                            <div>
+                                                <div class="font-semibold text-sm text-blue-300">100-199 tires</div>
+                                                <div class="text-xs text-blue-400">Next tier: +76 tires</div>
+                                            </div>
+                                            <div class="font-bold text-blue-300">10% OFF</div>
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between p-2 bg-green-900 bg-opacity-50 rounded-lg">
+                                            <div>
+                                                <div class="font-semibold text-sm text-green-300">200+ tires</div>
+                                                <div class="text-xs text-green-400">Premium tier: +176 tires</div>
+                                            </div>
+                                            <div class="font-bold text-green-300">15% OFF</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="space-y-3 mt-6">
+                                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg">
+                                        <i class="fas fa-shopping-cart mr-2"></i>
+                                        Proceed to Checkout
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

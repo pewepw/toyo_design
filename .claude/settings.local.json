@@ -11,7 +11,8 @@
       "Bash(grep:*)",
       "WebFetch(domain:www.toyotires.com.my)",
       "Bash(sed:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(/opt/homebrew/bin/python3:*)"
     ],
     "deny": []
   }
