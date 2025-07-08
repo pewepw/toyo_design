@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Warranty Registration Glass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 2300px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af 0%, #2563EB 100%);
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        
+        .glass-input {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: rgba(0, 0, 0, 0.8);
+            padding: 14px 16px;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        .glass-input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .glass-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .glass-button {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .glass-button.primary {
+            background: rgba(37, 99, 235, 0.3);
+            color: white;
+            backdrop-filter: blur(15px);
+        }
+        
+        .glass-button.primary:hover {
+            background: rgba(37, 99, 235, 0.4);
+        }
+        
+        .qr-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            z-index: -1;
+        }
+        
+        .form-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+            opacity: 0.9;
+        }
+        
+        
+        .upload-area {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div style="height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: white;">
+                <div class="flex items-center">
+                    <span>12:44</span>
+                    <i class="fas fa-signal ml-2"></i>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                        <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                        <div class="w-1 h-3 bg-white rounded"></div>
+                    </div>
+                    <i class="fas fa-wifi ml-2"></i>
+                    <div class="bg-white bg-opacity-20 rounded px-2 py-1 text-xs font-bold ml-1">89%</div>
+                </div>
+            </div>
+
+            <!-- Glass Header -->
+            <div class="glass-card mx-4 mt-4 p-6 text-white">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                        <h1 class="text-xl font-bold">Warranty Registration</h1>
+                    </div>
+                    <i class="fas fa-qrcode text-xl"></i>
+                </div>
+                <p class="text-sm opacity-80">Protect your TOYO TIRES investment</p>
+            </div>
+
+            <!-- QR Scan Card -->
+            <div class="px-4 mt-6">
+                <div class="qr-card text-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                        <i class="fas fa-qrcode text-3xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Quick Registration</h3>
+                    <p class="text-sm mb-6 opacity-80">Scan your tire sidewall QR code for instant warranty registration</p>
+                    <button class="glass-button primary px-8 py-4 rounded-full font-bold text-lg w-full">
+                        <i class="fas fa-camera mr-3"></i>Scan QR Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="text-center my-6">
+                <span class="text-sm font-semibold text-white opacity-70">OR REGISTER MANUALLY</span>
+            </div>
+
+            <!-- Manual Form -->
+            <div class="px-4">
+                <!-- Customer Info -->
+                <div class="form-section text-white">
+                    <h4 class="font-bold text-lg mb-4">Customer Information</h4>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="glass-input" placeholder="Enter your full name" value="Ahmad Rahman">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="glass-input" placeholder="+60 12-345 6789" value="+60 12-345 6789">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="glass-input" placeholder="your.email@example.com">
+                    </div>
+                </div>
+
+                <!-- Vehicle Info -->
+                <div class="form-section text-white">
+                    <h4 class="font-bold text-lg mb-4">Vehicle Information</h4>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Vehicle Make & Model</label>
+                        <input type="text" class="glass-input" placeholder="e.g., Honda Civic 2023" value="Honda Civic 2023">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">License Plate</label>
+                        <input type="text" class="glass-input" placeholder="ABC 1234">
+                    </div>
+                </div>
+
+                <!-- Tire Info -->
+                <div class="form-section text-white">
+                    <h4 class="font-bold text-lg mb-4">Tire Information</h4>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">TOYO TIRES Model</label>
+                        <select class="glass-input">
+                            <option>Select tire model</option>
+                            <option selected>PROXES T1 Sport</option>
+                            <option>PROXES CF2</option>
+                            <option>NANOENERGY 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Purchase Date</label>
+                        <input type="date" class="glass-input" value="2024-01-15">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Tire Size</label>
+                        <input type="text" class="glass-input" placeholder="e.g., 225/45R17" value="225/45R17">
+                    </div>
+                </div>
+
+                <!-- Upload Receipt -->
+                <div class="form-section text-white">
+                    <h4 class="font-bold text-lg mb-4">Purchase Receipt</h4>
+                    
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt text-3xl mb-3 opacity-70"></i>
+                        <p class="font-semibold mb-2">Upload Receipt</p>
+                        <p class="text-sm opacity-70 mb-3">Drag & drop or tap to select</p>
+                        <button class="glass-button px-6 py-2 rounded-lg">Choose File</button>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="form-section">
+                    <label class="flex items-start gap-3 text-white">
+                        <input type="checkbox" class="mt-1" checked>
+                        <span class="text-sm">
+                            I agree to the <span class="font-semibold text-yellow-300">Terms and Conditions</span> and 
+                            <span class="font-semibold text-yellow-300">Privacy Policy</span> for warranty registration.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pb-8">
+                    <button class="glass-button primary w-full py-4 rounded-2xl text-lg font-bold">
+                        <i class="fas fa-shield-alt mr-3"></i>Register Warranty
+                    </button>
+                    
+                    <p class="text-xs text-center mt-4 text-white opacity-70">
+                        Registration confirmation will be sent within 24 hours
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
