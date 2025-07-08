@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES B2B PORTAL - Dark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: 1530px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #121212;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 8px;
+            background: #1f2937;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            background: #374151;
+        }
+        
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .metrics-card {
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #374151;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1e1e1e;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: around;
+            padding: 12px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #3B82F6;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="phone-frame">
+        <div class="phone-screen">
+            
+            <!-- Status Bar -->
+            <div style="height: 44px; background: #121212; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                <span>9:41</span>
+                <span>
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </span>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-4 pb-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <img src="../images/toyo-tires-white.png" alt="TOYO TIRES" class="h-4">
+                            <img src="../images/ETEN-white.png" alt="ETEN" class="h-4">
+                        </div>
+                        <p class="text-sm text-gray-400">AutoMart Solutions Sdn Bhd</p>
+                    </div>
+                    <button class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-xl">
+                        <i class="fas fa-sliders-h"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Categories -->
+            <div class="flex gap-3 px-4 pb-2">
+                <button class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Dashboard</button>
+                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Active Orders</button>
+                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Shipments</button>
+                <button class="bg-gray-800 text-gray-300 font-semibold px-4 py-2 rounded-lg text-sm flex-shrink-0">Reports</button>
+            </div>
+
+            <!-- Business Metrics Cards -->
+            <div class="p-4">
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="metrics-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="text-xs text-gray-400 font-medium">CREDIT BALANCE</div>
+                            <i class="fas fa-credit-card text-blue-500"></i>
+                        </div>
+                        <div class="text-xl font-bold text-white">RM 45,800</div>
+                        <div class="text-xs text-blue-400 font-medium">+15% this month</div>
+                    </div>
+                    
+                    <div class="metrics-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="text-xs text-gray-400 font-medium">MONTHLY SALES</div>
+                            <i class="fas fa-chart-line text-blue-500"></i>
+                        </div>
+                        <div class="text-xl font-bold text-white">RM 28,950</div>
+                        <div class="text-xs text-blue-400 font-medium">+8% vs last month</div>
+                    </div>
+                </div>
+
+                <!-- Content Cards -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="col-span-2 bg-gray-800 rounded-xl p-4">
+                        <div class="h-24 bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                           <i class="fas fa-chart-pie text-5xl text-gray-500"></i>
+                        </div>
+                        <p class="font-bold">Top Selling Models</p>
+                        <p class="text-xs text-gray-400">Q3 2024 Report</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-4">
+                        <div class="h-20 bg-gray-700 rounded-lg mb-3 flex flex-col items-center justify-center">
+                           <p class="text-3xl font-bold">1,240</p>
+                           <p class="text-xs text-gray-400">Units</p>
+                        </div>
+                        <p class="font-bold text-sm text-center">Open Country H/T</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-4">
+                         <div class="h-20 bg-gray-700 rounded-lg mb-3 flex flex-col items-center justify-center">
+                           <p class="text-lg font-bold text-red-400">52 Units</p>
+                           <p class="text-xs text-gray-400">Remaining</p>
+                        </div>
+                        <p class="font-bold text-sm text-center">Proxes ST III (Low Stock)</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="mb-4">
+                    <p class="text-lg font-semibold mb-2">Business Stats</p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-gray-800 p-3 rounded-xl">
+                            <p class="text-sm text-gray-400">Revenue</p>
+                            <p class="text-xl font-bold">$1.2M</p>
+                            <p class="text-xs text-blue-400">+5.2%</p>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-xl">
+                            <p class="text-sm text-gray-400">Units Sold</p>
+                            <p class="text-xl font-bold">5.4k</p>
+                            <p class="text-xs text-blue-400">+8.1%</p>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-xl">
+                            <p class="text-sm text-gray-400">Margin</p>
+                            <p class="text-xl font-bold">18.2%</p>
+                            <p class="text-xs text-red-400">-0.5%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B2B Services Grid -->
+            <div class="px-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-lg text-white">Business Services</h3>
+                    <span class="text-blue-500 font-semibold text-sm">View All</span>
+                </div>
+                <div class="service-grid mb-6">
+                    <!-- Row 1 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Sales Forecast</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Credit Balance</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Claims</div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Appointments</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Order Tires</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Delivery</div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Warranty</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Campaigns</div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon bg-blue-600 text-white">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="text-xs font-medium text-white text-center">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Business Activity -->
+            <div class="px-4 pb-6">
+                <h3 class="font-bold text-lg text-white mb-4">Recent Business Activity</h3>
+                <div class="bg-gray-800 rounded-xl p-4">
+                    <div class="activity-item">
+                        <div class="activity-icon bg-blue-600 text-white">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-white">Order #ORD-2024-156 Completed</div>
+                            <div class="text-xs text-gray-400">240 PROXES tires delivered to Warehouse A</div>
+                        </div>
+                        <div class="text-xs text-gray-500">2h ago</div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon bg-blue-600 text-white">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-white">Payment Received</div>
+                            <div class="text-xs text-gray-400">RM 15,600 credited to account</div>
+                        </div>
+                        <div class="text-xs text-gray-500">1d ago</div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon bg-orange-600 text-white">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold text-sm text-white">Campaign Enrolled</div>
+                            <div class="text-xs text-gray-400">Buy 100 Get 10 Free - Spring Promotion</div>
+                        </div>
+                        <div class="text-xs text-gray-500">2d ago</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

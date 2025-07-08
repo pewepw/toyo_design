@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOYO TIRES B2B - Order Tires</title>
+    <title>TOYO TIRES B2B - Order Tires Dark</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -13,7 +13,7 @@
         
         .phone-frame {
             width: 480px;
-            height: 1950px;
+            height: 1870px;
             background: #1a1a1a;
             border-radius: 42px;
             padding: 4px;
@@ -49,25 +49,26 @@
         .phone-screen {
             width: 100%;
             height: 100%;
-            background: white;
+            background: #121212;
             border-radius: 38px;
             overflow: hidden;
             position: relative;
+            color: white;
         }
         
         .summary-card {
-            background: white;
+            background: #1f2937;
             border-radius: 16px;
             padding: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             margin-bottom: 16px;
         }
 
         .product-card {
-            background: white;
+            background: #1f2937;
             border-radius: 16px;
             padding: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             margin-bottom: 12px;
             border: 2px solid transparent;
             transition: all 0.2s ease;
@@ -75,6 +76,7 @@
 
         .product-card:hover {
             border-color: #3B82F6;
+            background: #374151;
         }
 
         .category-tab {
@@ -93,16 +95,17 @@
         }
 
         .category-tab:not(.active) {
-            background: #f3f4f6;
-            color: #6b7280;
+            background: #374151;
+            color: #9ca3af;
         }
 
         .quantity-control {
             display: flex;
             align-items: center;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #4b5563;
             border-radius: 8px;
             overflow: hidden;
+            background: #374151;
         }
 
         .quantity-btn {
@@ -111,15 +114,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f9fafb;
+            background: #4b5563;
             border: none;
             cursor: pointer;
-            color: #6b7280;
+            color: #d1d5db;
         }
 
         .quantity-btn:hover {
-            background: #f3f4f6;
-            color: #374151;
+            background: #6b7280;
+            color: #f3f4f6;
         }
 
         .quantity-input {
@@ -128,10 +131,12 @@
             text-align: center;
             border: none;
             font-weight: 600;
+            background: #374151;
+            color: white;
         }
 
         .discount-tier {
-            background: #10b981;
+            background: #3B82F6;
             border-radius: 8px;
             padding: 10px;
             color: white;
@@ -143,7 +148,7 @@
             align-items: center;
             gap: 12px;
             padding: 12px 0;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid #374151;
         }
 
         .cart-item:last-child {
@@ -168,11 +173,11 @@
 
         .filter-chip {
             padding: 6px 12px;
-            background: #f3f4f6;
+            background: #374151;
             border-radius: 16px;
             font-size: 12px;
             font-weight: 600;
-            color: #6b7280;
+            color: #9ca3af;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -184,7 +189,7 @@
         
         .status-bar {
             height: 44px;
-            background: #2563EB;
+            background: #121212;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -192,6 +197,23 @@
             padding: 0 20px;
             font-size: 14px;
             font-weight: 600;
+        }
+
+        .dark-input {
+            background: #374151;
+            border: 1px solid #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        .dark-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .dark-input:focus {
+            outline: none;
+            border-color: #3B82F6;
         }
     </style>
 </head>
@@ -211,7 +233,7 @@
             </div>
             
             <!-- Header -->
-            <div style="background: #2563EB; color: white; padding: 20px 24px; margin-top: -1px;">
+            <div style="background: #1f2937; color: white; padding: 20px 24px; margin-top: -1px;">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-chevron-left text-xl"></i>
@@ -221,7 +243,7 @@
                         <i class="fas fa-search text-xl"></i>
                         <div class="relative">
                             <i class="fas fa-shopping-cart text-xl"></i>
-                            <div class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
+                            <div class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</div>
                         </div>
                     </div>
                 </div>
@@ -229,20 +251,20 @@
             </div>
 
             <!-- Search & Filter -->
-            <div class="p-4 bg-white border-b border-gray-200">
+            <div class="p-4 bg-gray-800 border-b border-gray-700">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="flex-1 relative">
                         <input type="text" placeholder="Search tire models..." 
-                               class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg">
+                               class="w-full pl-10 pr-4 py-2 dark-input">
                         <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>
-                    <button class="p-2 border border-gray-300 rounded-lg">
-                        <i class="fas fa-filter text-gray-600"></i>
+                    <button class="p-2 border border-gray-600 rounded-lg bg-gray-700">
+                        <i class="fas fa-filter text-gray-300"></i>
                     </button>
                 </div>
                 
-                <div class="flex gap-2 overflow-x-auto">
-                    <div class="filter-chip active">All Tires</div>
+                <div class="flex gap-2">
+                    <div class="filter-chip active">All</div>
                     <div class="filter-chip">Passenger</div>
                     <div class="filter-chip">Commercial</div>
                     <div class="filter-chip">SUV/Truck</div>
@@ -266,25 +288,25 @@
                 <!-- Quick Reorder -->
                 <div class="summary-card mb-4">
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-bold text-gray-900">Quick Reorder</h3>
-                        <span class="text-blue-600 font-semibold text-sm">View History</span>
+                        <h3 class="font-bold text-white">Quick Reorder</h3>
+                        <span class="text-blue-400 font-semibold text-sm">View History</span>
                     </div>
                     
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
                             <div class="flex-1">
-                                <div class="font-semibold text-sm text-gray-900">PROXES T1 Sport 225/45R17</div>
-                                <div class="text-xs text-gray-600">Last ordered: Feb 28, 2024 (24 units)</div>
+                                <div class="font-semibold text-sm text-white">PROXES T1 Sport 225/45R17</div>
+                                <div class="text-xs text-gray-400">Last ordered: Feb 28, 2024 (24 units)</div>
                             </div>
                             <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
                                 Reorder
                             </button>
                         </div>
                         
-                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
                             <div class="flex-1">
-                                <div class="font-semibold text-sm text-gray-900">NANOENERGY 3 195/65R15</div>
-                                <div class="text-xs text-gray-600">Last ordered: Feb 15, 2024 (16 units)</div>
+                                <div class="font-semibold text-sm text-white">NANOENERGY 3 195/65R15</div>
+                                <div class="text-xs text-gray-400">Last ordered: Feb 15, 2024 (16 units)</div>
                             </div>
                             <button class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs font-semibold">
                                 Reorder
@@ -295,29 +317,29 @@
 
                 <!-- Featured Products -->
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-lg text-gray-900">Featured Products</h3>
-                    <span class="text-blue-600 font-semibold text-sm">View All</span>
+                    <h3 class="font-bold text-lg text-white">Featured Products</h3>
+                    <span class="text-blue-400 font-semibold text-sm">View All</span>
                 </div>
 
                 <!-- Product 1 -->
                 <div class="product-card">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-lg"></i>
+                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
                         </div>
                         <div class="flex-1">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <h4 class="font-bold text-gray-900">PROXES T1 Sport</h4>
-                                    <div class="text-sm text-gray-600">225/45R17 94W</div>
+                                    <h4 class="font-bold text-white">PROXES T1 Sport</h4>
+                                    <div class="text-sm text-gray-400">225/45R17 94W</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-lg text-gray-900">RM 320</div>
-                                    <div class="text-xs text-gray-500">per tire</div>
+                                    <div class="font-bold text-lg text-white">RM 320</div>
+                                    <div class="text-xs text-gray-400">per tire</div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-end justify-between">
                                 <div class="quantity-control">
                                     <button class="quantity-btn">
                                         <i class="fas fa-minus text-xs"></i>
@@ -339,22 +361,22 @@
                 <!-- Product 2 -->
                 <div class="product-card">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-lg"></i>
+                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
                         </div>
                         <div class="flex-1">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <h4 class="font-bold text-gray-900">NANOENERGY 3</h4>
-                                    <div class="text-sm text-gray-600">195/65R15 91H</div>
+                                    <h4 class="font-bold text-white">NANOENERGY 3</h4>
+                                    <div class="text-sm text-gray-400">195/65R15 91H</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-lg text-gray-900">RM 245</div>
-                                    <div class="text-xs text-gray-500">per tire</div>
+                                    <div class="font-bold text-lg text-white">RM 245</div>
+                                    <div class="text-xs text-gray-400">per tire</div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-end justify-between">
                                 <div class="quantity-control">
                                     <button class="quantity-btn">
                                         <i class="fas fa-minus text-xs"></i>
@@ -365,7 +387,7 @@
                                     </button>
                                 </div>
                                 
-                                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                                <button class="bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-semibold">
                                     Update
                                 </button>
                             </div>
@@ -376,22 +398,22 @@
                 <!-- Product 3 -->
                 <div class="product-card">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-lg"></i>
+                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
                         </div>
                         <div class="flex-1">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <h4 class="font-bold text-gray-900">Open Country R/T</h4>
-                                    <div class="text-sm text-gray-600">265/70R17 115T</div>
+                                    <h4 class="font-bold text-white">Open Country R/T</h4>
+                                    <div class="text-sm text-gray-400">265/70R17 115T</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-lg text-gray-900">RM 485</div>
-                                    <div class="text-xs text-gray-500">per tire</div>
+                                    <div class="font-bold text-lg text-white">RM 485</div>
+                                    <div class="text-xs text-gray-400">per tire</div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-end justify-between">
                                 <div class="quantity-control">
                                     <button class="quantity-btn">
                                         <i class="fas fa-minus text-xs"></i>
@@ -402,7 +424,7 @@
                                     </button>
                                 </div>
                                 
-                                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                                <button class="bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-semibold">
                                     Update
                                 </button>
                             </div>
@@ -413,22 +435,22 @@
                 <!-- Product 4 -->
                 <div class="product-card">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-lg"></i>
+                        <div class="w-24 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-20 h-20 object-contain">
                         </div>
                         <div class="flex-1">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <h4 class="font-bold text-gray-900">PROXES CF2</h4>
-                                    <div class="text-sm text-gray-600">205/55R16 91V</div>
+                                    <h4 class="font-bold text-white">PROXES CF2</h4>
+                                    <div class="text-sm text-gray-400">205/55R16 91V</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-lg text-gray-900">RM 285</div>
-                                    <div class="text-xs text-gray-500">per tire</div>
+                                    <div class="font-bold text-lg text-white">RM 285</div>
+                                    <div class="text-xs text-gray-400">per tire</div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-end justify-between">
                                 <div class="quantity-control">
                                     <button class="quantity-btn">
                                         <i class="fas fa-minus text-xs"></i>
@@ -449,77 +471,77 @@
 
                 <!-- Cart Summary -->
                 <div class="summary-card">
-                    <h3 class="font-bold text-gray-900 mb-3">Current Order Summary</h3>
+                    <h3 class="font-bold text-white mb-3">Current Order Summary</h3>
                     
                     <div class="cart-item">
-                        <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-sm"></i>
+                        <div class="w-8 h-8 bg-gray-700 rounded flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-6 h-6 object-contain">
                         </div>
                         <div class="flex-1">
-                            <div class="font-semibold text-sm text-gray-900">NANOENERGY 3</div>
-                            <div class="text-xs text-gray-600">195/65R15 - 16 units</div>
+                            <div class="font-semibold text-sm text-white">NANOENERGY 3</div>
+                            <div class="text-xs text-gray-400">195/65R15 - 16 units</div>
                         </div>
                         <div class="text-right">
-                            <div class="font-semibold text-sm text-gray-900">RM 3,920</div>
+                            <div class="font-semibold text-sm text-white">RM 3,920</div>
                         </div>
                     </div>
 
                     <div class="cart-item">
-                        <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
-                            <i class="fas fa-circle text-gray-400 text-sm"></i>
+                        <div class="w-8 h-8 bg-gray-700 rounded flex items-center justify-center">
+                            <img src="../images/image-tires-1.png" alt="Tire" class="w-6 h-6 object-contain">
                         </div>
                         <div class="flex-1">
-                            <div class="font-semibold text-sm text-gray-900">Open Country R/T</div>
-                            <div class="text-xs text-gray-600">265/70R17 - 8 units</div>
+                            <div class="font-semibold text-sm text-white">Open Country R/T</div>
+                            <div class="text-xs text-gray-400">265/70R17 - 8 units</div>
                         </div>
                         <div class="text-right">
-                            <div class="font-semibold text-sm text-gray-900">RM 3,880</div>
+                            <div class="font-semibold text-sm text-white">RM 3,880</div>
                         </div>
                     </div>
 
-                    <div class="border-t border-gray-200 pt-3 mt-3">
+                    <div class="border-t border-gray-600 pt-3 mt-3">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-gray-600">Subtotal (24 tires)</span>
-                            <span class="text-sm text-gray-900">RM 7,800</span>
+                            <span class="text-sm text-gray-400">Subtotal (24 tires)</span>
+                            <span class="text-sm text-white">RM 7,800</span>
                         </div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-green-600">Volume Discount (5%)</span>
-                            <span class="text-sm text-green-600">-RM 390</span>
+                            <span class="text-sm text-blue-400">Volume Discount (5%)</span>
+                            <span class="text-sm text-blue-400">-RM 390</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-900">Total</span>
-                            <span class="font-bold text-xl text-gray-900">RM 7,410</span>
+                            <span class="font-bold text-white">Total</span>
+                            <span class="font-bold text-xl text-white">RM 7,410</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bulk Pricing Info -->
                 <div class="summary-card">
-                    <h3 class="font-bold text-gray-900 mb-3">Bulk Pricing Tiers</h3>
+                    <h3 class="font-bold text-white mb-3">Bulk Pricing Tiers</h3>
                     
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between p-2 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center justify-between p-2 bg-yellow-900 bg-opacity-50 rounded-lg">
                             <div>
-                                <div class="font-semibold text-sm text-yellow-800">50-99 tires</div>
-                                <div class="text-xs text-yellow-600">Current tier</div>
+                                <div class="font-semibold text-sm text-yellow-300">50-99 tires</div>
+                                <div class="text-xs text-yellow-400">Current tier</div>
                             </div>
-                            <div class="font-bold text-yellow-800">5% OFF</div>
+                            <div class="font-bold text-yellow-300">5% OFF</div>
                         </div>
                         
-                        <div class="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                        <div class="flex items-center justify-between p-2 bg-blue-900 bg-opacity-50 rounded-lg">
                             <div>
-                                <div class="font-semibold text-sm text-green-800">100-199 tires</div>
-                                <div class="text-xs text-green-600">Next tier: +76 tires</div>
+                                <div class="font-semibold text-sm text-blue-300">100-199 tires</div>
+                                <div class="text-xs text-blue-400">Next tier: +76 tires</div>
                             </div>
-                            <div class="font-bold text-green-800">10% OFF</div>
+                            <div class="font-bold text-blue-300">10% OFF</div>
                         </div>
                         
-                        <div class="flex items-center justify-between p-2 bg-blue-50 rounded-lg">
+                        <div class="flex items-center justify-between p-2 bg-green-900 bg-opacity-50 rounded-lg">
                             <div>
-                                <div class="font-semibold text-sm text-blue-800">200+ tires</div>
-                                <div class="text-xs text-blue-600">Premium tier: +176 tires</div>
+                                <div class="font-semibold text-sm text-green-300">200+ tires</div>
+                                <div class="text-xs text-green-400">Premium tier: +176 tires</div>
                             </div>
-                            <div class="font-bold text-blue-800">15% OFF</div>
+                            <div class="font-bold text-green-300">15% OFF</div>
                         </div>
                     </div>
                 </div>
@@ -538,4 +560,4 @@
     </div>
 
 </body>
-</html> 
+</html>

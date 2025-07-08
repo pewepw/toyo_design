@@ -110,7 +110,8 @@ def main():
         'images/image-look.webp',
         'images/image-pointing.webp',
         'images/image-promo1.jpg',
-        'images/image-promo2.jpg'
+        'images/image-promo2.jpg',
+        'images/image-tires-1.png',
     ]
     
     # HTML files to update
@@ -134,6 +135,7 @@ def main():
         # 'design-2/order-history.html',
         # 'design-2/order-tires.html',
         # 'design-2/sales-forecast.html'
+         'design-3/index.html',
     ]
     
     print("Converting images to base64 data URIs...")
