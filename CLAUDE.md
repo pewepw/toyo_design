@@ -9,6 +9,7 @@ This is a web-based prototype system for TOYO TIRES application, containing mult
 ## Architecture
 
 ### Directory Structure
+- **Root level**: `index.html` - Main design gallery showcasing all design iterations
 - `design-0/` - Consolidated prototype collections:
   - `all-15-b2b-prototypes.html`, `all-15-b2c-prototypes.html` - Complete prototype viewers
   - `bonus-b2b-prototypes.html`, `bonus-b2c-prototypes.html` - Additional prototype collections
@@ -19,15 +20,13 @@ This is a web-based prototype system for TOYO TIRES application, containing mult
 - `images/` - Shared image assets (logos, campaigns, UI elements)
 
 ### Key Files
-- `convert_images_to_base64.py` - Python utility to embed images as base64 data URIs in HTML files for better compatibility with design tools
-- `remove_background_images.py` - Python utility for image processing and background removal
+- `convert_images_to_base64.py` - Python utility to embed images as base64 data URIs in HTML files for better compatibility with design tools. Do not run this file.
 
 ### Technical Stack
 - Pure HTML/CSS/JavaScript (no build system)
 - TailwindCSS via CDN
 - Font Awesome icons via CDN
 - Responsive design using CSS Grid and Flexbox
-- Base64 embedded images for design tool compatibility
 
 ## Development Commands
 
@@ -40,12 +39,6 @@ Converts image references to base64 data URIs in HTML files. Run this when:
 - Preparing files for design tool import
 - Ensuring cross-platform compatibility
 
-```bash
-python3 remove_background_images.py
-```
-Removes background-image CSS properties from HTML files using regex. Use this for:
-- Cleaning up CSS background-image declarations
-- Preparing files for specific design tool workflows
 
 ### File Serving
 Since these are static HTML files, serve them using:
@@ -53,6 +46,7 @@ Since these are static HTML files, serve them using:
 python3 -m http.server 8000
 ```
 Then navigate to:
+- `http://localhost:8000/` - Main design gallery (root index.html)
 - `http://localhost:8000/design-0/` - For consolidated prototype collections
 - `http://localhost:8000/design-X/` - For individual design iterations (where X = 1, 2, or 3)
 
@@ -160,3 +154,30 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 #### Asset References
 - **Logo**: `images/toyo-tires.png` (primary brand logo)
 - **Image Path**: Use relative paths `../images/filename.ext`
+
+## Deployment
+
+### GitHub Pages (Primary Deployment Method)
+This project uses GitHub Pages for deployment:
+- **Automatic deployment** from the main branch
+- **URL**: `https://pewepw.github.io/toyo_design/`
+- **Process**: Push to main branch → GitHub Pages auto-deploys
+
+### Deployment Structure
+The current file structure is optimized for GitHub Pages:
+- Root `index.html` serves as the main entry point
+- All design iterations are self-contained in their directories
+- Images are centralized in the `images/` directory
+- No build process required - deploy directly from repository
+
+## Git Workflow
+
+### Branch Strategy
+- Main development on feature branches
+- Combined index files are primary deliverables
+- Individual screen files support detailed development
+
+### File Management
+- Each design iteration maintains its own `index.html` and `combined-index.html`
+- Copy variations (e.g., `campaign copy.html`) are used for iterative development
+- Use descriptive commit messages for design changes
