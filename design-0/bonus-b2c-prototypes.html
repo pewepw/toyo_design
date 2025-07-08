@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Bonus B2C Prototypes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* Hide scrollbar but keep scroll functionality */
+        html, body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 38px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .prototype-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 3rem;
+        }
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+        .prototype-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* iOS Status Bar */
+        .ios-status-bar {
+            background: white;
+            color: black;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Boost-specific styles */
+        .boost-service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0 0px;
+            background: #f8f9fa;
+        }
+        .boost-service-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 2px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .boost-service-item:hover {
+            transform: translateY(-2px);
+        }
+        .boost-service-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        /* Grab-specific styles */
+        .grab-category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0px;
+        }
+        .grab-category-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 8px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+        .grab-category-item:hover {
+            transform: translateY(-2px);
+        }
+        .grab-category-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        /* Touch n Go specific styles */
+        .tng-quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            margin: 12px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .tng-quick-actions-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+            padding: 0;
+        }
+        .tng-action-item {
+            text-align: center;
+        }
+        .tng-action-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+            border-radius: 0 0 38px 38px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .nav-item.active {
+            color: #dc2626;
+        }
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="text-center py-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">TOYO TIRES CARE</h1>
+        <p class="text-gray-600">3 Comprehensive B2C Prototypes - Exact Malaysian/SEA App Matching</p>
+    </div>
+    
+    <div class="grid-container">
+        <!-- Comprehensive Boost-Inspired -->
+        <div class="prototype-card">
+            <div class="prototype-header" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
+                <h3 class="text-xl font-semibold">Boost-Inspired</h3>
+            </div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <!-- Exact Boost Status Bar -->
+                    <div style="background: #dc2626; color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                        <div class="flex items-center">
+                            <span>12:44</span>
+                            <i class="fas fa-location-arrow ml-2"></i>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="flex gap-1">
+                                <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                <div class="w-1 h-3 bg-white rounded"></div>
+                            </div>
+                            <i class="fas fa-wifi text-white ml-2"></i>
+                            <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-red-600 font-bold ml-1">81</div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Header -->
+                    <div style="background: #dc2626; color: white; padding: 20px 24px;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-90">Welcome back, Ahmad</div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-star text-yellow-300 text-sm"></i>
+                                        <span class="font-semibold">1,250</span>
+                                        <i class="fas fa-chevron-right text-sm opacity-70"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-ghost text-white text-lg"></i>
+                                </div>
+                                <div class="absolute -top-2 -right-2 bg-white text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                                    <i class="fas fa-bell text-red-600 text-xs"></i>
+                                </div>
+                                <div class="absolute -top-1 -right-1 bg-white text-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">11</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Main Hero -->
+                    <div style="background: #dc2626; color: white; padding: 0 24px 24px;">
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <div class="text-lg font-bold leading-tight mb-2">Power Up Your Tires with 3.5% savings</div>
+                                <div class="text-lg font-bold leading-tight mb-3">& RM3 Cashback!</div>
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 w-fit">
+                                    <span class="text-sm font-medium mr-2">Learn More</span>
+                                    <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                        <i class="fas fa-chevron-right text-red-600 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-32 h-32 bg-contain bg-no-repeat bg-center" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjY0IiBjeT0iNjQiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjIiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xOC45MiA2LjAxQzE4LjcyIDUuNDIgMTguMTYgNSAxNy41IDVIMTVWM0MxNSAyLjQ1IDE0LjU1IDIgMTQgMkg2QzUuNDUgMiA1IDIuNDUgNSAzVjVIMi41QzEuODQgNSAxLjI4IDUuNDIgMS4wOCA2LjAxQzAuODggNi42IDAuOTUgNy4yNiAxLjMgNy43TDEwIDIwLjVMMTguNyA3LjdDMTkuMDUgNy4yNiAxOS4xMiA2LjYgMTguOTIgNi4wMVpNNyA0SDEzVjVIN1Y0WiIvPgo8L3N2Zz4KPC9zdmc+Cg==')"></div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Wallet Section -->
+                    <div style="background: #f8f9fa; margin: 0; padding: 16px 24px;">
+                        <div class="bg-white rounded-xl p-4 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-plus text-red-600 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600">Add Money</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm text-gray-600">Wallet</div>
+                                    <div class="font-bold text-lg">RM 150.91</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-red-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-gift text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-xs leading-tight break-words">TOYO-Je!</div>
+                                    <div class="text-xs text-gray-600">Unlock more TOYO features</div>
+                                    <div class="text-xs text-gray-600">- explore them now!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Services Grid -->
+                    <div style="background: #f8f9fa; padding: 0 24px;">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-lg text-gray-900">Do more with TOYO</h3>
+                            <span class="text-red-600 font-semibold text-xs leading-tight break-words">Edit</span>
+                        </div>
+                        <div class="boost-service-grid">
+                            <!-- Row 1 -->
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-paper-plane text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Find Tires</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-credit-card text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYO PayFlex</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-receipt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Bills</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-mobile-alt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words leading-tight">Mobile Service</div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-pie text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYO My Tires</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-umbrella text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Insurance</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shield-alt text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Beyond Care</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-ellipsis-h text-red-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">More</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Bottom Promotion -->
+                    <div class="bg-black text-white mx-6 rounded-xl overflow-hidden" style="margin-top: 24px; margin-bottom: 120px;">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div style="font-family: cursive; font-style: italic; font-size: 18px; line-height: 1.2;">
+                                        <div>Stay Protected.</div>
+                                        <div>Enjoy Double Rewards!</div>
+                                    </div>
+                                    <div class="bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mt-3 w-fit">
+                                        10% Cashback
+                                    </div>
+                                    <div class="bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mt-1 w-fit">
+                                        RM50 Rebate
+                                    </div>
+                                    <div class="text-xs text-gray-300 mt-2">Renew Your Tire Insurance in 3 Minutes</div>
+                                    <div class="text-xs text-gray-300">via TOYO & get 24/7 Tire Assistance!</div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="relative">
+                                        <div class="w-24 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-lg"></div>
+                                        <i class="fas fa-car absolute inset-0 flex items-center justify-center text-white text-2xl"></i>
+                                        <div class="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full"></div>
+                                        <div class="absolute bottom-1 left-1 w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-600 px-4 py-2">
+                            <i class="fas fa-chevron-right text-white float-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Exact Boost Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active" style="color: #dc2626;">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-university"></i>
+                            <span>Bank</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-qrcode text-white text-sm"></i>
+                            </div>
+                            <span>Scan</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-star"></i>
+                            <span>TOYOUP</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comprehensive Grab-Inspired -->
+        <div class="prototype-card">
+            <div class="prototype-header" style="background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);">
+                <h3 class="text-xl font-semibold">Comprehensive Grab-Inspired</h3>
+            </div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <!-- Exact Grab Status Bar -->
+                    <div style="background: linear-gradient(45deg, #16a34a 0%, #10b981 50%, #06d6a0 100%); color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                        <div class="flex items-center">
+                            <span>12:41</span>
+                            <i class="fas fa-location-arrow ml-2"></i>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="flex gap-1">
+                                <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                <div class="w-1 h-3 bg-white rounded"></div>
+                            </div>
+                            <i class="fas fa-wifi text-white ml-2"></i>
+                            <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-green-600 font-bold ml-1">81</div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Header -->
+                    <div style="background: linear-gradient(45deg, #16a34a 0%, #10b981 50%, #06d6a0 100%); color: white; padding: 20px;">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-bars text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-white rounded-full px-4 py-3">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                    <span class="text-gray-500 text-sm">Search tires</span>
+                                </div>
+                            </div>
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center relative">
+                                <i class="fas fa-car text-white text-lg"></i>
+                                <div class="absolute -top-1 -right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">2</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Main Categories -->
+                    <div style="background: white; padding: 20px;">
+                        <div class="grab-category-grid">
+                            <!-- Row 1 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-circle text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Tires</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-wrench text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Service</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shipping-fast text-orange-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Express</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-store text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Mart</div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-percentage text-orange-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Deals</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Mobile Service</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shopping-bag text-orange-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">Shopping</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-th text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="font-semibold text-xs text-gray-900 leading-tight break-words">All</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Quick Actions -->
+                    <div class="bg-white px-6">
+                        <div class="flex gap-3">
+                            <div class="flex-1 bg-gray-50 rounded-xl p-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-wallet text-green-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500">View Balance</div>
+                                        <div class="font-semibold text-xs leading-tight break-words">TOYO Wallet</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-gray-50 rounded-xl p-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-search text-orange-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500">Search</div>
+                                        <div class="font-semibold text-xs leading-tight break-words">"Winter Tires"</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-gray-50 rounded-xl p-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-star text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500">Rate</div>
+                                        <div class="font-semibold text-xs leading-tight break-words">Service Center</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Sign Up Section -->
+                    <div class="bg-white px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg font-bold text-gray-900">Sign up today</div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Promotional Content -->
+                    <div class="bg-white px-6 space-y-4 pb-24">
+                        <!-- Main Promo -->
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white relative overflow-hidden">
+                            <div class="relative z-10">
+                                <div class="font-bold text-lg mb-1">Win PROXES T1,</div>
+                                <div class="font-bold text-lg mb-1">NANOENERGY or</div>
+                                <div class="font-bold text-lg mb-3">OBSERVE tires</div>
+                                <button class="bg-purple-800 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    Sign up today
+                                </button>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-20">
+                                <i class="fas fa-gift text-6xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Order Again Section -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4">
+                            <div class="text-lg font-bold mb-3 text-gray-900">Order tires again</div>
+                            <div class="flex gap-4 overflow-x-auto pb-2">
+                                <div class="flex-shrink-0 text-center">
+                                    <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-2">
+                                        <i class="fas fa-circle text-gray-400 text-2xl"></i>
+                                    </div>
+                                    <div class="text-xs font-medium">PROXES T1</div>
+                                    <div class="text-xs text-gray-500">RM 12.95 <span class="text-red-500">each</span></div>
+                                </div>
+                                <div class="flex-shrink-0 text-center">
+                                    <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-2">
+                                        <i class="fas fa-fire text-orange-500 text-2xl"></i>
+                                    </div>
+                                    <div class="text-xs font-medium">NANOENERGY</div>
+                                    <div class="text-xs text-gray-500">Hot Deal!</div>
+                                </div>
+                                <div class="flex-shrink-0 text-center">
+                                    <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-2">
+                                        <i class="fas fa-shopping-bag text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div class="text-xs font-medium">Browse More</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact Grab Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active" style="color: #16a34a;">
+                            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mb-1">
+                                <i class="fas fa-user text-green-600 text-sm"></i>
+                            </div>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Activity</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Finance</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-comment"></i>
+                            <span>Messages</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comprehensive Touch 'n Go-Inspired -->
+        <div class="prototype-card">
+            <div class="prototype-header" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                <h3 class="text-xl font-semibold">Comprehensive Touch 'n Go-Inspired</h3>
+            </div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <!-- Exact TnG Status Bar -->
+                    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600;">
+                        <div class="flex items-center">
+                            <span>12:41</span>
+                            <i class="fas fa-location-arrow ml-2"></i>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="flex gap-1">
+                                <div class="w-1 h-3 bg-white rounded opacity-60"></div>
+                                <div class="w-1 h-3 bg-white rounded opacity-80"></div>
+                                <div class="w-1 h-3 bg-white rounded"></div>
+                            </div>
+                            <i class="fas fa-wifi text-white ml-2"></i>
+                            <div class="bg-white bg-opacity-90 rounded px-2 py-1 text-xs text-blue-600 font-bold ml-1">81</div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Header -->
+                    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 20px;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjRkYwMDAwIi8+CjxyZWN0IHg9IjAiIHk9IjgiIHdpZHRoPSIyNCIgaGVpZ2h0PSI4IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Malaysia" class="w-5 h-4 mr-2">
+                                    <span class="text-sm">Malaysia</span>
+                                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-truck text-white text-sm"></i>
+                                </div>
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center relative">
+                                    <i class="fas fa-user text-white"></i>
+                                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-coins text-white text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-check-circle text-green-300"></i>
+                                <div class="text-2xl font-bold">RM 125.37</div>
+                                <i class="fas fa-eye text-white opacity-70"></i>
+                            </div>
+                            <div class="text-sm opacity-90 flex items-center">
+                                <span>View balance details</span>
+                                <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            <button class="bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-bold flex-1">
+                                + Add money
+                            </button>
+                            <button class="border border-white text-white px-4 py-2 rounded-full text-sm font-bold">
+                                Transactions <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Quick Actions -->
+                    <div class="tng-quick-actions">
+                        <div class="tng-action-item">
+                            <div class="tng-action-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="text-xs font-medium text-gray-900 leading-tight break-words">Apply</div>
+                        </div>
+                        <div class="tng-action-item">
+                            <div class="tng-action-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="text-xs font-medium text-gray-900 leading-tight break-words">Tire Health</div>
+                        </div>
+                        <div class="tng-action-item">
+                            <div class="tng-action-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div class="text-xs font-medium text-gray-900 leading-tight break-words">Transfer</div>
+                        </div>
+                        <div class="tng-action-item">
+                            <div class="tng-action-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="text-xs font-medium text-gray-900 leading-tight break-words">Cards</div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Status Cards -->
+                    <div class="flex gap-3 px-4 my-4">
+                        <div class="flex-1 bg-white rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-seedling text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">Grow your savings</div>
+                                    <div class="font-semibold text-xs leading-tight break-words">Start with just RM10</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-gift text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">TOYOrewards</div>
+                                    <div class="font-semibold text-xs leading-tight break-words">0 pts</div>
+                                    <div class="text-xs text-orange-600 font-semibold">7.7</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Recommended -->
+                    <div class="px-4 my-6">
+                        <div class="text-lg font-bold mb-4 text-gray-900">Recommended</div>
+                        <div class="tng-quick-actions">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-percentage text-pink-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Daily Deals</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shopping-cart text-yellow-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Shop & Earn</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-receipt text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Bills</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-bar text-green-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYO Report</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG My Favourites -->
+                    <div class="px-4 my-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-lg font-bold text-gray-900">My Favourites</div>
+                            <div class="text-blue-600 text-sm font-semibold">Edit</div>
+                        </div>
+                        <div class="tng-quick-actions">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-car text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">TOYOyang</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fab fa-apple text-gray-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Apple Zone</div>
+                            </div>
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-mobile-alt text-red-600"></i>
+                                </div>
+                                <div class="absolute -top-1 right-2 bg-red-500 text-white text-xs px-1 rounded">$BACK</div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">MY Service</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-wifi text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">RFID</div>
+                            </div>
+                        </div>
+                        <div class="tng-quick-actions">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-credit-card text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Visa Card</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shield-alt text-green-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Insurance</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2 relative">
+                                    <i class="fas fa-star text-orange-600"></i>
+                                    <div class="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1 rounded">FREE</div>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">A+ Rewards</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-ellipsis-h text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">More</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Finance Section -->
+                    <div class="px-4 mb-24">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-gray-900">TOYOfinance</div>
+                            <div class="text-blue-600 text-sm font-semibold flex items-center">
+                                Open <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4">Grow and protect your money easily.</div>
+                        
+                        <div class="tng-quick-actions-3 mb-4">
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-coins text-yellow-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Get more cash</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shield-alt text-green-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Compare insurances</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-line text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Get credit report</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tng-quick-actions-3">
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-money-bill-wave text-blue-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Send money overseas</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-pie text-green-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Invest in unit trust</div>
+                            </div>
+                            <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-mobile-alt text-purple-600"></i>
+                                </div>
+                                <div class="text-xs font-medium text-gray-900 leading-tight break-words">Spend cashlessly</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exact TnG Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active" style="color: #1e40af;">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>eShop</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mb-1">
+                                <i class="fas fa-qrcode text-white text-sm"></i>
+                            </div>
+                            <span>Scan</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Finance</span>
+                        </div>
+                        <div class="nav-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Near Me</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
