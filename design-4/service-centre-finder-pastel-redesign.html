@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Service Centre Finder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: auto;
+            min-height: 800px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            background: linear-gradient(135deg, #faf9ff 0%, #fff5f5 100%);
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #4169E1 0%, #87CEEB 50%, #40E0D0 100%);
+            padding: 64px 24px 32px;
+            color: white;
+            z-index: 20;
+            border-radius: 0 0 24px 0;
+        }
+        
+        
+        .map-container {
+            background: #F0F0F0;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-pin {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #4169E1;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .map-pin.active {
+            background: #ff4444;
+            border-color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 8px 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+        
+        .filter-chip {
+            background: rgba(65, 105, 225, 0.1);
+            color: #4169E1;
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-chip.active {
+            background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .rating-stars {
+            color: #fbbf24;
+        }
+        
+        .distance-badge {
+            background: rgba(64, 224, 208, 0.15);
+            color: #40E0D0;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        
+        .status-open {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .floating-action {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(65, 105, 225, 0.4);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 30;
+        }
+        
+        .floating-action:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            
+            <!-- Header Overlay -->
+            <div class="header-overlay">
+                <div class="flex items-center gap-3 mb-4">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                    <h1 class="text-xl font-bold">Service Centres</h1>
+                </div>
+                <p class="text-sm opacity-90 mb-4">Find nearby TOYO service centres and locations</p>
+                
+                <!-- Search Bar in Header -->
+                <div class="relative">
+                    <input type="text" class="w-full pl-12 pr-4 py-3 border border-white border-opacity-30 rounded-xl bg-white bg-opacity-20 backdrop-filter blur-10 text-white placeholder-white placeholder-opacity-70" placeholder="Search location or postal code">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-white opacity-70"></i>
+                </div>
+            </div>
+
+
+            <!-- Map Container -->
+            <div class="map-container" style="margin-top: 240px;">
+                <!-- Map Background -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><circle cx=&quot;20&quot; cy=&quot;30&quot; r=&quot;8&quot; fill=&quot;rgba(255,255,255,0.1)&quot;/><circle cx=&quot;70&quot; cy=&quot;20&quot; r=&quot;12&quot; fill=&quot;rgba(255,255,255,0.1)&quot;/><circle cx=&quot;80&quot; cy=&quot;70&quot; r=&quot;10&quot; fill=&quot;rgba(255,255,255,0.1)&quot;/><circle cx=&quot;30&quot; cy=&quot;80&quot; r=&quot;6&quot; fill=&quot;rgba(255,255,255,0.1)&quot;/></svg>'); opacity: 0.6;"></div>
+                
+                <!-- Service Center Pins -->
+                <div class="map-pin active" style="top: 60px; left: 120px;"></div>
+                <div class="map-pin" style="top: 100px; right: 80px;"></div>
+                <div class="map-pin" style="bottom: 80px; left: 60px;"></div>
+                <div class="map-pin" style="bottom: 120px; right: 100px;"></div>
+                
+                <!-- Map Center Icon -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <i class="fas fa-map-marked-alt text-6xl text-gray-400 opacity-40"></i>
+                </div>
+                
+                <!-- Map Controls -->
+                <div class="absolute top-4 right-4 space-y-2">
+                    <button class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 shadow-sm">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 shadow-sm">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                
+                <!-- Location Button -->
+                <div class="absolute bottom-4 right-4">
+                    <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 shadow-sm">
+                        <i class="fas fa-crosshairs text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Service Centers List -->
+            <div style="margin-top: 20px;">
+                <div class="flex items-center justify-between mb-4 px-4">
+                    <h3 class="font-bold text-lg text-gray-900">Nearby Centers (8)</h3>
+                    <button class="text-sm font-medium" style="color: #40E0D0;">
+                        <i class="fas fa-sort-amount-down mr-1"></i>
+                        Sort
+                    </button>
+                </div>
+                
+                <!-- Featured Center -->
+                <div class="service-card" style="border: 2px solid #4169E1;">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                            <i class="fas fa-star text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-bold text-lg text-gray-900">TOYO Premium Center KL</h3>
+                                <span class="distance-badge">1.2 km</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Jalan Bukit Bintang, 50200 Kuala Lumpur</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.8 (124)</span>
+                                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">FEATURED</span>
+                            </div>
+                            <div class="text-sm status-open mb-3">Open • Closes at 6:00 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="text-white py-3 rounded-xl text-sm font-semibold" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                            <i class="fas fa-directions mr-1"></i>Directions
+                        </button>
+                        <button class="py-3 rounded-xl text-sm font-semibold border border-gray-300 text-gray-700">
+                            <i class="fas fa-phone mr-1"></i>Call Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Regular Centers -->
+                <div class="service-card">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                            <i class="fas fa-tools text-gray-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-gray-900">TOYO Service Shah Alam</h3>
+                                <span class="distance-badge">2.8 km</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Section 13, Shah Alam, Selangor</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="rating-stars text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-xs text-gray-600">4.6 (89)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-xs status-open">Open • 8:00 PM</div>
+                                <div class="flex gap-2">
+                                    <button class="text-xs px-3 py-1 rounded-lg text-white" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                                        Directions
+                                    </button>
+                                    <button class="text-xs px-3 py-1 rounded-lg border border-gray-300 text-gray-600">
+                                        Call
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                            <i class="fas fa-wrench text-gray-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-gray-900">Auto Service Petaling</h3>
+                                <span class="distance-badge">4.1 km</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Petaling Jaya, Selangor</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="rating-stars text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-xs text-gray-600">4.7 (156)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-xs text-red-600 font-medium">Closed • Opens 8:00 AM</div>
+                                <div class="flex gap-2">
+                                    <button class="text-xs px-3 py-1 rounded-lg text-white" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                                        Directions
+                                    </button>
+                                    <button class="text-xs px-3 py-1 rounded-lg border border-gray-300 text-gray-600">
+                                        Call
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Support -->
+                <div class="mx-4 mb-8 mt-6 rounded-xl p-4" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%); margin-bottom: 30px;">
+                    <div class="text-center text-white">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-headset text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Need Help Finding a Centre?</h4>
+                        <p class="text-sm opacity-90 mb-4">Our customer service team can help you find the nearest service centre.</p>
+                        <button class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold">
+                            Contact Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Action Button -->
+            <div class="floating-action">
+                <i class="fas fa-route"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

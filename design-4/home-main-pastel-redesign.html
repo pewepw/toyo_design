@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO TIRES CARE - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        .phone-frame {
+            width: 480px;
+            height: auto;
+            min-height: 800px;
+            background: #1a1a1a;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border: 2px solid #2a2a2a;
+            margin: 2rem auto;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 32px;
+            background: #000;
+            border-radius: 16px;
+            z-index: 10;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            z-index: 11;
+        }
+        .phone-screen {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-card {
+            background: linear-gradient(135deg, #4169E1 0%, #87CEEB 50%, #40E0D0 100%);
+            border-radius: 24px;
+            margin: 16px;
+            padding: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .action-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+        
+        .quick-action {
+            background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);
+            border-radius: 16px;
+            padding: 16px;
+            color: white;
+            text-align: center;
+            margin: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quick-action:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(65, 105, 225, 0.3);
+        }
+        
+        .floating-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            
+            <!-- Status Bar Spacer -->
+            <div style="height: 64px;"></div>
+
+            <!-- Header with User Profile -->
+            <div class="hero-card">
+                <div class="flex items-center mb-6">
+                    <div class="flex items-center gap-3">
+                        <img src="../images/toyo-tires-white.png" alt="TOYO TIRES" class="h-6">
+                        <img src="../images/CARE-white.png" alt="CARE" class="h-6">
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm opacity-90">Welcome back</div>
+                        <div class="text-xl font-bold">Ahmad Rahman</div>
+                        <div class="flex items-center gap-2 mt-1">
+                            <i class="fas fa-crown text-yellow-300 text-sm"></i>
+                            <span class="text-sm font-medium">Gold Member</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="text-center bg-white bg-opacity-20 rounded-xl p-3">
+                        <div class="text-2xl font-bold">2,580</div>
+                        <div class="text-xs opacity-90">Points</div>
+                    </div>
+                    <div class="text-center bg-white bg-opacity-20 rounded-xl p-3">
+                        <div class="text-2xl font-bold">12</div>
+                        <div class="text-xs opacity-90">Services</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Actions -->
+            <div class="px-4 -mt-8">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="action-card">
+                        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Warranty</h3>
+                        <p class="text-sm text-gray-600 mb-4">Register or claim your tire warranty</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 text-xs py-2 px-3 rounded-lg text-white" style="background: linear-gradient(135deg, #4169E1 0%, #40E0D0 100%);">
+                                Register
+                            </button>
+                            <button class="flex-1 text-xs py-2 px-3 rounded-lg border border-gray-300 text-gray-700">
+                                Claim
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card">
+                        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, #40E0D0 0%, #87CEEB 100%);">
+                            <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Service</h3>
+                        <p class="text-sm text-gray-600 mb-4">Find nearby service centers</p>
+                        <button class="w-full text-xs py-2 px-3 rounded-lg text-white" style="background: linear-gradient(135deg, #40E0D0 0%, #87CEEB 100%);">
+                            Find Centers
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Grid -->
+            <div class="px-4 mt-6">
+                <h3 class="font-bold text-lg text-gray-900 mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="quick-action">
+                        <i class="fas fa-bullhorn text-2xl mb-2"></i>
+                        <div class="text-xs font-medium">Campaigns</div>
+                    </div>
+                    <div class="quick-action">
+                        <i class="fas fa-gamepad text-2xl mb-2"></i>
+                        <div class="text-xs font-medium">Games</div>
+                    </div>
+                    <div class="quick-action">
+                        <i class="fas fa-gift text-2xl mb-2"></i>
+                        <div class="text-xs font-medium">Rewards</div>
+                    </div>
+                    <div class="quick-action">
+                        <i class="fas fa-headset text-2xl mb-2"></i>
+                        <div class="text-xs font-medium">Support</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Featured Promotion -->
+            <div class="px-4 mt-6 mb-8" style="padding-bottom: 70px;">
+                <div class="rounded-xl overflow-hidden" style="background: linear-gradient(135deg, #4169E1 0%, #87CEEB 50%, #40E0D0 100%);">
+                    <div class="p-6 text-white">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg mb-2">Summer Service Special</h4>
+                                <p class="text-sm opacity-90 mb-4">Get 20% off tire rotation and balancing services this month</p>
+                                <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold">
+                                    Book Now
+                                </button>
+                            </div>
+                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-percentage text-white text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
