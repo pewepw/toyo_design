@@ -19,36 +19,11 @@ This is a web-based prototype system for TOYO TIRES application, containing mult
   - `index.html` - Navigation/landing page for each design iteration
 - `images/` - Shared image assets (logos, campaigns, UI elements)
 
-### Key Files
-- `convert_images_to_base64.py` - Python utility to embed images as base64 data URIs in HTML files for better compatibility with design tools. Do not run this file.
-
 ### Technical Stack
 - Pure HTML/CSS/JavaScript (no build system)
 - TailwindCSS via CDN
 - Font Awesome icons via CDN
 - Responsive design using CSS Grid and Flexbox
-
-## Development Commands
-
-### Image Processing
-```bash
-python3 convert_images_to_base64.py
-```
-Converts image references to base64 data URIs in HTML files. Run this when:
-- Adding new images to the `images/` directory
-- Preparing files for design tool import
-- Ensuring cross-platform compatibility
-
-
-### File Serving
-Since these are static HTML files, serve them using:
-```bash
-python3 -m http.server 8000
-```
-Then navigate to:
-- `http://localhost:8000/` - Main design gallery (root index.html)
-- `http://localhost:8000/design-0/` - For consolidated prototype collections
-- `http://localhost:8000/design-X/` - For individual design iterations (where X = 1, 2, or 3)
 
 ## Prototype Development Workflow
 
@@ -60,7 +35,7 @@ Then navigate to:
 
 1. **User Experience Analysis**: First, analyze the main functions and user needs of this app to determine the core interaction logic.
 2. **Product Interface Planning**: As a product manager, define key interfaces to ensure a reasonable information architecture.
-3. **High-Fidelity UI Design**: As a UI designer, create interfaces that closely follow the real iOS design guidelines, using modern UI elements to provide the best visual experience. The primary theme color is #2563EB.
+3. **High-Fidelity UI Design**: As a UI designer, create interfaces that closely follow the real iOS design guidelines, using modern UI elements to provide the best visual experience.
 4. **HTML Prototype Implementation**: Use **HTML + Tailwind CSS** to generate all prototype screens, and use **FontAwesome** (or other open-source UI components) to enhance the design, making it more refined and closer to a real app.
 
 ### Interface Structure and Display Requirements
@@ -85,7 +60,6 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - If an interface is longer than one screen, do not use scrollviews — instead, increase the screen height to display all content fully in a single view
 
 #### Asset Requirements
-- The logo is `images/toyo-tires.png`
 - Follow these requirements to generate complete HTML code, ensuring that it can be directly used for actual development
 
 ## Working with Prototypes
@@ -114,7 +88,6 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - **Mobile-first**: Responsive design prioritizing mobile experience
 - **iOS Guidelines**: Follow Apple's Human Interface Guidelines
 - **Navigation**: Consistent patterns across screens
-- **Components**: Header/footer components embedded in each file
 
 #### Development-Ready Output
 - **Direct Implementation**: Prototypes should be ready for actual development
@@ -125,18 +98,16 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 ### Image Handling
 - All images should be placed in the `images/` directory
 - Reference images using relative paths: `../images/filename.ext`
-- Do not run `convert_images_to_base64.py` to embed images for design tool compatibility, i'll do it manually
 - Supported formats: PNG, JPG, JPEG, GIF, SVG, WebP
 
 ### Design System
 
 #### Brand Colors
-- **Primary Theme Color**: #2563EB (Blue)
-- **Secondary**: #3B82F6 (Light Blue)
-- **Gradient**: Blue gradient (#2563EB to #3B82F6)
+- **Primary Theme Color**: #0062B0 (TOYO BLUE), #7F7F7F (DRIVEN GRAY)
+- **Secondary Theme Color**: #727272 (TOYO GRAY) 
 
 #### Typography
-- **System Fonts**: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto
+- **Fonts**: Helvetica Neue
 - **iOS Style**: Follow Apple's Human Interface Guidelines for text hierarchy
 
 #### UI Components
@@ -152,7 +123,7 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - **Safe Areas**: Consider iPhone notch and bottom safe areas
 
 #### Asset References
-- **Logo**: `images/toyo-tires.png` (primary brand logo)
+- **Logo**: `images/toyo-tires.png` (primary brand logo), `images/toyo-tires-white.png` (white version of the logo)
 - **Image Path**: Use relative paths `../images/filename.ext`
 
 ## Deployment

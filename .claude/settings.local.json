@@ -12,7 +12,8 @@
       "WebFetch(domain:www.toyotires.com.my)",
       "Bash(sed:*)",
       "Bash(cp:*)",
-      "Bash(/opt/homebrew/bin/python3:*)"
+      "Bash(/opt/homebrew/bin/python3:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }
