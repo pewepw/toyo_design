@@ -56,9 +56,18 @@
             font-weight: 600;
         }
         
+        .nav-bar {
+            height: 50px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
         .main-content {
             padding: 40px 30px;
-            height: calc(100% - 44px);
+            height: calc(100% - 94px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -95,16 +104,19 @@
         .otp-container {
             display: flex;
             justify-content: space-between;
-            gap: 8px;
+            gap: 4px;
             margin-bottom: 30px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .otp-input {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             text-align: center;
             background: #f8f9fa;
@@ -229,14 +241,7 @@
             
             <!-- Navigation Bar -->
             <div class="nav-bar">
-                <button class="back-button">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-            </div>
-            
-            <!-- Navigation Bar -->
-            <div class="nav-bar">
-                <button class="back-button">
+                <button class="back-button" onclick="goBack()">
                     <i class="fas fa-arrow-left"></i>
                 </button>
             </div>
