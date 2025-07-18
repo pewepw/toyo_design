@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Scan QR Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #000;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .camera-view {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,98,176,0.1) 30%, 
+                rgba(0,98,176,0.1) 70%, 
+                rgba(0,0,0,0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .camera-overlay {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .scan-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+        }
+        
+        .scan-corners {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #0062B0;
+        }
+        
+        .corner.top-left {
+            top: -3px;
+            left: -3px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 20px 0 0 0;
+        }
+        
+        .corner.top-right {
+            top: -3px;
+            right: -3px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 20px 0 0;
+        }
+        
+        .corner.bottom-left {
+            bottom: -3px;
+            left: -3px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 20px;
+        }
+        
+        .corner.bottom-right {
+            bottom: -3px;
+            right: -3px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 20px 0;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0062B0, transparent);
+            animation: scan 2s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        .qr-simulation {
+            width: 160px;
+            height: 160px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .qr-pattern {
+            width: 140px;
+            height: 140px;
+            background: 
+                radial-gradient(circle at 20% 20%, #000 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, #000 2px, transparent 2px),
+                radial-gradient(circle at 60% 20%, #000 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, #000 2px, transparent 2px),
+                radial-gradient(circle at 20% 40%, #000 2px, transparent 2px),
+                radial-gradient(circle at 40% 40%, #000 2px, transparent 2px),
+                radial-gradient(circle at 60% 40%, #000 2px, transparent 2px),
+                radial-gradient(circle at 80% 40%, #000 2px, transparent 2px),
+                radial-gradient(circle at 20% 60%, #000 2px, transparent 2px),
+                radial-gradient(circle at 40% 60%, #000 2px, transparent 2px),
+                radial-gradient(circle at 60% 60%, #000 2px, transparent 2px),
+                radial-gradient(circle at 80% 60%, #000 2px, transparent 2px),
+                radial-gradient(circle at 20% 80%, #000 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, #000 2px, transparent 2px),
+                radial-gradient(circle at 60% 80%, #000 2px, transparent 2px),
+                radial-gradient(circle at 80% 80%, #000 2px, transparent 2px);
+            background-size: 10px 10px;
+            border: 8px solid #000;
+            position: relative;
+        }
+        
+        .qr-pattern::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border: 2px solid white;
+        }
+        
+        .qr-pattern::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border: 2px solid white;
+        }
+        
+        .header-controls {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(0,98,176,0.8);
+            border-color: #0062B0;
+        }
+        
+        .scan-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .flashlight-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .flashlight-button:hover {
+            background: rgba(255,193,7,0.8);
+            border-color: #ffc107;
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 200px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .instruction-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .instruction-subtext {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .bottom-controls {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .control-button {
+            padding: 12px 24px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-button:hover {
+            background: rgba(0,98,176,0.8);
+            border-color: #0062B0;
+        }
+        
+        .success-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,98,176,0.9);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            margin-bottom: 20px;
+            animation: successPulse 0.6s ease-out;
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(0,0,0,0.8);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Camera View -->
+            <div class="camera-view">
+                <!-- Header Controls -->
+                <div class="header-controls">
+                    <button class="back-button" onclick="window.location.href='1-2-schedule-appointment.html'">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h1 class="scan-title">Scan QR Code</h1>
+                    <button class="flashlight-button" onclick="toggleFlashlight()">
+                        <i class="fas fa-flashlight" id="flashIcon"></i>
+                    </button>
+                </div>
+                
+                <!-- Scan Overlay -->
+                <div class="camera-overlay">
+                    <div class="scan-frame"></div>
+                    <div class="scan-corners">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                    </div>
+                    <div class="scan-line"></div>
+                    
+                    <!-- QR Code Simulation -->
+                    <div class="qr-simulation">
+                        <div class="qr-pattern"></div>
+                    </div>
+                </div>
+                
+                <!-- Instructions -->
+                <div class="instructions">
+                    <div class="instruction-text">Position QR code within the frame</div>
+                    <div class="instruction-subtext">The QR code will be scanned automatically</div>
+                </div>
+                
+                <!-- Bottom Controls -->
+                <div class="bottom-controls">
+                    <button class="control-button" onclick="manualEntry()">
+                        <i class="fas fa-keyboard"></i>
+                        Manual Entry
+                    </button>
+                    <button class="control-button" onclick="selectFromGallery()">
+                        <i class="fas fa-image"></i>
+                        Gallery
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Success Overlay -->
+            <div class="success-overlay" id="successOverlay">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="success-text">QR Code Scanned Successfully!</div>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let flashlightOn = false;
+        let scanTimeout;
+        
+        // Auto-scan simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate QR code detection after 3 seconds
+            scanTimeout = setTimeout(function() {
+                scanQRCode();
+            }, 3000);
+        });
+        
+        function toggleFlashlight() {
+            flashlightOn = !flashlightOn;
+            const flashIcon = document.getElementById('flashIcon');
+            
+            if (flashlightOn) {
+                flashIcon.className = 'fas fa-flashlight text-yellow-400';
+            } else {
+                flashIcon.className = 'fas fa-flashlight';
+            }
+        }
+        
+        function scanQRCode() {
+            const successOverlay = document.getElementById('successOverlay');
+            successOverlay.style.display = 'flex';
+            
+            // Navigate to next screen after showing success
+            setTimeout(function() {
+                window.location.href = '1-2-2-claim-details.html';
+            }, 1500);
+        }
+        
+        function manualEntry() {
+            // Clear auto-scan timeout
+            if (scanTimeout) {
+                clearTimeout(scanTimeout);
+            }
+            
+            const code = prompt('Enter QR Code manually:');
+            if (code) {
+                scanQRCode();
+            }
+        }
+        
+        function selectFromGallery() {
+            // Clear auto-scan timeout
+            if (scanTimeout) {
+                clearTimeout(scanTimeout);
+            }
+            
+            // Simulate gallery selection
+            setTimeout(function() {
+                scanQRCode();
+            }, 1000);
+        }
+        
+        // Click on QR code to scan immediately
+        document.querySelector('.qr-simulation').addEventListener('click', function() {
+            if (scanTimeout) {
+                clearTimeout(scanTimeout);
+            }
+            scanQRCode();
+        });
+    </script>
+</body>
+</html>

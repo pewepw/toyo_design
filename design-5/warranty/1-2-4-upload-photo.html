@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Upload Photos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .photo-count {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f0f9ff;
+            color: #0062B0;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 80px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .upload-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .section-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .required-label {
+            background: #dc3545;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        
+        .tread-photo {
+            margin-bottom: 24px;
+        }
+        
+        .upload-box {
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-box:hover {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+        
+        .upload-box.has-photo {
+            padding: 0;
+            border: 1px solid #ddd;
+            background: none;
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+        
+        .upload-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .upload-subtext {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .photo-preview {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(45deg, #ddd 25%, transparent 25%), 
+                        linear-gradient(-45deg, #ddd 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #ddd 75%), 
+                        linear-gradient(-45deg, transparent 75%, #ddd 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            gap: 4px;
+        }
+        
+        .photo-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .photo-action:hover {
+            background: rgba(0,98,176,0.8);
+        }
+        
+        .additional-photos {
+            margin-bottom: 24px;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .photo-slot {
+            aspect-ratio: 1;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-slot:hover {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+        
+        .photo-slot.has-photo {
+            border: 1px solid #ddd;
+            background: none;
+        }
+        
+        .slot-icon {
+            font-size: 20px;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+        
+        .slot-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .small-photo-preview {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ddd 25%, transparent 25%), 
+                        linear-gradient(-45deg, #ddd 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #ddd 75%), 
+                        linear-gradient(-45deg, transparent 75%, #ddd 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .instructions {
+            background: #f0f9ff;
+            border: 1px solid #0062B0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .instruction-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .instruction-list li {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .instruction-list li::before {
+            content: '•';
+            color: #0062B0;
+            position: absolute;
+            left: 0;
+        }
+        
+        .submit-button {
+            position: fixed;
+            bottom: 100px;
+            left: 15px;
+            right: 15px;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,98,176,0.4);
+        }
+        
+        .submit-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='1-2-3-claim-checklist.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Upload Photos</h1>
+                <div class="photo-count" id="photoCount">1/6</div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content" style="padding-bottom: 80px;">
+                <!-- Instructions -->
+                <div class="instructions">
+                    <div class="instruction-title">
+                        <i class="fas fa-info-circle"></i>
+                        Photo Guidelines
+                    </div>
+                    <ul class="instruction-list">
+                        <li>Take clear, well-lit photos showing the damage clearly</li>
+                        <li>Include close-up and wide-angle shots of the affected area</li>
+                        <li>Capture tire identification and serial numbers</li>
+                        <li>Show the tire in its mounted position when possible</li>
+                    </ul>
+                </div>
+                
+                <!-- Tread Depth Photo -->
+                <div class="upload-section">
+                    <div class="tread-photo">
+                        <h3 class="section-title">
+                            <i class="fas fa-camera section-icon"></i>
+                            Tread Depth Photo
+                            <span class="required-label">REQUIRED</span>
+                        </h3>
+                        <p class="section-description">Take a photo showing tread depth measurement and separation area</p>
+                        
+                        <div class="upload-box has-photo" onclick="takePhoto('tread')">
+                            <div class="photo-preview">
+                                Tread Depth & Separation
+                                <div class="photo-overlay">
+                                    <button class="photo-action" onclick="event.stopPropagation(); retakePhoto('tread')">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                    <button class="photo-action" onclick="event.stopPropagation(); deletePhoto('tread')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Photos -->
+                <div class="upload-section">
+                    <div class="additional-photos">
+                        <h3 class="section-title">
+                            <i class="fas fa-images section-icon"></i>
+                            Additional Photos (5 maximum)
+                        </h3>
+                        <p class="section-description">Upload additional photos to support the warranty claim</p>
+                        
+                        <div class="photo-grid">
+                            <div class="photo-slot" onclick="takePhoto('additional1')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Sidewall View</span>
+                            </div>
+                            
+                            <div class="photo-slot" onclick="takePhoto('additional2')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Serial Plate</span>
+                            </div>
+                            
+                            <div class="photo-slot" onclick="takePhoto('additional3')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Full Tire View</span>
+                            </div>
+                            
+                            <div class="photo-slot" onclick="takePhoto('additional4')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Damage Detail</span>
+                            </div>
+                            
+                            <div class="photo-slot" onclick="takePhoto('additional5')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Vehicle Position</span>
+                            </div>
+                            
+                            <div class="photo-slot" onclick="takePhoto('additional6')">
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">Additional View</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <button class="submit-button" onclick="submitPhotos()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                Submit Claim to TOYO
+            </button>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let photoCount = 1; // Start with 1 (tread photo already taken)
+        const maxPhotos = 6;
+        
+        function updatePhotoCount() {
+            document.getElementById('photoCount').textContent = photoCount + '/' + maxPhotos;
+        }
+        
+        function takePhoto(slotId) {
+            // Simulate photo taking
+            const slot = event.currentTarget;
+            
+            if (!slot.classList.contains('has-photo')) {
+                // Add photo to slot
+                slot.classList.add('has-photo');
+                slot.innerHTML = `
+                    <div class="small-photo-preview">
+                        Photo ${photoCount}
+                        <div class="photo-overlay">
+                            <button class="photo-action" onclick="event.stopPropagation(); retakePhoto('${slotId}')">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="photo-action" onclick="event.stopPropagation(); deletePhoto('${slotId}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                photoCount++;
+                updatePhotoCount();
+            }
+        }
+        
+        function retakePhoto(slotId) {
+            // Simulate retaking photo
+            console.log('Retaking photo for:', slotId);
+        }
+        
+        function deletePhoto(slotId) {
+            const slots = document.querySelectorAll('.photo-slot, .upload-box');
+            slots.forEach(slot => {
+                if (slot.onclick && slot.onclick.toString().includes(slotId)) {
+                    if (slot.classList.contains('has-photo')) {
+                        slot.classList.remove('has-photo');
+                        // Reset slot content based on type
+                        if (slotId === 'tread') {
+                            slot.innerHTML = `
+                                <i class="fas fa-camera upload-icon"></i>
+                                <div class="upload-text">Take Tread Photo</div>
+                                <div class="upload-subtext">Tap to capture</div>
+                            `;
+                        } else {
+                            const slotTexts = {
+                                'additional1': 'Sidewall View',
+                                'additional2': 'Serial Plate',
+                                'additional3': 'Full Tire View',
+                                'additional4': 'Damage Detail',
+                                'additional5': 'Vehicle Position',
+                                'additional6': 'Additional View'
+                            };
+                            slot.innerHTML = `
+                                <i class="fas fa-plus slot-icon"></i>
+                                <span class="slot-text">${slotTexts[slotId] || 'Add Photo'}</span>
+                            `;
+                        }
+                        photoCount--;
+                        updatePhotoCount();
+                    }
+                }
+            });
+        }
+        
+        function submitPhotos() {
+            // Navigate to success page
+            window.location.href = '1-2-5-claim-filed.html';
+        }
+        
+        // Initialize photo count
+        updatePhotoCount();
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Appointment Accepted</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 80px);
+            overflow-y: auto;
+            padding: 40px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .success-animation {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(76,175,80,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .success-animation::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border: 2px solid rgba(76,175,80,0.3);
+            border-radius: 70px;
+            animation: ripple 2s infinite;
+        }
+        
+        .success-animation i {
+            font-size: 48px;
+            color: white;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+        
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .success-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.5;
+            max-width: 300px;
+        }
+        
+        .appointment-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .summary-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .summary-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .notification-status {
+            background: #e8f5e8;
+            border: 1px solid #4CAF50;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 32px;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .notification-status i {
+            color: #4CAF50;
+            margin-right: 8px;
+        }
+        
+        .notification-text {
+            font-size: 14px;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .action-button {
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .primary-button {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .primary-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,98,176,0.3);
+        }
+        
+        .secondary-button {
+            background: #f8f9fa;
+            color: #0062B0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .secondary-button:hover {
+            background: #e9ecef;
+            border-color: #0062B0;
+            transform: translateY(-2px);
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Success Animation -->
+                <div class="success-animation">
+                    <i class="fas fa-check"></i>
+                </div>
+                
+                <!-- Success Message -->
+                <h1 class="success-title">Appointment Accepted</h1>
+                <p class="success-subtitle">
+                    The appointment has been successfully scheduled and the customer has been notified.
+                </p>
+                
+                <!-- Appointment Summary -->
+                <div class="appointment-summary">
+                    <h3 class="summary-title">Appointment Details</h3>
+                    <div class="summary-row">
+                        <span class="summary-label">Customer</span>
+                        <span class="summary-value">Ahmad Rahman</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Mobile</span>
+                        <span class="summary-value">+60 12-345 6789</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Date</span>
+                        <span class="summary-value">24 Nov 2024</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Time</span>
+                        <span class="summary-value">2:00 PM</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Issue</span>
+                        <span class="summary-value">Tread separation</span>
+                    </div>
+                </div>
+                
+                <!-- Notification Status -->
+                <div class="notification-status">
+                    <div class="notification-text">
+                        <i class="fas fa-check-circle"></i>
+                        SMS notification sent to customer successfully
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-button secondary-button" onclick="window.location.href='#'">
+                        <i class="fas fa-plus"></i>
+                        Create Order
+                    </button>
+                    <button class="action-button primary-button" onclick="window.location.href='1-claim-appointment.html'">
+                        <i class="fas fa-home"></i>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

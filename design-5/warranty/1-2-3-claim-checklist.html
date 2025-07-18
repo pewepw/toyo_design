@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Claim Checklist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .progress-badge {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f0f9ff;
+            color: #0062B0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 160px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .inspection-header {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            text-align: center;
+        }
+        
+        .inspection-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .inspection-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        
+        .progress-container {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 3px;
+            margin-bottom: 12px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #0062B0;
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .checklist-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .checklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+        }
+        
+        .checklist-item:hover {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+        
+        .checklist-item.checked {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .checklist-item.checked .checkbox {
+            border-color: #4CAF50;
+            background: #4CAF50;
+        }
+        
+        .checkbox i {
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .checklist-item.checked .checkbox i {
+            opacity: 1;
+        }
+        
+        .checklist-content {
+            flex: 1;
+        }
+        
+        .checklist-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        
+        .checklist-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .customer-info {
+            background: #f0f9ff;
+            border: 1px solid #0062B0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .customer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .customer-details {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .action-buttons {
+            position: fixed;
+            bottom: 100px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 0 2px;
+            background: white;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .reject-button {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .reject-button:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(220,53,69,0.3);
+        }
+        
+        .next-button {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .next-button:hover:not(:disabled) {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,98,176,0.3);
+        }
+        
+        .next-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='1-2-2-claim-details.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Claim Inspection</h1>
+                <div class="progress-badge">
+                    <span id="progressText">0/10</span>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Inspection Header -->
+                <div class="inspection-header">
+                    <div class="inspection-title">Tire Inspection Checklist</div>
+                    <div class="inspection-subtitle">Complete all inspection points before proceeding</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="progress-text" id="progressPercent">0% Complete</div>
+                </div>
+                
+                <!-- Customer Info -->
+                <div class="customer-info">
+                    <div class="customer-title">
+                        <i class="fas fa-user"></i>
+                        Ahmad Rahman - PROXES CF3 (215/60R16)
+                    </div>
+                    <div class="customer-details">
+                        Appointment: 23 Nov 2024, 2:00 PM • Tread separation claim
+                    </div>
+                </div>
+                
+                <!-- Checklist Section -->
+                <div class="checklist-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-check section-icon"></i>
+                        Inspection Points
+                    </h3>
+                    
+                    <div class="checklist-items">
+                        <div class="checklist-item" data-point="1">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Tire identification and serial number verification</div>
+                                <div class="checklist-description">Confirm tire pattern, size, and DOT serial number matches warranty certificate</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="2">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Manufacturing date within warranty period</div>
+                                <div class="checklist-description">Verify DOT date code confirms tire is within 5-year warranty period</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="3">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Tread depth measurement and documentation</div>
+                                <div class="checklist-description">Measure remaining tread depth at multiple points and record findings</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="4">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Visual inspection of sidewall condition</div>
+                                <div class="checklist-description">Check for cuts, bulges, punctures, or other external damage</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="5">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Examination of tread separation area</div>
+                                <div class="checklist-description">Document extent and pattern of tread separation or belt damage</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="6">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Assessment of wear patterns</div>
+                                <div class="checklist-description">Check for irregular wear indicating alignment, inflation, or suspension issues</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="7">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Road hazard damage evaluation</div>
+                                <div class="checklist-description">Determine if damage is due to impact, puncture, or road hazard</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="8">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Vehicle maintenance history review</div>
+                                <div class="checklist-description">Discuss tire rotation, inflation maintenance, and vehicle alignment history</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="9">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Mileage and usage pattern verification</div>
+                                <div class="checklist-description">Confirm reported mileage and driving conditions match tire condition</div>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist-item" data-point="10">
+                            <div class="checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checklist-content">
+                                <div class="checklist-title">Photo documentation completion</div>
+                                <div class="checklist-description">Take comprehensive photos of all damage areas and tire identification</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button reject-button" onclick="window.location.href='1-2-6-reject-reason.html'">
+                    <i class="fas fa-times"></i>
+                    Reject
+                </button>
+                <button class="action-button next-button" id="nextButton" disabled onclick="proceedToPhotos()">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </button>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let checkedCount = 0;
+        const totalPoints = 10;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const checklistItems = document.querySelectorAll('.checklist-item');
+            
+            checklistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const isChecked = this.classList.contains('checked');
+                    
+                    if (isChecked) {
+                        this.classList.remove('checked');
+                        checkedCount--;
+                    } else {
+                        this.classList.add('checked');
+                        checkedCount++;
+                    }
+                    
+                    updateProgress();
+                });
+            });
+        });
+        
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const progressPercent = document.getElementById('progressPercent');
+            const nextButton = document.getElementById('nextButton');
+            
+            const percentage = (checkedCount / totalPoints) * 100;
+            
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = checkedCount + '/' + totalPoints;
+            progressPercent.textContent = Math.round(percentage) + '% Complete';
+            
+            // Enable next button only when all items are checked
+            if (checkedCount === totalPoints) {
+                nextButton.disabled = false;
+            } else {
+                nextButton.disabled = true;
+            }
+        }
+        
+        function proceedToPhotos() {
+            if (checkedCount === totalPoints) {
+                window.location.href = '1-2-4-upload-photo.html';
+            }
+        }
+    </script>
+</body>
+</html>

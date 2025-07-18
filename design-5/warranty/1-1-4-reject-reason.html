@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Reject Reason</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 80px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .customer-summary {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .customer-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .customer-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .customer-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .customer-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .rejection-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #dc3545;
+            font-size: 20px;
+        }
+        
+        .reason-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .reason-option {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+        }
+        
+        .reason-option:hover {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .reason-option.selected {
+            border-color: #dc3545;
+            background: #fff5f5;
+            box-shadow: 0 2px 8px rgba(220,53,69,0.1);
+        }
+        
+        .reason-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-right: 12px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .reason-option.selected .reason-radio {
+            border-color: #dc3545;
+        }
+        
+        .reason-option.selected .reason-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #dc3545;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .reason-text {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .custom-reason {
+            margin-top: 16px;
+        }
+        
+        .custom-reason-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .custom-reason-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            background: #fafafa;
+            transition: all 0.2s ease;
+        }
+        
+        .custom-reason-input:focus {
+            outline: none;
+            border-color: #dc3545;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(220,53,69,0.08);
+        }
+        
+        .confirm-button {
+            position: fixed;
+            bottom: 100px;
+            left: 15px;
+            right: 15px;
+            padding: 18px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(220,53,69,0.3);
+        }
+        
+        .confirm-button:hover:not(:disabled) {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(220,53,69,0.4);
+        }
+        
+        .confirm-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='1-1-1-claim-details.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Reject Appointment</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content" style="padding-bottom: 80px;">
+                <!-- Customer Summary -->
+                <div class="customer-summary">
+                    <div class="customer-header">
+                        <div class="customer-avatar">AR</div>
+                        <div class="customer-info">
+                            <h3>Ahmad Rahman</h3>
+                            <p>+60 12-345 6789</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rejection Section -->
+                <div class="rejection-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-times-circle section-icon"></i>
+                        Select Rejection Reason
+                    </h3>
+                    
+                    <!-- Reason List -->
+                    <div class="reason-list">
+                        <div class="reason-option" data-reason="schedule">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Schedule conflict - No available time slots</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="documentation">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Incomplete documentation or photos</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="warranty">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Warranty period expired</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="ineligible">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Damage not covered by warranty</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="information">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Insufficient tire or vehicle information</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="dealer">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Not purchased from authorized dealer</div>
+                        </div>
+                        
+                        <div class="reason-option" data-reason="custom">
+                            <div class="reason-radio"></div>
+                            <div class="reason-text">Other reason (specify below)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Reason -->
+                    <div class="custom-reason" id="customReasonSection" style="display: none;">
+                        <label class="custom-reason-label">Please specify the reason:</label>
+                        <textarea 
+                            class="custom-reason-input" 
+                            placeholder="Enter the specific reason for rejection..."
+                            id="customReasonText"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Confirm Button -->
+            <button class="confirm-button" id="confirmButton" disabled onclick="handleReject()">
+                <i class="fas fa-times"></i>
+                Confirm Rejection
+            </button>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedReason = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const reasonOptions = document.querySelectorAll('.reason-option');
+            const confirmButton = document.getElementById('confirmButton');
+            const customReasonSection = document.getElementById('customReasonSection');
+            const customReasonText = document.getElementById('customReasonText');
+            
+            reasonOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    reasonOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    selectedReason = this.dataset.reason;
+                    
+                    // Show/hide custom reason section
+                    if (selectedReason === 'custom') {
+                        customReasonSection.style.display = 'block';
+                        customReasonText.focus();
+                    } else {
+                        customReasonSection.style.display = 'none';
+                    }
+                    
+                    updateConfirmButton();
+                });
+            });
+            
+            customReasonText.addEventListener('input', updateConfirmButton);
+        });
+        
+        function updateConfirmButton() {
+            const confirmButton = document.getElementById('confirmButton');
+            const customReasonText = document.getElementById('customReasonText');
+            
+            if (selectedReason && selectedReason !== 'custom') {
+                confirmButton.disabled = false;
+            } else if (selectedReason === 'custom' && customReasonText.value.trim()) {
+                confirmButton.disabled = false;
+            } else {
+                confirmButton.disabled = true;
+            }
+        }
+        
+        function handleReject() {
+            if (selectedReason) {
+                window.location.href = '1-1-5-appointment-rejected.html';
+            }
+        }
+    </script>
+</body>
+</html>

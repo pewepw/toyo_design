@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Scheduled Appointments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .badge {
+            background: #4ecdc4;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 80px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .date-section {
+            margin-bottom: 24px;
+        }
+        
+        .date-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+        
+        .appointment-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .appointment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #0062B0;
+        }
+        
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .time-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f0f9ff;
+            border: 1px solid #0062B0;
+            border-radius: 20px;
+        }
+        
+        .time-info i {
+            color: #0062B0;
+            font-size: 14px;
+        }
+        
+        .time-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .status-pending {
+            background: #fff8e1;
+            color: #f57c00;
+        }
+        
+        .customer-info {
+            margin-bottom: 16px;
+        }
+        
+        .customer-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .customer-mobile {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .appointment-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        
+        .detail-icon {
+            color: #666;
+            font-size: 12px;
+            width: 16px;
+        }
+        
+        .detail-text {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .scan-button {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .scan-button:hover {
+            background: #004d8c;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 16px;
+        }
+        
+        .empty-state h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .empty-state p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .floating-scan {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #0062B0;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .floating-scan:hover {
+            background: #004d8c;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0,98,176,0.4);
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            background: #0062B0;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='1-claim-appointment.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Scheduled Appointments</h1>
+                <div class="badge">12</div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Today's Appointments -->
+                <div class="date-section">
+                    <div class="date-header">Today - 23 November 2024</div>
+                    
+                    <div class="appointment-card" onclick="scanAppointment('AP-001')">
+                        <div class="appointment-header">
+                            <div class="time-info">
+                                <i class="fas fa-clock"></i>
+                                <span class="time-text">2:00 PM</span>
+                            </div>
+                            <div class="status-badge status-confirmed">Confirmed</div>
+                        </div>
+                        
+                        <div class="customer-info">
+                            <div class="customer-name">Ahmad Rahman</div>
+                            <div class="customer-mobile">+60 12-345 6789</div>
+                        </div>
+                        
+                        <div class="appointment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-car detail-icon"></i>
+                                <span class="detail-text">Tread separation</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-certificate detail-icon"></i>
+                                <span class="detail-text">WTY-2024-001234</span>
+                            </div>
+                        </div>
+                        
+                        <button class="scan-button" onclick="event.stopPropagation(); window.location.href='1-2-1-scan-qr-code.html'">
+                            <i class="fas fa-qrcode"></i>
+                            Scan QR Code
+                        </button>
+                    </div>
+                    
+                    <div class="appointment-card" onclick="scanAppointment('AP-002')">
+                        <div class="appointment-header">
+                            <div class="time-info">
+                                <i class="fas fa-clock"></i>
+                                <span class="time-text">4:30 PM</span>
+                            </div>
+                            <div class="status-badge status-confirmed">Confirmed</div>
+                        </div>
+                        
+                        <div class="customer-info">
+                            <div class="customer-name">Siti Nurhaliza</div>
+                            <div class="customer-mobile">+60 19-876 5432</div>
+                        </div>
+                        
+                        <div class="appointment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-car detail-icon"></i>
+                                <span class="detail-text">Uneven wear</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-certificate detail-icon"></i>
+                                <span class="detail-text">WTY-2024-001567</span>
+                            </div>
+                        </div>
+                        
+                        <button class="scan-button" onclick="event.stopPropagation(); window.location.href='1-2-1-scan-qr-code.html'">
+                            <i class="fas fa-qrcode"></i>
+                            Scan QR Code
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tomorrow's Appointments -->
+                <div class="date-section">
+                    <div class="date-header">Tomorrow - 24 November 2024</div>
+                    
+                    <div class="appointment-card" onclick="scanAppointment('AP-003')">
+                        <div class="appointment-header">
+                            <div class="time-info">
+                                <i class="fas fa-clock"></i>
+                                <span class="time-text">10:00 AM</span>
+                            </div>
+                            <div class="status-badge status-confirmed">Confirmed</div>
+                        </div>
+                        
+                        <div class="customer-info">
+                            <div class="customer-name">Chen Wei Ming</div>
+                            <div class="customer-mobile">+60 16-234 5678</div>
+                        </div>
+                        
+                        <div class="appointment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-car detail-icon"></i>
+                                <span class="detail-text">Sidewall damage</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-certificate detail-icon"></i>
+                                <span class="detail-text">WTY-2024-001890</span>
+                            </div>
+                        </div>
+                        
+                        <button class="scan-button" onclick="event.stopPropagation(); window.location.href='1-2-1-scan-qr-code.html'">
+                            <i class="fas fa-qrcode"></i>
+                            Scan QR Code
+                        </button>
+                    </div>
+                    
+                    <div class="appointment-card" onclick="scanAppointment('AP-004')">
+                        <div class="appointment-header">
+                            <div class="time-info">
+                                <i class="fas fa-clock"></i>
+                                <span class="time-text">2:30 PM</span>
+                            </div>
+                            <div class="status-badge status-pending">Pending Confirmation</div>
+                        </div>
+                        
+                        <div class="customer-info">
+                            <div class="customer-name">Raj Kumar</div>
+                            <div class="customer-mobile">+60 17-890 1234</div>
+                        </div>
+                        
+                        <div class="appointment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-car detail-icon"></i>
+                                <span class="detail-text">Blowout damage</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-certificate detail-icon"></i>
+                                <span class="detail-text">WTY-2024-002134</span>
+                            </div>
+                        </div>
+                        
+                        <button class="scan-button" onclick="event.stopPropagation(); window.location.href='1-2-1-scan-qr-code.html'">
+                            <i class="fas fa-qrcode"></i>
+                            Scan QR Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Scan Button -->
+            <div class="floating-scan" onclick="window.location.href='1-2-1-scan-qr-code.html'">
+                <i class="fas fa-qrcode"></i>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-container">
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-item">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function scanAppointment(appointmentId) {
+            // Store appointment ID for the scanning process
+            localStorage.setItem('currentAppointment', appointmentId);
+            window.location.href = '1-2-1-scan-qr-code.html';
+        }
+    </script>
+</body>
+</html>
