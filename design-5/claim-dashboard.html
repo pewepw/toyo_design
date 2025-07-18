@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Claim Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            padding: 20px;
+            height: calc(100% - 44px - 80px);
+            overflow-y: auto;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .view-all-btn {
+            color: #0062B0;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .request-item {
+            padding: 15px;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .request-item:hover {
+            border-color: #0062B0;
+            box-shadow: 0 4px 12px rgba(0,98,176,0.15);
+        }
+        
+        .request-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .request-date {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .request-time {
+            font-size: 12px;
+            color: #0062B0;
+            font-weight: 600;
+        }
+        
+        .request-info {
+            margin-bottom: 10px;
+        }
+        
+        .customer-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .customer-phone {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .request-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .accept-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .accept-btn:hover {
+            background: #218838;
+        }
+        
+        .reject-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .reject-btn:hover {
+            background: #c82333;
+        }
+        
+        .view-btn {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .view-btn:hover {
+            background: #004d8c;
+        }
+        
+        .appointment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .appointment-item:hover {
+            border-color: #0062B0;
+            box-shadow: 0 4px 12px rgba(0,98,176,0.15);
+        }
+        
+        .appointment-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .appointment-time {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .appointment-customer {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .appointment-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-action-btn {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .quick-action-btn:hover {
+            border-color: #0062B0;
+            box-shadow: 0 4px 12px rgba(0,98,176,0.15);
+        }
+        
+        .quick-action-icon {
+            font-size: 24px;
+            color: #0062B0;
+            margin-bottom: 8px;
+        }
+        
+        .quick-action-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tab-item.active {
+            color: #0062B0;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header Section -->
+                <div class="header-section">
+                    <div class="header-title">Claim Management</div>
+                    <div class="header-subtitle">Dashboard for warranty claims and appointments</div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">REQUESTS</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">SCHEDULED</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">PENDING</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="#" class="quick-action-btn">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="quick-action-text">Scan QR Code</div>
+                    </a>
+                    <a href="#" class="quick-action-btn">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="quick-action-text">Create Claim</div>
+                    </a>
+                </div>
+                
+                <!-- Appointment Requests -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">Appointment Requests</h3>
+                        <a href="#" class="view-all-btn">View All</a>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-header">
+                            <div class="request-date">Application Date: Jan 15, 2025</div>
+                            <div class="request-time">2:00 PM</div>
+                        </div>
+                        <div class="request-info">
+                            <div class="customer-name">John Smith</div>
+                            <div class="customer-phone">
+                                <i class="fas fa-phone"></i>
+                                +60 12-345-6789
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn accept-btn">Accept</button>
+                            <button class="action-btn reject-btn">Reject</button>
+                            <button class="action-btn view-btn">View</button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-header">
+                            <div class="request-date">Application Date: Jan 15, 2025</div>
+                            <div class="request-time">3:30 PM</div>
+                        </div>
+                        <div class="request-info">
+                            <div class="customer-name">Sarah Johnson</div>
+                            <div class="customer-phone">
+                                <i class="fas fa-phone"></i>
+                                +60 12-987-6543
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn accept-btn">Accept</button>
+                            <button class="action-btn reject-btn">Reject</button>
+                            <button class="action-btn view-btn">View</button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-header">
+                            <div class="request-date">Application Date: Jan 16, 2025</div>
+                            <div class="request-time">10:00 AM</div>
+                        </div>
+                        <div class="request-info">
+                            <div class="customer-name">Michael Chen</div>
+                            <div class="customer-phone">
+                                <i class="fas fa-phone"></i>
+                                +60 12-555-4321
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn accept-btn">Accept</button>
+                            <button class="action-btn reject-btn">Reject</button>
+                            <button class="action-btn view-btn">View</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scheduled Appointments -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">Scheduled Appointments</h3>
+                        <a href="#" class="view-all-btn">View All</a>
+                    </div>
+                    
+                    <div class="appointment-item">
+                        <div>
+                            <div class="appointment-time">Jan 17, 2025 - 9:00 AM</div>
+                            <div class="appointment-customer">David Wong</div>
+                        </div>
+                        <div class="appointment-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="appointment-item">
+                        <div>
+                            <div class="appointment-time">Jan 17, 2025 - 2:00 PM</div>
+                            <div class="appointment-customer">Lisa Anderson</div>
+                        </div>
+                        <div class="appointment-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="appointment-item">
+                        <div>
+                            <div class="appointment-time">Jan 18, 2025 - 11:00 AM</div>
+                            <div class="appointment-customer">Robert Kim</div>
+                        </div>
+                        <div class="appointment-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-shield-alt tab-icon"></i>
+                    <span>Claims</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-search tab-icon"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-bookmark tab-icon"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

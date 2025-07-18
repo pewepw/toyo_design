@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Order Summary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .logo {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            padding: 20px;
+            height: calc(100% - 44px - 100px - 80px);
+            overflow-y: auto;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .edit-btn {
+            color: #0062B0;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .edit-btn:hover {
+            text-decoration: underline;
+        }
+        
+        .shipping-info {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .shipping-info .title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .order-items {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .order-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .item-image {
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .item-info {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .item-details {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .quantity-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            background: transparent;
+        }
+        
+        .remove-btn {
+            color: #dc3545;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .remove-btn:hover {
+            color: #c82333;
+        }
+        
+        .summary-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .summary-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .summary-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .total-row {
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .total-row .summary-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .total-row .summary-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0062B0;
+        }
+        
+        .confirm-button {
+            width: 100%;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .confirm-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
+        }
+        
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tab-item.active {
+            color: #0062B0;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <div class="header-top">
+                    <div class="logo">TOYO TIRES</div>
+                    <div style="font-size: 12px; color: #666; font-weight: 500;">ETEN</div>
+                </div>
+                <div class="page-title">Review Your Order</div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Shipping Information -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">Shipping To</h3>
+                        <a href="#" class="edit-btn">Edit</a>
+                    </div>
+                    <div class="shipping-info">
+                        <div class="title">Main Warehouse</div>
+                        <div>123 Industrial Park Ave, Suite 4B</div>
+                        <div>Metropolis, CA 90210</div>
+                    </div>
+                </div>
+                
+                <!-- Order Items -->
+                <div class="order-items">
+                    <div class="section-header">
+                        <h3 class="section-title">Order Items (2)</h3>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-image">
+                            <i class="fas fa-circle" style="color: #666;"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">Open Country A/T</div>
+                            <div class="item-details">20 x $240.00</div>
+                        </div>
+                        <div class="item-actions">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn">-</button>
+                                <input type="number" class="quantity-input" value="20">
+                                <button class="quantity-btn">+</button>
+                            </div>
+                            <i class="fas fa-trash remove-btn"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-image">
+                            <i class="fas fa-circle" style="color: #666;"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">Proxes Sport A/S</div>
+                            <div class="item-details">12 x $185.50</div>
+                        </div>
+                        <div class="item-actions">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn">-</button>
+                                <input type="number" class="quantity-input" value="12">
+                                <button class="quantity-btn">+</button>
+                            </div>
+                            <i class="fas fa-trash remove-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="summary-section">
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal</span>
+                        <span class="summary-value">$7,026.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Freight & Shipping</span>
+                        <span class="summary-value">$150.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Taxes (Est.)</span>
+                        <span class="summary-value">$582.95</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span class="summary-label">Grand Total</span>
+                        <span class="summary-value">$7,758.95</span>
+                    </div>
+                </div>
+                
+                <button class="confirm-button">
+                    Confirm & Place Order
+                </button>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-lock tab-icon"></i>
+                    <span>Security</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-search tab-icon"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-bookmark tab-icon"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - TOYO TIRES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .screen-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #0062B0;
+            padding-bottom: 10px;
+        }
+        
+        .screen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(393px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        iframe {
+            width: 393px;
+            height: 852px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            background: #000;
+        }
+        
+        .screen-label {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #0062B0, #4A90E2);
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>TOYO TIRES ETEN</h1>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">1. Account Activation Flow</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">1. Account Activation</div>
+                    <iframe src="activation.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">1.1 Activation Verification</div>
+                    <iframe src="activation-verify.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">1.2 Code Resent</div>
+                    <iframe src="activation-resend.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">1.1.1 Set Password</div>
+                    <iframe src="set-password.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">1.1.1.1 Activation Success</div>
+                    <iframe src="activation-success.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">2. Forgot Password Flow</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">2. Forgot Password</div>
+                    <iframe src="forgot-password.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.1 Forgot Password OTP</div>
+                    <iframe src="forgot-password-verify.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.1.1 Reset Password</div>
+                    <iframe src="forgot-password-reset.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.1.2 Password Reset Success</div>
+                    <iframe src="password-reset-success.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">3. Login Flow</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">3. Login</div>
+                    <iframe src="login.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">3.1 Login OTP Verification</div>
+                    <iframe src="login-verify.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">Dashboard & Home</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">Home Dashboard</div>
+                    <iframe src="dashboard.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">Order Management</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">Order Listing</div>
+                    <iframe src="order-listing.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">Order Summary</div>
+                    <iframe src="order-summary.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">Place Order</div>
+                    <iframe src="place-order.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">Warranty & Claims</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">Claim Dashboard</div>
+                    <iframe src="claim-dashboard.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">Claim Details</div>
+                    <iframe src="claim-details.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

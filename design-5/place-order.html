@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Place Order</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            padding: 20px;
+            height: calc(100% - 44px - 80px);
+            overflow-y: auto;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .credit-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .credit-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .credit-amount {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .credit-label {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        
+        .order-types {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .order-type-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .order-type-card:hover {
+            border-color: #0062B0;
+            box-shadow: 0 8px 25px rgba(0,98,176,0.15);
+        }
+        
+        .order-type-card.selected {
+            border-color: #0062B0;
+            background: #f8f9ff;
+        }
+        
+        .order-type-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .order-type-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .order-type-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .order-type-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .order-type-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            background: #e8f4fd;
+            color: #0062B0;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .feature-tag.highlight {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .requirements-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .requirements-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .requirement-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .requirement-icon {
+            color: #28a745;
+            font-size: 16px;
+        }
+        
+        .requirement-icon.warning {
+            color: #ffc107;
+        }
+        
+        .requirement-icon.error {
+            color: #dc3545;
+        }
+        
+        .requirement-text {
+            font-size: 14px;
+            color: #333;
+            flex: 1;
+        }
+        
+        .continue-button {
+            width: 100%;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .continue-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
+        }
+        
+        .continue-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .help-note {
+            background: #e8f4fd;
+            border-left: 4px solid #0062B0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .help-note-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 5px;
+        }
+        
+        .help-note-text {
+            font-size: 12px;
+            color: #0062B0;
+            line-height: 1.4;
+        }
+        
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tab-item.active {
+            color: #0062B0;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header Section -->
+                <div class="header-section">
+                    <div class="header-title">Place Order</div>
+                    <div class="header-subtitle">Select order type and review requirements</div>
+                    
+                    <div class="credit-info">
+                        <div class="credit-item">
+                            <div class="credit-amount">$15,000</div>
+                            <div class="credit-label">TOTAL LIMIT</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-amount">$12,500</div>
+                            <div class="credit-label">AVAILABLE</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-amount">$2,500</div>
+                            <div class="credit-label">USED</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Types -->
+                <div class="order-types">
+                    <div class="order-type-card selected">
+                        <div class="order-type-header">
+                            <div class="order-type-title">Normal Order</div>
+                            <div class="order-type-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                        <div class="order-type-description">
+                            Standard product ordering with full inventory selection and flexible delivery options.
+                        </div>
+                        <div class="order-type-features">
+                            <div class="feature-tag highlight">All Products</div>
+                            <div class="feature-tag">Delivery/Pickup</div>
+                            <div class="feature-tag">30min Cancel</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-type-card">
+                        <div class="order-type-header">
+                            <div class="order-type-title">Clearance Order</div>
+                            <div class="order-type-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                        </div>
+                        <div class="order-type-description">
+                            Special pricing on selected clearance programs with limited availability.
+                        </div>
+                        <div class="order-type-features">
+                            <div class="feature-tag highlight">Special Price</div>
+                            <div class="feature-tag">Program Based</div>
+                            <div class="feature-tag">Limited Stock</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-type-card">
+                        <div class="order-type-header">
+                            <div class="order-type-title">Direct Shipment</div>
+                            <div class="order-type-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                        </div>
+                        <div class="order-type-description">
+                            Large volume orders with container shipping for optimal cost efficiency.
+                        </div>
+                        <div class="order-type-features">
+                            <div class="feature-tag highlight">Container Load</div>
+                            <div class="feature-tag">90% Fill Required</div>
+                            <div class="feature-tag">Main Account</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-type-card">
+                        <div class="order-type-header">
+                            <div class="order-type-title">Own Use Order</div>
+                            <div class="order-type-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="order-type-description">
+                            Personal use orders with special 2+2 promotion for family channel dealers.
+                        </div>
+                        <div class="order-type-features">
+                            <div class="feature-tag highlight">2+2 Free</div>
+                            <div class="feature-tag">Family Channel</div>
+                            <div class="feature-tag">Once/Year</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Requirements Section -->
+                <div class="requirements-section">
+                    <div class="requirements-title">
+                        <i class="fas fa-info-circle"></i>
+                        Order Requirements
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle requirement-icon"></i>
+                        <div class="requirement-text">Credit limit available: $12,500</div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle requirement-icon"></i>
+                        <div class="requirement-text">Account status: Active</div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <i class="fas fa-exclamation-triangle requirement-icon warning"></i>
+                        <div class="requirement-text">New dealer: First order minimum 20 pieces</div>
+                    </div>
+                </div>
+                
+                <!-- Help Note -->
+                <div class="help-note">
+                    <div class="help-note-title">Credit Check</div>
+                    <div class="help-note-text">
+                        Credit limit is automatically checked when accessing place order. If credit check fails, 
+                        the Credit Control admin will be notified via email.
+                    </div>
+                </div>
+                
+                <button class="continue-button">
+                    <i class="fas fa-arrow-right" style="margin-right: 8px;"></i>
+                    Continue to Product Selection
+                </button>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-shield-alt tab-icon"></i>
+                    <span>Claims</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-shopping-cart tab-icon"></i>
+                    <span>Orders</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-bookmark tab-icon"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

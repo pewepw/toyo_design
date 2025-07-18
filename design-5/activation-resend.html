@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Account Activation - Code Resent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            height: 50px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .main-content {
+            padding: 40px 30px;
+            height: calc(100% - 94px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .success-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .success-message {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        
+        .primary-button {
+            width: 100%;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .primary-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
+        }
+        
+        .limit-notice {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #92400e;
+            text-align: left;
+        }
+        
+        .limit-notice .icon {
+            color: #f59e0b;
+            margin-right: 8px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .help-text a {
+            color: #0062B0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(0,98,176,0.1);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="nav-bar">
+                <button class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                
+                
+                <!-- Success Section -->
+                <div class="success-section">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    
+                    <h2 class="success-title">Code Resent Successfully</h2>
+                    
+                    <p class="success-message">
+                        A new 6-digit activation code has been sent to your registered mobile number. Please check your SMS and enter the code to continue.
+                    </p>
+                    
+                    <button class="primary-button" onclick="returnToVerify()">
+                        Return to Verification
+                        <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </button>
+                    
+                    <div class="limit-notice">
+                        <i class="fas fa-info-circle icon"></i>
+                        <strong>Daily Limit Notice:</strong> You can request activation codes up to 3 times per day. <span id="remainingAttempts">2 attempts remaining</span> for today.
+                    </div>
+                    
+                    <div class="help-text">
+                        Need help? Contact your TOYO TIRES representative<br>
+                        or call <a href="tel:1800-88-8696">1800-88-8696</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simulate remaining attempts (in real app, this would come from server)
+        let remainingAttempts = 2;
+        document.getElementById('remainingAttempts').textContent = `${remainingAttempts} attempts remaining`;
+        
+        function returnToVerify() {
+            // In real app, this would navigate back to verification screen
+            window.location.href = 'activation-verify.html';
+        }
+        
+        // Auto-redirect after 5 seconds
+        setTimeout(() => {
+            returnToVerify();
+        }, 5000);
+    </script>
+</body>
+</html>

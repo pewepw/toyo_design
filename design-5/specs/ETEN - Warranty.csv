@@ -1,0 +1,79 @@
+Screen ID,Screen Name,Description,Display / Fields,User Feedback,Status,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,
+1,Claim Appointment,a dashboard page for Claim Management,"- No of Request
+- No of scheduled Appointment
+- No of pending claims",,,,,,,,,,,,,,,,,,,,,,
+1.1,Appointment Request,showing list of incoming claim appointment request,"- Application Date
+- Preferred Appointment Date/Time
+- Customer Name
+- Mobile No
+",,,,,,,,,,,,,,,,,,,,,,
+1.1.1,Claim Details,page display claim details,"- Customer name
+- Mobile No
+- Preferred Appointment Date/Time
+- Tire Details (Pattern, Size, Serial Plate)
+- Warranty Certificate No
+- Problem
+- 3 submitted photo
+- Accept button
+- Reject button",,,,,,,,,,,,,,,,,,,,,,
+1.1.2,Accept and Notify,appointment acceptance screen to schedule confirm appointment date,"- select date
+- Confirm and Notify button",,,,,,,,,,,,,,,,,,,,,,
+1.1.3,Appointment Accepted,appointment confirmed message screen with option to place order,"- Done Button
+- Create Order button",,,,,,,,,,,,,,,,,,,,,,
+1.1.4,Reject Reason,"page to reject apppointment request, with selection of preset reject reason.","- Reason List (Select)
+- Confirm reject button",,,,,,,,,,,,,,,,,,,,,,
+1.1.5,Appointment Rejected,"appointment rejected message screen, and notified customer.",- done button,,,,,,,,,,,,,,,,,,,,,,
+1.2,Schedule Appointment,page show list of upcoming appointment,"- Date/Time
+- Customer Name",,,,,,,,,,,,,,,,,,,,,,
+1.2.1,Scan Claim QR code,Open Camera to scan TC App claim QR Code,Camera with QR Marker,,,,,,,,,,,,,,,,,,,,,,
+1.2.2,Claim Details,page display claim details,"- Customer name
+- Mobile No
+- Preferred Appointment Date/Time
+- Tire Details (Pattern, Size, Serial Plate)
+- Warranty Certificate No
+- Problem
+- 3 submitted photo
+- Next button",,,,,,,,,,,,,,,,,,,,,,
+1.2.3,Claim Check List,"Display 10 Check Points with Check box, all box must check before able to complete the claim, else only reject button are clickable","- 10 check box with check-points
+[ TOYO to Provide Check List]
+- Reject Button
+- Next Button",,,,,,,,,,,,,,,,,,,,,,
+1.2.4,Upload Photo,page to upload damaged tire photo as supporting to file claim with Toyo,"- Tread Dept Photo
+- 5 x additional Photo
+- Submit button",,,,,,,,,,,,,,,,,,,,,,
+1.2.5,Claim filed to Toyo,claim filed success message,- Done button,,,,,,,,,,,,,,,,,,,,,,
+1.2.6,Reject Reason,"Type page shown they fail to complete Claim Check List, and dealer will need to select reason","- Reason List (Select)
+- Confirm reject button",,,,,,,,,,,,,,,,,,,,,,
+2,Claim List,Listing of all filled claim to Toyo with it status and action,"- Claim Date
+- Claim No
+- Status
+- Action Button",,,,,,,,,,,,,,,,,,,,,,
+2.1,Claim Details,"Page showing details of the Claim Submission and it progress, include current claim status and next action required","- Claim Date
+- Claim No
+- Status
+- CTC Button (if require)
+- Scrap Upload
+- New Tire Receive Button
+- Show Report Button",,,,,,,,,,,,,,,,,,,,,,
+2.1.1,Claim Report,Complete Report display,[details refer sample from Toyo],,,,,,,,,,,,,,,,,,,,,,
+2.2,CTC,Will display CTC requirement and collection time,- Flag with CTC status tag,,,,,,,,,,,,,,,,,,,,,,
+2.3,Scrap,"Display the Scrap instruction when scrap action is require, dealer is will require to upload scrap photo according to the guideline","- Upload Photo button
+- Submit button",,,,,,,,,,,,,,,,,,,,,,
+2.3.1,Scrap Summary,Summary and success upload page,"- Success message
+- Done button",,,,,,,,,,,,,,,,,,,,,,
+2.4,Reimbursement,"If the claim is Reimbursement, this page is where dealer use to upload reimbursement invoice","- Attach invoice
+- Submit Button",,,,,,,,,,,,,,,,,,,,,,
+2.4.1,Invoice submitted,Success invoice upload message page,"- Success message
+- Done button",,,,,,,,,,,,,,,,,,,,,,
+2.5,Create Claim,"Dealer to create claim at outlet, either for self claim or on behalf of customer, if self claim, customer information will be dealer contact details
+
+Next will follow the normal step 1.2.4","- Pattern & Size
+- Serial Plate
+- Warranty Certificate No. (Optional)
+- Warranty Type (Normal)
+- Vehicle No (Optional)
+- Problem
+- Customer / Dealer Name
+- Mobile No
+- Next button",,,,,,,,,,,,,,,,,,,,,,

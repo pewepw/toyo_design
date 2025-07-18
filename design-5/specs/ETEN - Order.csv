@@ -1,0 +1,230 @@
+Screen ID,Screen Name,Description,Display / Fields,User Feedback,Status,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,
+1,Dashboard,Page that show the account summary,"- Sales Target (Family Channel Only)
+- Available Credit Limit
+- Processing Order
+- Processing Claim
+- Last 3 months warranty registered
+- Campaign",,,,,,,,,,,,,,,,,,,,,,
+2,Place Order,"Select Order type
+
+Perform Credit Limit check everytime this access Place Order function, if credit check fail, email notify Credit Control admin
+
+** New ETEN Dealer account, First Order Min 20pcs","- Clearence Order
+- Normal Order
+- Direct Shipment",,,,,,,,,,,,,,,,,,,,,,
+2.1,Credit Limit Check,"SAP API: Account No SAP to return Total Credit Limit, Available Credit and Account Status",Eg. Credit Limit 888/80000,,,,,,,,,,,,,,,,,,,,,,
+2.2,GET Ship to,"SAP API: Get Ship to list for the Main Account
+
+*This API only call if the accoun this Main Account end with '00', for non main account delivery only to own branch.",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.3,Clearance Program,"If is Main account with Multiple Ship to, system will prompt to select Ship to before clearence program show.
+
+List of Clearance Program created by OM will display here for dealer selection, dealer click on the program name to continue","- Program name
+- Period
+- Description",,,,,,,,,,,,,,,,,,,,,,
+2.3.1,Clearance SKU List,"SAP API:
+SAP to return clearence product list with price and stock balance, based on Shipping Point & Program Code","- Filter (Pattern, Size)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- origin, 
+- Program Price
+- qty
+- add to cart button",,,,,,,,,,,,,,,,,,,,,,
+2.3.2,Clearance Product,List of Clearance Product,"- Tire Pattern, Size, Price
+- Qty
+- Add to Cart button",,,,,,,,,,,,,,,,,,,,,,
+2.4,Select Product,"to create normal order, search and select product
+OR select from quick order list - top 10 items (base on latest 6 months order)","- Filter (Pattern, Size)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- origin, 
+- stock status (color), 
+- Invoice Price
+- qty
+- add to cart button",,,,,,,,,,,,,,,,,,,,,,
+2.4.1,Get Price & Stock,"SAP API: 
+SAP to return stock balance & price group price
+using Material Code, Shipping Point, Dealer bill to Acc",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.4.2,Cart,"List of selected product with SAP return price by Material/SKU
+
+If total exceeded Credit Limit, warning will show
+
+Delivery location only available for Main Account, else ship to only show branch account.
+
+Pick up option only available for Normal Order","- Order Type (Normal / Clearance)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- Invoice Price
+- qty
+- total
+- Delivery Type (Deliver / Pick Up)
+- Delivery Location
+- for Pick-up (Self-collection/Lalamove)
+- for Pick-up (Driver Name & Plate)
+- Remark
+- check out button",,,,,,,,,,,,,,,,,,,,,,
+2.4.3,Confirm Order,Order Summary before Post for order,"- Order Details
+- Confirm Order button",,,,,,,,,,,,,,,,,,,,,,
+2.4.4,Create Order,"Push order to SAP, SAP to return Sales Order No.
+
+SAP to return remaining material stock, if SO&DO creation fail due to insufficient stock. ETEN to prompt for Dealer to reconfirm whether to proceed and create remaining as back order.",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.4.5,Back Order,Page for customer to confirm split order to back order by showing total as Normal Order & Back Order.,"- Order Item List (Pattern, Size, Qty)
+- Back Order Item List (Pattern, Size, Qty)
+- Confirm button",,,,,,,,,,,,,,,,,,,,,,
+2.5,DS Cart List,"List of multiple Direct Shipment Cart prepared by the Dealer
+
+Is Direct Shipment only for Main Account?","- Date
+- Number of Items
+- Truck Size
+- ETA
+- New Cart button",,,,,,,,,,,,,,,,,,,,,,
+2.5.1,Cart,"Must select Ship to location first.
+List of selected product with invoice price per tire
+
+If total exceeded Credit Limit, warning will show
+
+ETA = D+2
+
+Truck Size 20FT only for East Malaysia and East Coast
+
+% of Rim Size on from Total Order (16/17/18/19)
+
+Must fill up 90% of the truck size M3 before checkout allow","- Truck Size (20/40FT)
+- ETA
+- Delivery Location (Ship to)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- Invoice Price
+- qty
+- total
+- % of Rim Size
+- Remark
+- check out button",,,,,,,,,,,,,,,,,,,,,,
+2.5.2,Select Product,"search and select product
+OR select from quick order list - top 10 items (base on latest 6 months order)","- Filter (Pattern, Size)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- origin, 
+- stock status (color), 
+- Invoice Price
+- qty
+- add to cart button",,,,,,,,,,,,,,,,,,,,,,
+2.4.1,Get Price & Stock,"SAP API: 
+SAP to return stock balance & price group price
+using Material Code, Shipping Point, Dealer bill to Acc",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.5.3,Upload Product List,"Page to download order list.
+an excel template to download to follow","- Browse Button
+- Upload Button",,,,,,,,,,,,,,,,,,,,,,
+2.4.1,Get Price & Stock,"SAP API: 
+SAP to return stock balance & price group price
+using Material Code, Shipping Point, Dealer bill to Acc",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.5.4,Confirm Order,"Order Summary before Post for order
+
+If no stock, Dealer have to adjust the order to make sure it fill up full truck","- Order Details
+- Confirm Order button",,,,,,,,,,,,,,,,,,,,,,
+2.5.5,Create DS Order,"Push order to SAP, SAP to return Sales Order No, without DO require
+Different Shipping Point for Direct Shipment Order (TBD)
+ETEN send Expected Delivery Date to SAP
+
+SCM to create DO manually
+- Normal & DS = same Order Type
+
+Yvonne to discuss with EY team on this Logic
+Taiping Warehouse - using 8digit SKU in SCM only store 8 digits. Dealer are order using sales SKU 15 digits.",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.6,Select Product,"search and select product
+OR select from quick order list - top 10 items (base on latest 6 months order)
+
+Criteria
+- only available at Main Account
+- Toyo Family Channel Only
+- Once a year order only.
+- Must order 2+2 tires
+- Previous year order > 200k
+
+
+* Min Order/yr requirement might change. (TOYO to confirm)","- Filter (Pattern, Size)
+- Pattern, 
+- Size, 
+- DOT (year), 
+- origin, 
+- stock status (color), 
+- Invoice Price
+- qty
+- add to cart button",,,,,,,,,,,,,,,,,,,,,,
+2.4.1,Get Price & Stock,"SAP API: 
+SAP to return stock balance & price group price
+using Material Code, Shipping Point, Dealer bill to Acc",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+2.6.1,Cart,"List of selected product with invoice price per tire.
+
+Auto add Free pcs of tire, and value as 0.00. Max 4 pcs of tires in cart only
+
+DOT - Toyo to confirm whether to show year only or Q425?","- Pattern, 
+- Size, 
+- DOT (year), 
+- Invoice Price
+- qty
+- total
+- Delivery Type (Delive Only)
+- Ship To
+- Remark
+- check out button",,,,,,,,,,,,,,,,,,,,,,
+2.6.2,Confirm Order,Order Summary before Post for order,"- Order Details
+- Confirm Order button",,,,,,,,,,,,,,,,,,,,,,
+2.6.3,Create Own Use Order,"Push order to SAP, SAP to return Sales Order No. 
+
+SAP to return remaining material stock, if SO&DO creation fail due to insufficient stock. ETEN to prompt for Dealer cannot proceed.",[ to discuss with SAP on variables and format],,,,,,,,,,,,,,,,,,,,,,
+3,Order List,"List of order based on search
+
+Back Order - Dealer Cannot Cancel Order","- Filter (Order No, Date Range, Order type, Status)
+- Order Type (DS, Normal, Clearance, Back-order, Own Use)
+- Order No, 
+- Order Date, 
+- Status",,,,,,,,,,,,,,,,,,,,,,
+3.1,Order Details,"Order Details
+Cancel button only available within 30 minute from order placed datetime.
+Return button only available within 7 days from delivery date
+
+Dealer use ETEN order no and Invoice no as primary reference no. Sales Order number are used for internal SAP reference
+
+DO will include ETEN order no","- Order No
+- Order information (Pattern, Size, Qty, Price)
+- DO (Show number only)
+- Document: Invoice, CN
+- Return Order No (if have Return)
+- Status
+- Confirm receive button
+- Return button
+- Cancel order button
+– Reorder button",,,,,,,,,,,,,,,,,,,,,,
+3.1.1,Order Receive & Rate,"Page to manually confirm order receive, and rate delivery service","- Confirm receive button
+- 5 star delivery rating
+- Remark",,,,,,,,,,,,,,,,,,,,,,
+3.1.2,Reorder,Generate order list with all the products on the selected order. ,"- Tick box
+- Pattern, size, qty
+- Re-order button",,,,,,,,,,,,,,,,,,,,,,
+3.2,Return,"Page that list all SKU from the selected order, check box for details to select items  & qty to return
+
+- 7 days from ETA for return request","- List of SKU
+- Check box
+- Return selected button",,,,,,,,,,,,,,,,,,,,,,
+3.2.1,Return Items,Return items confirmation page,"- List of selected SKU
+- Invoice & DO No. Auto (from Order)
+- Select Reason
+- Remark
+- Return Order button",,,,,,,,,,,,,,,,,,,,,,
+3.3,Cancel Order,"Cancellation request form.
+
+- Push cancellation request to backend admin for approval, disable SCM delivery update.","- Select Reason
+- Remark
+- Cancel Order button",,,,,,,,,,,,,,,,,,,,,,
+4,Sales Forecast,"Actual vs Forecast
+Value based on Dealer submitted value",,,,,,,,,,,,,,,,,,,,,,,
+4.1,Generate Forecast,"Generate value based on last 6 months order, dealer to update value, this page will generate the Excel template for dealer to download and upload in the submission page",- Download Template,,,,,,,,,,,,,,,,,,,,,,
+4.2,Submit Forecast,"Forecast submission page to upload template
+Refer to forecast Template","- Upload excel button
+- Submit button",,,,,,,,,,,,,,,,,,,,,,

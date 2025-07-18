@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Login - Verify OTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            padding: 40px 30px;
+            height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .form-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .otp-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .otp-input {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input:focus {
+            outline: none;
+            border-color: #0062B0;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,98,176,0.1);
+        }
+        
+        .otp-input.filled {
+            border-color: #0062B0;
+            background: white;
+            color: #0062B0;
+        }
+        
+        .primary-button {
+            width: 100%;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .primary-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
+        }
+        
+        .primary-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .resend-button {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: #0062B0;
+            border: 2px solid #0062B0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .resend-button:hover {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .resend-button:disabled {
+            background: transparent;
+            color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .timer-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .security-notice {
+            background: #e8f4fd;
+            border-left: 4px solid #0062B0;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #0062B0;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .help-text a {
+            color: #0062B0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(0,98,176,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="nav-bar">
+                <button class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="nav-bar">
+                <button class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                
+                <!-- Form Section -->
+                <div class="form-section">
+                    <h2 class="form-title">Device Verification</h2>
+                    <p class="form-subtitle">Enter the 6-digit verification code sent to your registered mobile number</p>
+                    
+                    <form id="verifyForm">
+                        <div class="otp-container">
+                            <input type="text" class="otp-input" maxlength="1" data-index="0">
+                            <input type="text" class="otp-input" maxlength="1" data-index="1">
+                            <input type="text" class="otp-input" maxlength="1" data-index="2">
+                            <input type="text" class="otp-input" maxlength="1" data-index="3">
+                            <input type="text" class="otp-input" maxlength="1" data-index="4">
+                            <input type="text" class="otp-input" maxlength="1" data-index="5">
+                        </div>
+                        
+                        <button type="submit" class="primary-button" id="verifyButton" disabled>
+                            Verify & Login
+                            <i class="fas fa-check" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                    
+                    <button class="resend-button" id="resendButton" disabled>
+                        <i class="fas fa-refresh" style="margin-right: 8px;"></i>
+                        Resend Code
+                    </button>
+                    
+                    <div class="timer-text" id="timerText">
+                        Resend available in <span id="countdown">30</span> seconds
+                    </div>
+                    
+                    <div class="security-notice">
+                        <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                        This verification is required for first-time login or when using a new device to ensure account security.
+                    </div>
+                    
+                    <div class="help-text">
+                        Need help? Contact your TOYO TIRES representative<br>
+                        or call <a href="tel:1800-88-8696">1800-88-8696</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // OTP input handling
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const verifyButton = document.getElementById('verifyButton');
+        const resendButton = document.getElementById('resendButton');
+        const countdown = document.getElementById('countdown');
+        const timerText = document.getElementById('timerText');
+        
+        let timer = 30;
+        let timerInterval;
+        
+        // Start countdown timer
+        function startTimer() {
+            timer = 30;
+            resendButton.disabled = true;
+            timerInterval = setInterval(() => {
+                timer--;
+                countdown.textContent = timer;
+                
+                if (timer <= 0) {
+                    clearInterval(timerInterval);
+                    resendButton.disabled = false;
+                    timerText.textContent = 'Click resend to get a new code';
+                }
+            }, 1000);
+        }
+        
+        // Initialize timer
+        startTimer();
+        
+        // OTP input functionality
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                
+                // Only allow numbers
+                if (!/^\d$/.test(value)) {
+                    e.target.value = '';
+                    return;
+                }
+                
+                // Add filled class
+                if (value) {
+                    e.target.classList.add('filled');
+                } else {
+                    e.target.classList.remove('filled');
+                }
+                
+                // Auto-focus next input
+                if (value && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+                
+                // Check if all inputs are filled
+                checkAllFilled();
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                // Handle backspace
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+            
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text');
+                const digits = pastedData.replace(/\D/g, '').slice(0, 6);
+                
+                digits.split('').forEach((digit, i) => {
+                    if (i < otpInputs.length) {
+                        otpInputs[i].value = digit;
+                        otpInputs[i].classList.add('filled');
+                    }
+                });
+                
+                checkAllFilled();
+            });
+        });
+        
+        function checkAllFilled() {
+            const allFilled = Array.from(otpInputs).every(input => input.value);
+            verifyButton.disabled = !allFilled;
+        }
+        
+        // Resend button functionality
+        resendButton.addEventListener('click', () => {
+            // Clear all inputs
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            // Focus first input
+            otpInputs[0].focus();
+            
+            // Reset verify button
+            verifyButton.disabled = true;
+            
+            // Start timer again
+            startTimer();
+            
+            // Show success message (in real app, this would trigger API call)
+            alert('New verification code sent to your mobile number');
+        });
+        
+        // Form submission
+        document.getElementById('verifyForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const otp = Array.from(otpInputs).map(input => input.value).join('');
+            
+            if (otp.length === 6) {
+                // In real app, this would verify the OTP and log the user in
+                console.log('Verifying OTP:', otp);
+                // Show success message and redirect to dashboard
+                alert('Login successful! Redirecting to dashboard...');
+                // In real app: window.location.href = 'dashboard.html';
+            }
+        });
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

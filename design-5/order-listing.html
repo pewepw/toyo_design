@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Order Listing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .notification-badge {
+            position: relative;
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .notification-badge::after {
+            content: '4';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .credit-info {
+            background: #0062B0;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .credit-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .credit-amount {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .credit-label {
+            font-size: 10px;
+            opacity: 0.9;
+        }
+        
+        .place-order-section {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .place-order-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar::placeholder {
+            color: #999;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: #0062B0;
+            background: white;
+        }
+        
+        .main-content {
+            padding: 20px;
+            height: calc(100% - 44px - 200px - 80px);
+            overflow-y: auto;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-all-btn {
+            color: #0062B0;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0062B0;
+            margin-bottom: 4px;
+        }
+        
+        .product-name {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .product-desc {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .quantity-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            background: white;
+        }
+        
+        .quantity-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            font-size: 12px;
+            border: none;
+            background: transparent;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 8px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #218838;
+        }
+        
+        .checkout-btn {
+            background: #0062B0;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkout-btn:hover {
+            background: #004d8c;
+        }
+        
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tab-item.active {
+            color: #0062B0;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <div class="header-top">
+                    <div>
+                        <div class="header-title">TOYO TIRES</div>
+                        <div style="font-size: 12px; color: #666; font-weight: 500;">ETEN</div>
+                    </div>
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                </div>
+                
+                <div class="credit-info">
+                    <div class="credit-item">
+                        <div class="credit-amount">$ 5000.00</div>
+                        <div class="credit-label">AVAILABLE</div>
+                    </div>
+                    <div class="credit-item">
+                        <div class="credit-amount">$ 1000</div>
+                        <div class="credit-label">TOTAL ITEMS IN CART</div>
+                    </div>
+                    <div class="credit-item">
+                        <div class="checkout-btn">
+                            <span>Check Out Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Place Order Section -->
+            <div class="place-order-section">
+                <h3 class="place-order-title">Place a New Order</h3>
+                <input type="text" class="search-bar" placeholder="Search by model or SKU">
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="section-title">
+                    <span>Shop Tires</span>
+                    <a href="#" class="view-all-btn">View All</a>
+                </div>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">Tire Image</div>
+                        <div class="product-price">$ 0.50</div>
+                        <div class="product-name">Michelin XPS Rib 215/85R16 10PR</div>
+                        <div class="product-desc">Lorem ipsum dolor sit amet...</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add To Cart</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">Tire Image</div>
+                        <div class="product-price">$ 0.50</div>
+                        <div class="product-name">Michelin XPS Rib 215/85R16 10PR</div>
+                        <div class="product-desc">Lorem ipsum dolor sit amet...</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add To Cart</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">Tire Image</div>
+                        <div class="product-price">$ 0.50</div>
+                        <div class="product-name">Michelin XPS Rib 215/85R16 10PR</div>
+                        <div class="product-desc">Lorem ipsum dolor sit amet...</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add To Cart</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">Tire Image</div>
+                        <div class="product-price">$ 0.50</div>
+                        <div class="product-name">Michelin XPS Rib 215/85R16 10PR</div>
+                        <div class="product-desc">Lorem ipsum dolor sit amet...</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-lock tab-icon"></i>
+                    <span>Security</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-search tab-icon"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-bookmark tab-icon"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

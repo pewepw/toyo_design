@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Account Activation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            padding: 40px 30px;
+            height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0062B0;
+            margin-bottom: 8px;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .form-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0062B0;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,98,176,0.1);
+        }
+        
+        .primary-button {
+            width: 100%;
+            padding: 18px;
+            background: #0062B0;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .primary-button:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
+        }
+        
+        .secondary-button {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: #0062B0;
+            border: 2px solid #0062B0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .secondary-button:hover {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .help-text a {
+            color: #0062B0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-with-icon {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                
+                <!-- Form Section -->
+                <div class="form-section">
+                    <h2 class="form-title">Account Activation</h2>
+                    <p class="form-subtitle">Enter your dealer account number and activation code to get started</p>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Dealer Account No</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" class="form-input input-with-icon" placeholder="Enter your dealer account number" maxlength="20">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Activation Code</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-key input-icon"></i>
+                                <input type="text" class="form-input input-with-icon" placeholder="Enter activation code" maxlength="20">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="primary-button">
+                            Next
+                            <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                    
+                    <div class="help-text">
+                        Need help? Contact your TOYO TIRES representative<br>
+                        or call <a href="tel:1800-88-8696">1800-88-8696</a>
+                    </div>
+                </div>
+                
+                <!-- Alternative Actions -->
+                <div style="margin-top: 30px;">
+                    <button class="secondary-button">
+                        <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                        Already have an account? Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

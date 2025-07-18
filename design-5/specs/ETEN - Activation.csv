@@ -1,0 +1,34 @@
+Screen ID,Screen Name,Description,Display / Fields,User Feedback,Status,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,
+1,Account Activation,Page for account activation,"- Dealer Account No
+- Activation Code
+- Next button",,,,,,,,,,,,,,,,,,,,,,
+1.1,Activation Code verification,6-digits activation code,"- 6 digits input box
+- Resend code button (30secs activate)
+- Verify button",,,,,,,,,,,,,,,,,,,,,,
+1.2,Request Activation Code,"to resend activation code, only available after 30 seconds, and allow only to request 3 times a day",Resend success message,,,,,,,,,,,,,,,,,,,,,,
+1.1.1,Set Password,page for dealer to set login password,"- Password
+- Confirm password
+- Activate button",,,,,,,,,,,,,,,,,,,,,,
+1.1.1.1,Account activated,"success message
+
+TOYO to confirm which Toyo Admin department email to receive dealer activation email notification ","success message
+- goto login button",,,,,,,,,,,,,,,,,,,,,,
+2,Forgot password,page to retrieve dealer password,"- Dealer account no
+- registered mobile mobile
+- Retrieve password button",,,,,,,,,,,,,,,,,,,,,,
+2.1,Verify OTP code,enter 6-digits OTP code from SMS,"- 6 digits input box
+- Verify button",,,,,,,,,,,,,,,,,,,,,,
+2.1.1,Set new password,page to set new password,"- Password
+- Confirm password
+- Activate button",,,,,,,,,,,,,,,,,,,,,,
+2.1.2,Password resetted,success message,"success message
+- goto login button",,,,,,,,,,,,,,,,,,,,,,
+3,Login,"Dealer login page, if first time login or with different device will verify with OTP","- Account No
+- Mobile No
+- Password
+- Login button
+- Biometric login button
+- forgot password button",,,,,,,,,,,,,,,,,,,,,,
+3.1,Verify OTP code,enter 6-digits OTP code from SMS,"- 6 digits input box
+- Verify button",,,,,,,,,,,,,,,,,,,,,,

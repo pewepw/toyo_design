@@ -10,13 +10,9 @@ This is a web-based prototype system for TOYO TIRES application, containing mult
 
 ### Directory Structure
 - **Root level**: `index.html` - Main design gallery showcasing all design iterations
-- `design-0/` - Consolidated prototype collections:
-  - `all-15-b2b-prototypes.html`, `all-15-b2c-prototypes.html` - Complete prototype viewers
-  - `bonus-b2b-prototypes.html`, `bonus-b2c-prototypes.html` - Additional prototype collections
-- `design-1/`, `design-2/`, `design-3/` - Different design iterations, each containing:
-  - `combined-index.html` - Main prototype showcase file displaying all screens
+- `design-0/`, `design-1/`, `design-2/`, `design-3/`, `design-4/` - Different design iterations, each containing:
+  - `index.html` -Main prototype showcase file displaying all screens
   - Individual HTML files for specific screens (home, campaigns, warranty, etc.)
-  - `index.html` - Navigation/landing page for each design iteration
 - `images/` - Shared image assets (logos, campaigns, UI elements)
 
 ### Technical Stack
@@ -44,7 +40,7 @@ This is a web-based prototype system for TOYO TIRES application, containing mult
 Each interface should be stored as a separate HTML file, clearly named (e.g., home-feature-1.html, home-feature-2.html, home-feature-3.html, etc.).
 
 #### Main Entry Point (index.html)
-The index.html file will act as the main container. Do not include actual interface HTML code directly in this file. Instead, embed all interface files using <iframe> elements.
+The index.html file will act as the main container. Do not include actual interface HTML code directly in this file. Instead, embed all interface files using <iframe> elements. No titles or headers or containers should be added for each iframe.
 
 All interfaces should be visible together on the page (stacked or laid out side-by-side) — do not use navigation links to toggle views.
 
@@ -56,7 +52,7 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - Match the exact dimensions and aspect ratio of the device
 - Use rounded corners and wrap each screen in a flat device mockup frame
 - Include a top iOS-style status bar (e.g., time, signal, battery indicators)
-- Add a bottom app navigation tab bar styled similarly to native iOS tab bars
+- Add a bottom app navigation tab bar styled similarly to native iOS tab bars (Unless otherwise specified)
 - If an interface is longer than one screen, do not use scrollviews — instead, increase the screen height to display all content fully in a single view
 
 #### Asset Requirements
@@ -68,7 +64,8 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - **Design 0**: Consolidated prototype collections and overview files
 - **Design 1**: Original TOYO TIRES CARE interface
 - **Design 2**: Refined B2B/B2C variants 
-- **Design 3**: Latest iteration with "boost" and "glass" UI variants, dark mode support
+- **Design 3**: Latest iteration with "boost", "glass" and "dark" UI variants
+- **Design 4**: Another UI variant: Pastel colors
 
 ### Common Screens Across Designs
 - Home/Dashboard
@@ -119,7 +116,7 @@ Each iframe content (individual HTML files) should simulate an iPhone 16 Pro:
 - **Screen Dimensions**: 393px × 852px (standard viewport)
 - **Device Frame**: Rounded corners with flat mockup design
 - **Status Bar**: iOS-style with time, signal, battery indicators
-- **Tab Bar**: Bottom navigation following iOS tab bar patterns
+- **Tab Bar**: Bottom navigation following iOS tab bar patterns (Unless otherwise specified)
 - **Safe Areas**: Consider iPhone notch and bottom safe areas
 
 #### Asset References
@@ -145,10 +142,10 @@ The current file structure is optimized for GitHub Pages:
 
 ### Branch Strategy
 - Main development on feature branches
-- Combined index files are primary deliverables
+- index.html files are primary deliverables
 - Individual screen files support detailed development
 
 ### File Management
-- Each design iteration maintains its own `index.html` and `combined-index.html`
+- Each design iteration maintains its own `index.html`
 - Copy variations (e.g., `campaign copy.html`) are used for iterative development
 - Use descriptive commit messages for design changes

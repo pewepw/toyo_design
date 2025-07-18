@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN Claim Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .back-btn {
+            color: #0062B0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .main-content {
+            padding: 20px;
+            height: calc(100% - 44px - 80px - 80px);
+            overflow-y: auto;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            flex-shrink: 0;
+            width: 35%;
+        }
+        
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            flex: 1;
+            text-align: right;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .tire-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .tire-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .tire-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tire-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .tire-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .problem-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .problem-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        
+        .photos-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .photo-item {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            background: #e0e0e0;
+        }
+        
+        .photo-item i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .accept-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .accept-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+        
+        .reject-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .reject-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220,53,69,0.3);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #ffc107;
+            color: #333;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-badge.urgent {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .status-badge.normal {
+            background: #28a745;
+            color: white;
+        }
+        
+        .priority-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .claim-id {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0062B0;
+        }
+        
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tab-item.active {
+            color: #0062B0;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:44</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <i class="fas fa-arrow-left back-btn"></i>
+                <h1 class="header-title">Claim Details</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Priority and Status -->
+                <div class="priority-section">
+                    <div class="claim-id">Claim #CLM-2025-001</div>
+                    <div class="status-badge urgent">Urgent</div>
+                </div>
+                
+                <!-- Customer Information -->
+                <div class="info-card">
+                    <h3 class="section-title">Customer Information</h3>
+                    <div class="info-row">
+                        <span class="info-label">Name</span>
+                        <span class="info-value">John Smith</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Mobile No</span>
+                        <span class="info-value">+60 12-345-6789</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Preferred Date</span>
+                        <span class="info-value">Jan 20, 2025</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Preferred Time</span>
+                        <span class="info-value">2:00 PM</span>
+                    </div>
+                </div>
+                
+                <!-- Tire Details -->
+                <div class="info-card">
+                    <h3 class="section-title">Tire Details</h3>
+                    <div class="tire-details">
+                        <div class="tire-item">
+                            <span class="tire-label">Pattern</span>
+                            <span class="tire-value">Open Country A/T</span>
+                        </div>
+                        <div class="tire-item">
+                            <span class="tire-label">Size</span>
+                            <span class="tire-value">255/70R16</span>
+                        </div>
+                        <div class="tire-item">
+                            <span class="tire-label">Serial Plate</span>
+                            <span class="tire-value">TY2025001234</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Warranty Certificate</span>
+                        <span class="info-value">WC-2024-5678</span>
+                    </div>
+                </div>
+                
+                <!-- Problem Description -->
+                <div class="problem-section">
+                    <h3 class="section-title">Problem Description</h3>
+                    <div class="problem-text">
+                        Customer reports unusual tread wear pattern on the front left tire. The tire shows signs of irregular wear on the outer edge, which may indicate alignment issues or improper inflation. The tire is approximately 6 months old and has been used under normal driving conditions.
+                    </div>
+                </div>
+                
+                <!-- Submitted Photos -->
+                <div class="photos-section">
+                    <h3 class="section-title">Submitted Photos (3)</h3>
+                    <div class="photo-grid">
+                        <div class="photo-item">
+                            <div style="text-align: center;">
+                                <i class="fas fa-image"></i>
+                                <div>Tread 1</div>
+                            </div>
+                        </div>
+                        <div class="photo-item">
+                            <div style="text-align: center;">
+                                <i class="fas fa-image"></i>
+                                <div>Tread 2</div>
+                            </div>
+                        </div>
+                        <div class="photo-item">
+                            <div style="text-align: center;">
+                                <i class="fas fa-image"></i>
+                                <div>Sidewall</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn accept-btn">
+                        <i class="fas fa-check" style="margin-right: 8px;"></i>
+                        Accept
+                    </button>
+                    <button class="action-btn reject-btn">
+                        <i class="fas fa-times" style="margin-right: 8px;"></i>
+                        Reject
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-shield-alt tab-icon"></i>
+                    <span>Claims</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-search tab-icon"></i>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-bookmark tab-icon"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
