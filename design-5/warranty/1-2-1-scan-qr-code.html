@@ -363,47 +363,6 @@
             text-align: center;
         }
         
-        .bottom-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: rgba(0,0,0,0.8);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-        
-        .nav-container {
-            background: #0062B0;
-            border-radius: 30px;
-            padding: 12px 24px;
-            display: flex;
-            gap: 40px;
-            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
-        }
-        
-        .nav-item {
-            color: rgba(255,255,255,0.6);
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 8px;
-            border-radius: 12px;
-        }
-        
-        .nav-item.active {
-            color: white;
-            background: rgba(255,255,255,0.2);
-        }
-        
-        .nav-item:hover {
-            color: white;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -476,40 +435,11 @@
                 <div class="success-text">QR Code Scanned Successfully!</div>
             </div>
             
-            <!-- Bottom Navigation -->
-            <div class="bottom-nav">
-                <div class="nav-container">
-                    <div class="nav-item">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="nav-item">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="nav-item">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="nav-item active">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <div class="nav-item">
-                        <i class="fas fa-user"></i>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     
     <script>
         let flashlightOn = false;
-        let scanTimeout;
-        
-        // Auto-scan simulation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Simulate QR code detection after 3 seconds
-            scanTimeout = setTimeout(function() {
-                scanQRCode();
-            }, 3000);
-        });
         
         function toggleFlashlight() {
             flashlightOn = !flashlightOn;
@@ -533,11 +463,6 @@
         }
         
         function manualEntry() {
-            // Clear auto-scan timeout
-            if (scanTimeout) {
-                clearTimeout(scanTimeout);
-            }
-            
             const code = prompt('Enter QR Code manually:');
             if (code) {
                 scanQRCode();
@@ -545,11 +470,6 @@
         }
         
         function selectFromGallery() {
-            // Clear auto-scan timeout
-            if (scanTimeout) {
-                clearTimeout(scanTimeout);
-            }
-            
             // Simulate gallery selection
             setTimeout(function() {
                 scanQRCode();
@@ -558,9 +478,6 @@
         
         // Click on QR code to scan immediately
         document.querySelector('.qr-simulation').addEventListener('click', function() {
-            if (scanTimeout) {
-                clearTimeout(scanTimeout);
-            }
             scanQRCode();
         });
     </script>
