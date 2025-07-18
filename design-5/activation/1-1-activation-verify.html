@@ -21,7 +21,7 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            background: #f0f0f0;
             font-family: 'Helvetica Neue', sans-serif;
         }
         
@@ -38,7 +38,7 @@
         .screen-content {
             width: 100%;
             height: 100%;
-            background: #f8f9fa;
+            background: white;
             border-radius: 23px;
             overflow: hidden;
             position: relative;
@@ -50,7 +50,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 15px;
             color: #333;
             font-size: 14px;
             font-weight: 600;
@@ -61,16 +61,25 @@
             background: white;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 0 8px;
         }
         
         .main-content {
-            padding: 40px 30px;
+            padding: 40px 15px;
             height: calc(100% - 94px);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         
         .logo-section {
@@ -78,56 +87,59 @@
             margin-bottom: 50px;
         }
         
-        .form-section {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .form-title {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             text-align: center;
+            letter-spacing: -0.5px;
         }
         
         .form-subtitle {
-            font-size: 14px;
+            font-size: 16px;
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .otp-container {
             display: flex;
-            justify-content: space-between;
-            gap: 4px;
+            justify-content: center;
+            gap: 10px;
             margin-bottom: 30px;
-            max-width: 280px;
             margin-left: auto;
             margin-right: auto;
         }
         
         .otp-input {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 18px;
             font-weight: 600;
             text-align: center;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
+            background: #fafafa;
+            transition: all 0.2s ease;
         }
         
         .otp-input:focus {
             outline: none;
             border-color: #0062B0;
             background: white;
-            box-shadow: 0 0 0 3px rgba(0,98,176,0.1);
+            box-shadow: 0 0 0 3px rgba(0,98,176,0.08);
         }
         
         .otp-input.filled {
@@ -142,18 +154,20 @@
             background: #0062B0;
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.2s ease;
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .primary-button:hover {
             background: #004d8c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
         }
         
         .primary-button:disabled {
@@ -165,21 +179,25 @@
         
         .resend-button {
             width: 100%;
-            padding: 16px;
+            padding: 4px;
             background: transparent;
             color: #0062B0;
-            border: 2px solid #0062B0;
-            border-radius: 12px;
+            border: none;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
+            transition: all 0.2s ease;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .resend-button:hover {
-            background: #0062B0;
-            color: white;
+            background: rgba(0,98,176,0.1);
+            color: #0062B0;
         }
         
         .resend-button:disabled {
@@ -193,7 +211,7 @@
             font-size: 14px;
             color: #666;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 0px;
         }
         
         .help-text {
@@ -214,15 +232,25 @@
             background: none;
             border: none;
             color: #0062B0;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
-            padding: 8px;
+            padding: 10px 8px;
             border-radius: 8px;
-            transition: background 0.3s ease;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 44px;
+            min-height: 44px;
+            justify-content: flex-start;
         }
         
         .back-button:hover {
             background: rgba(0,98,176,0.1);
+        }
+        
+        .back-button i {
+            font-size: 18px;
         }
         
     </style>
@@ -243,16 +271,14 @@
             <!-- Navigation Bar -->
             <div class="nav-bar">
                 <button class="back-button">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-chevron-left"></i>
                 </button>
             </div>
             
             <!-- Main Content -->
             <div class="main-content">
-                
-                
-                <!-- Form Section -->
-                <div class="form-section">
+                <!-- Content Section -->
+                <div class="content-section">
                     <h2 class="form-title">Verify Activation Code</h2>
                     <p class="form-subtitle">Enter the 6-digit activation code sent to your mobile number</p>
                     
@@ -268,12 +294,12 @@
                         
                         <button type="submit" class="primary-button" id="verifyButton" disabled>
                             Verify
-                            <i class="fas fa-check" style="margin-left: 8px;"></i>
+                            <i class="fas fa-check"></i>
                         </button>
                     </form>
                     
                     <button class="resend-button" id="resendButton" disabled>
-                        <i class="fas fa-refresh" style="margin-right: 8px;"></i>
+                        <i class="fas fa-refresh"></i>
                         Resend Code
                     </button>
                     

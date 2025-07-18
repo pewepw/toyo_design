@@ -21,7 +21,7 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #0062B0 0%, #4A90E2 100%);
+            background: #f0f0f0;
             font-family: 'Helvetica Neue', sans-serif;
         }
         
@@ -38,7 +38,7 @@
         .screen-content {
             width: 100%;
             height: 100%;
-            background: #f8f9fa;
+            background: white;
             border-radius: 23px;
             overflow: hidden;
             position: relative;
@@ -50,88 +50,90 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 15px;
             color: #333;
             font-size: 14px;
             font-weight: 600;
         }
         
         .main-content {
-            padding: 40px 30px;
+            padding: 60px 15px 40px;
             height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .logo-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .content-section {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         
-        .logo-section {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #0062B0;
-            margin-bottom: 8px;
-        }
-        
-        .logo-subtitle {
-            font-size: 14px;
-            color: #666;
-            font-weight: 500;
-        }
-        
-        .form-section {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
         .form-title {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             text-align: center;
+            letter-spacing: -0.5px;
         }
         
         .form-subtitle {
-            font-size: 14px;
+            font-size: 16px;
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         .form-label {
             display: block;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
+            padding-left: 4px;
         }
         
         .form-input {
             width: 100%;
-            padding: 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            padding: 18px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            transition: all 0.2s ease;
+            background: #fafafa;
         }
         
         .form-input:focus {
             outline: none;
             border-color: #0062B0;
             background: white;
-            box-shadow: 0 0 0 3px rgba(0,98,176,0.1);
+            box-shadow: 0 0 0 3px rgba(0,98,176,0.08);
         }
         
         .primary-button {
@@ -140,18 +142,20 @@
             background: #0062B0;
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.2s ease;
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .primary-button:hover {
             background: #004d8c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,98,176,0.3);
         }
         
         .secondary-button {
@@ -159,32 +163,22 @@
             padding: 16px;
             background: transparent;
             color: #0062B0;
-            border: 2px solid #0062B0;
-            border-radius: 12px;
+            border: none;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
+            transition: all 0.2s ease;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .secondary-button:hover {
-            background: #0062B0;
-            color: white;
-        }
-        
-        .help-text {
-            font-size: 12px;
-            color: #666;
-            margin-top: 15px;
-            text-align: center;
-            line-height: 1.5;
-        }
-        
-        .help-text a {
+            background: rgba(0,98,176,0.1);
             color: #0062B0;
-            text-decoration: none;
-            font-weight: 600;
         }
         
         .input-icon {
@@ -192,7 +186,7 @@
             left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666;
+            color: #999;
             font-size: 16px;
         }
         
@@ -201,7 +195,11 @@
         }
         
         .input-with-icon {
-            padding-left: 50px;
+            padding-left: 48px;
+        }
+        
+        .actions-section {
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -220,9 +218,16 @@
             
             <!-- Main Content -->
             <div class="main-content">
+                <!-- Logo Section -->
+                <div class="logo-section">
+                    <div class="flex items-center justify-center gap-3">
+                        <img src="../../images/toyo-tires.png" alt="TOYO TIRES" class="h-5">
+                        <img src="../../images/ETEN.png" alt="ETEN" class="h-5">
+                    </div>
+                </div>
                 
-                <!-- Form Section -->
-                <div class="form-section">
+                <!-- Content Section -->
+                <div class="content-section">
                     <h2 class="form-title">Account Activation</h2>
                     <p class="form-subtitle">Enter your dealer account number and activation code to get started</p>
                     
@@ -245,15 +250,15 @@
                         
                         <button type="submit" class="primary-button">
                             Next
-                            <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </form>
                 </div>
                 
                 <!-- Alternative Actions -->
-                <div style="margin-top: 30px;">
+                <div class="actions-section">
                     <button class="secondary-button">
-                        <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                        <i class="fas fa-sign-in-alt"></i>
                         Already have an account? Login
                     </button>
                 </div>
