@@ -120,8 +120,8 @@
         
         <div class="progress-note">
             <h3>Implementation Status</h3>
-            <p><strong>Current Status:</strong> 14 screens implemented (Phase 1 Complete)</p>
-            <p><strong>Missing Screens:</strong> 10 screens from section 2.x requirements</p>
+            <p><strong>Current Status:</strong> 24 screens implemented (Phase 2 Complete)</p>
+            <p><strong>Complete System:</strong> All warranty management screens implemented</p>
             <p><strong>Documentation:</strong> See <code>specs/progress.md</code> for detailed progress tracking</p>
         </div>
         
@@ -192,27 +192,73 @@
                     <div class="screen-label">1.2.5 Claim Filed to Toyo</div>
                     <iframe src="./1-2-5-claim-filed.html"></iframe>
                 </div>
+                <div>
+                    <div class="screen-label">1.2.6 Reject Reason (Checklist Failure)</div>
+                    <iframe src="./1-2-6-reject-reason.html"></iframe>
+                </div>
             </div>
         </div>
         
         <div class="screen-section">
-            <h2 class="section-title">4. Missing Screens (To Be Implemented)</h2>
-            <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
-                <h3 style="color: #666; margin-bottom: 16px;">Remaining 10 screens from CSV requirements:</h3>
-                <ul style="margin-left: 20px; color: #666;">
-                    <li>1.2.6 - Reject Reason (checklist failure)</li>
-                    <li>2 - Claim List (main listing)</li>
-                    <li>2.1 - Claim Details (progress tracking)</li>
-                    <li>2.1.1 - Claim Report (complete report)</li>
-                    <li>2.2 - CTC (Call to Customer)</li>
-                    <li>2.3 - Scrap Instructions</li>
-                    <li>2.3.1 - Scrap Summary</li>
-                    <li>2.4 - Reimbursement</li>
-                    <li>2.4.1 - Invoice Submitted</li>
-                    <li>2.5 - Create Claim</li>
-                </ul>
+            <h2 class="section-title">4. Claim List Management</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">2 Claim List (Main Listing)</div>
+                    <iframe src="./2-claim-list.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.1 Claim Details (Progress Tracking)</div>
+                    <iframe src="./2-1-claim-details.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.1.1 Claim Report (Complete Report)</div>
+                    <iframe src="./2-1-1-claim-report.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.2 CTC (Call to Customer)</div>
+                    <iframe src="./2-2-ctc.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.3 Scrap Instructions</div>
+                    <iframe src="./2-3-scrap.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.3.1 Scrap Summary</div>
+                    <iframe src="./2-3-1-scrap-summary.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">5. Reimbursement & Claim Creation</h2>
+            <div class="screen-grid">
+                <div>
+                    <div class="screen-label">2.4 Reimbursement (Invoice Upload)</div>
+                    <iframe src="./2-4-reimbursement.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.4.1 Invoice Submitted</div>
+                    <iframe src="./2-4-1-invoice-submitted.html"></iframe>
+                </div>
+                <div>
+                    <div class="screen-label">2.5 Create Claim (Manual Entry)</div>
+                    <iframe src="./2-5-create-claim.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-section">
+            <h2 class="section-title">6. System Complete</h2>
+            <div style="padding: 20px; background: #e8f5e8; border-radius: 8px; border: 1px solid #c3e6c3;">
+                <h3 style="color: #27ae60; margin-bottom: 16px;">✅ All 24 Screens Implemented</h3>
+                <p style="margin-bottom: 8px; color: #333;">
+                    <strong>Phase 1:</strong> 14 screens (Sections 1.x) ✓
+                </p>
+                <p style="margin-bottom: 8px; color: #333;">
+                    <strong>Phase 2:</strong> 10 screens (Sections 2.x) ✓
+                </p>
                 <p style="margin-top: 16px; color: #333; font-weight: 500;">
-                    See <code>specs/progress.md</code> for detailed implementation plan.
+                    Complete warranty management system with end-to-end claim processing flows.
                 </p>
             </div>
         </div>

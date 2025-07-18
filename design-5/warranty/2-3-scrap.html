@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Scrap Instructions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 100px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrap-header {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .scrap-icon {
+            font-size: 48px;
+            color: #f39c12;
+            margin-bottom: 12px;
+        }
+        
+        .scrap-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #8b4513;
+            margin-bottom: 8px;
+        }
+        
+        .scrap-subtitle {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .claim-info {
+            background: #f0f9ff;
+            border: 1px solid #0062B0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .claim-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .claim-details {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .instructions-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .instruction-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instruction-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #0062B0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .instruction-content {
+            flex: 1;
+            padding-top: 4px;
+        }
+        
+        .instruction-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .instruction-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .photo-requirements {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .requirement-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .requirement-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e8f5e8;
+            color: #27ae60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .requirement-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .upload-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .upload-slot {
+            aspect-ratio: 1;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+        }
+        
+        .upload-slot:hover {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+        
+        .upload-slot.has-photo {
+            border-color: #27ae60;
+            background: #e8f5e8;
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+        
+        .upload-slot:hover .upload-icon {
+            color: #0062B0;
+        }
+        
+        .upload-slot.has-photo .upload-icon {
+            color: #27ae60;
+        }
+        
+        .upload-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .upload-slot:hover .upload-text {
+            color: #0062B0;
+        }
+        
+        .upload-slot.has-photo .upload-text {
+            color: #27ae60;
+        }
+        
+        .upload-note {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 0 2px;
+            background: white;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .cancel-button {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+        
+        .cancel-button:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .submit-button {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,98,176,0.3);
+        }
+        
+        .submit-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-1-claim-details.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Scrap Instructions</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Scrap Header -->
+                <div class="scrap-header">
+                    <div class="scrap-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="scrap-title">Tire Scrapping Required</div>
+                    <div class="scrap-subtitle">Follow proper disposal procedures and document the process</div>
+                </div>
+                
+                <!-- Claim Info -->
+                <div class="claim-info">
+                    <div class="claim-title">
+                        <i class="fas fa-file-alt"></i>
+                        Claim: WC-2024-001234
+                    </div>
+                    <div class="claim-details">
+                        Customer: Ahmad Rahman • PROXES CF3 (215/60R16) • Approved for replacement
+                    </div>
+                </div>
+                
+                <!-- Instructions Section -->
+                <div class="instructions-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-list section-icon"></i>
+                        Scrapping Procedure
+                    </h3>
+                    
+                    <div class="instruction-item">
+                        <div class="instruction-number">1</div>
+                        <div class="instruction-content">
+                            <div class="instruction-title">Verify Tire Details</div>
+                            <div class="instruction-text">Confirm tire pattern, size, and serial number match the claim before proceeding with scrapping.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-item">
+                        <div class="instruction-number">2</div>
+                        <div class="instruction-content">
+                            <div class="instruction-title">Document Before Scrapping</div>
+                            <div class="instruction-text">Take required photos of the tire showing defects, serial numbers, and overall condition.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-item">
+                        <div class="instruction-number">3</div>
+                        <div class="instruction-content">
+                            <div class="instruction-title">Proper Disposal Method</div>
+                            <div class="instruction-text">Cut tire into pieces making it unusable, ensuring environmental compliance and safety.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-item">
+                        <div class="instruction-number">4</div>
+                        <div class="instruction-content">
+                            <div class="instruction-title">Record Disposal</div>
+                            <div class="instruction-text">Document the scrapping process with photos and update the claim status.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Photo Requirements -->
+                <div class="photo-requirements">
+                    <h3 class="section-title">
+                        <i class="fas fa-camera section-icon"></i>
+                        Photo Requirements
+                    </h3>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="requirement-text">Clear shot of tire defect or damage area</div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="requirement-text">DOT code and serial number visible</div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="requirement-text">Tire after proper scrapping/cutting</div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="requirement-text">Disposal documentation or receipt</div>
+                    </div>
+                </div>
+                
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-upload section-icon"></i>
+                        Upload Photos
+                    </h3>
+                    
+                    <div class="upload-grid">
+                        <div class="upload-slot" onclick="uploadPhoto('defect')">
+                            <div class="upload-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="upload-text">Defect Area</div>
+                        </div>
+                        
+                        <div class="upload-slot" onclick="uploadPhoto('serial')">
+                            <div class="upload-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="upload-text">Serial Number</div>
+                        </div>
+                        
+                        <div class="upload-slot" onclick="uploadPhoto('scrapped')">
+                            <div class="upload-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="upload-text">Scrapped Tire</div>
+                        </div>
+                        
+                        <div class="upload-slot" onclick="uploadPhoto('disposal')">
+                            <div class="upload-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="upload-text">Disposal Proof</div>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-note">
+                        <i class="fas fa-info-circle"></i>
+                        All photos are required before submission. Tap slots to capture or select photos.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button cancel-button" onclick="window.location.href='2-1-claim-details.html'">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="action-button submit-button" id="submitButton" disabled onclick="submitScrapPhotos()">
+                    <i class="fas fa-check"></i>
+                    Submit
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        let uploadedPhotos = {
+            defect: false,
+            serial: false,
+            scrapped: false,
+            disposal: false
+        };
+        
+        function uploadPhoto(type) {
+            // Simulate photo upload
+            const slot = document.querySelector(`[onclick="uploadPhoto('${type}')"]`);
+            slot.classList.add('has-photo');
+            
+            const icon = slot.querySelector('.upload-icon i');
+            icon.className = 'fas fa-check';
+            
+            const text = slot.querySelector('.upload-text');
+            text.textContent = text.textContent + ' ✓';
+            
+            uploadedPhotos[type] = true;
+            
+            // Update submit button state
+            checkSubmitReady();
+        }
+        
+        function checkSubmitReady() {
+            const submitButton = document.getElementById('submitButton');
+            const allUploaded = Object.values(uploadedPhotos).every(uploaded => uploaded);
+            
+            if (allUploaded) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+        
+        function submitScrapPhotos() {
+            const allUploaded = Object.values(uploadedPhotos).every(uploaded => uploaded);
+            
+            if (allUploaded) {
+                // Navigate to summary page
+                window.location.href = '2-3-1-scrap-summary.html';
+            } else {
+                alert('Please upload all required photos before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Scrap Summary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 100px);
+            overflow-y: auto;
+            padding: 40px 15px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #e8f5e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            70% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+        }
+        
+        .success-icon i {
+            font-size: 48px;
+            color: #27ae60;
+            z-index: 1;
+        }
+        
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 12px;
+        }
+        
+        .success-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .summary-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .summary-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .summary-value.highlight {
+            color: #0062B0;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #e9ecef;
+            margin: 16px 0;
+        }
+        
+        .photos-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 18px;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .photo-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 80px;
+            background: #e8f5e8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #27ae60;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .photo-caption {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .next-steps {
+            background: #f0f9ff;
+            border: 1px solid #0062B0;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .next-steps-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0062B0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .next-steps-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .next-steps-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .next-steps-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .next-steps-icon {
+            color: #0062B0;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+        
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 0 2px;
+            background: white;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .view-claim-button {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+        
+        .view-claim-button:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .done-button {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .done-button:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(39,174,96,0.3);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <h1 class="header-title">Scrap Completed</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Success Icon -->
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-title">Scrap Documented</div>
+                <div class="success-subtitle">
+                    Tire scrapping has been successfully documented and photos uploaded.
+                </div>
+                
+                <!-- Summary Card -->
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <div class="summary-label">Claim Number</div>
+                        <div class="summary-value highlight">WC-2024-001234</div>
+                    </div>
+                    <div class="summary-row">
+                        <div class="summary-label">Customer</div>
+                        <div class="summary-value">Ahmad Rahman</div>
+                    </div>
+                    <div class="summary-row">
+                        <div class="summary-label">Tire Pattern</div>
+                        <div class="summary-value">PROXES CF3 (215/60R16)</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="summary-row">
+                        <div class="summary-label">Scrap Date</div>
+                        <div class="summary-value">23 Nov 2024</div>
+                    </div>
+                    <div class="summary-row">
+                        <div class="summary-label">Scrap Time</div>
+                        <div class="summary-value">12:30 PM</div>
+                    </div>
+                    <div class="summary-row">
+                        <div class="summary-label">Photos Uploaded</div>
+                        <div class="summary-value">4 photos</div>
+                    </div>
+                </div>
+                
+                <!-- Photos Section -->
+                <div class="photos-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-camera section-icon"></i>
+                        Uploaded Photos
+                    </h3>
+                    
+                    <div class="photos-grid">
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="photo-caption">Defect Area</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="photo-caption">Serial Number</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="photo-caption">Scrapped Tire</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="photo-caption">Disposal Proof</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Next Steps -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">
+                        <i class="fas fa-list-ul"></i>
+                        Next Steps
+                    </h3>
+                    
+                    <ul class="next-steps-list">
+                        <li class="next-steps-item">
+                            <i class="fas fa-check next-steps-icon"></i>
+                            <span>Claim status updated to "Scrap Completed"</span>
+                        </li>
+                        <li class="next-steps-item">
+                            <i class="fas fa-arrow-right next-steps-icon"></i>
+                            <span>Proceed with replacement tire delivery</span>
+                        </li>
+                        <li class="next-steps-item">
+                            <i class="fas fa-bell next-steps-icon"></i>
+                            <span>Customer will be notified of progress</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button view-claim-button" onclick="window.location.href='2-1-claim-details.html'">
+                    <i class="fas fa-eye"></i>
+                    View Claim
+                </button>
+                <button class="action-button done-button" onclick="window.location.href='2-claim-list.html'">
+                    <i class="fas fa-check"></i>
+                    Done
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

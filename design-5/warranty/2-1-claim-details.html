@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Claim Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .share-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .claim-header {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .claim-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0062B0;
+            margin-bottom: 8px;
+        }
+        
+        .claim-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .claim-date {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .claim-status {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .claim-customer {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .claim-tire {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .claim-issue {
+            font-size: 14px;
+            color: #666;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0062B0;
+        }
+        
+        .progress-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .progress-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e9ecef;
+            z-index: 1;
+        }
+        
+        .timeline-item.completed .timeline-dot {
+            border-color: #27ae60;
+            background: #27ae60;
+        }
+        
+        .timeline-item.current .timeline-dot {
+            border-color: #0062B0;
+            background: #0062B0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 98, 176, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 98, 176, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 98, 176, 0); }
+        }
+        
+        .timeline-content {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .timeline-item.completed .timeline-content {
+            background: #e8f5e8;
+            border-color: #c3e6c3;
+        }
+        
+        .timeline-item.current .timeline-content {
+            background: #f0f9ff;
+            border-color: #0062B0;
+        }
+        
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .action-button {
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-direction: column;
+        }
+        
+        .action-button i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .btn-primary {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,98,176,0.3);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .btn-warning:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,193,7,0.3);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(40,167,69,0.3);
+        }
+        
+        .details-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .detail-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .priority-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .priority-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .priority-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .priority-low {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-claim-list.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Claim Details</h1>
+                <button class="share-button" onclick="shareClaimDetails()">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Claim Header -->
+                <div class="claim-header">
+                    <div class="claim-number">WC-2024-001234</div>
+                    <div class="claim-meta">
+                        <div class="claim-date">Filed: 23 Nov 2024</div>
+                        <div class="claim-status">In Progress</div>
+                    </div>
+                    <div class="claim-customer">Ahmad Rahman</div>
+                    <div class="claim-tire">PROXES CF3 (215/60R16) • DOT: 2423</div>
+                    <div class="claim-issue">
+                        <strong>Issue:</strong> Tread separation on front right tire after 18 months of use
+                    </div>
+                </div>
+                
+                <!-- Progress Timeline -->
+                <div class="progress-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-route section-icon"></i>
+                        Claim Progress
+                    </h3>
+                    
+                    <div class="progress-timeline">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Claim Filed</div>
+                                <div class="timeline-date">23 Nov 2024 • 10:30 AM</div>
+                                <div class="timeline-description">Initial warranty claim submitted by customer</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Appointment Scheduled</div>
+                                <div class="timeline-date">23 Nov 2024 • 2:00 PM</div>
+                                <div class="timeline-description">Inspection appointment confirmed with customer</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Inspection Complete</div>
+                                <div class="timeline-date">23 Nov 2024 • 3:45 PM</div>
+                                <div class="timeline-description">10-point inspection passed, photos uploaded</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item current">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">TOYO Review</div>
+                                <div class="timeline-date">In Progress</div>
+                                <div class="timeline-description">Awaiting TOYO decision on warranty claim</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Decision & Resolution</div>
+                                <div class="timeline-date">Pending</div>
+                                <div class="timeline-description">Final decision and customer notification</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-button btn-warning" onclick="window.location.href='2-2-ctc.html'">
+                        <i class="fas fa-phone"></i>
+                        <span>Call Customer</span>
+                    </button>
+                    <button class="action-button btn-secondary" onclick="window.location.href='2-3-scrap.html'">
+                        <i class="fas fa-camera"></i>
+                        <span>Scrap Upload</span>
+                    </button>
+                    <button class="action-button btn-success" onclick="window.location.href='2-4-reimbursement.html'">
+                        <i class="fas fa-gift"></i>
+                        <span>New Tire</span>
+                    </button>
+                    <button class="action-button btn-primary" onclick="window.location.href='2-1-1-claim-report.html'">
+                        <i class="fas fa-file-alt"></i>
+                        <span>View Report</span>
+                    </button>
+                </div>
+                
+                <!-- Claim Details -->
+                <div class="details-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-info-circle section-icon"></i>
+                        Claim Information
+                    </h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Warranty Certificate</div>
+                            <div class="detail-value">WC-CF3-2023-456789</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Purchase Date</div>
+                            <div class="detail-value">15 May 2023</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Mileage</div>
+                            <div class="detail-value">28,500 km</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Vehicle</div>
+                            <div class="detail-value">Honda Civic 2020</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dealer</div>
+                            <div class="detail-value">KL Auto Service</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Priority</div>
+                            <div class="detail-value">
+                                <span class="priority-badge priority-medium">Medium</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        function shareClaimDetails() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Claim Details - WC-2024-001234',
+                    text: 'TOYO TIRES warranty claim details for Ahmad Rahman',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                navigator.clipboard.writeText(window.location.href);
+                alert('Claim details link copied to clipboard!');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Create Claim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 100px);
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-icon {
+            color: #0062B0;
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .required {
+            color: #dc3545;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fafafa;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0062B0;
+            background-color: white;
+        }
+        
+        .form-input::placeholder {
+            color: #999;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fafafa;
+            color: #333;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: #0062B0;
+            background-color: white;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fafafa;
+            color: #333;
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: #0062B0;
+            background-color: white;
+        }
+        
+        .form-textarea::placeholder {
+            color: #999;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .form-help {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .radio-input.checked {
+            border-color: #0062B0;
+            background: #0062B0;
+        }
+        
+        .radio-input.checked::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .radio-label {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .optional-fields {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .optional-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 0 2px;
+            background: white;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .cancel-button {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+        
+        .cancel-button:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .create-button {
+            background: #0062B0;
+            color: white;
+        }
+        
+        .create-button:hover:not(:disabled) {
+            background: #004d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,98,176,0.3);
+        }
+        
+        .create-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-claim-list.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Create New Claim</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Tire Information -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-tire section-icon"></i>
+                        Tire Information
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tire Pattern & Size <span class="required">*</span></label>
+                        <select class="form-select" id="tirePattern">
+                            <option value="">Select tire pattern and size</option>
+                            <option value="cf3-215-60r16">PROXES CF3 (215/60R16)</option>
+                            <option value="cf3-225-45r17">PROXES CF3 (225/45R17)</option>
+                            <option value="cf2-195-65r15">PROXES CF2 (195/65R15)</option>
+                            <option value="r888r-225-45r17">PROXES R888R (225/45R17)</option>
+                            <option value="r1r-245-40r18">PROXES R1R (245/40R18)</option>
+                            <option value="other">Other (specify in notes)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Serial Plate Number <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="serialPlate" placeholder="Enter tire serial plate number" maxlength="20">
+                        <div class="form-help">Located on the tire sidewall, usually starts with DOT</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Warranty Type <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item" onclick="selectWarrantyType('material')">
+                                <div class="radio-input" id="material-radio"></div>
+                                <div class="radio-label">Material Defect</div>
+                            </div>
+                            <div class="radio-item" onclick="selectWarrantyType('road')">
+                                <div class="radio-input" id="road-radio"></div>
+                                <div class="radio-label">Road Hazard</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="optional-fields">
+                        <div class="optional-title">Optional Information</div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Warranty Certificate Number</label>
+                            <input type="text" class="form-input" id="certNumber" placeholder="Enter warranty certificate number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Vehicle Registration</label>
+                            <input type="text" class="form-input" id="vehicleReg" placeholder="Enter vehicle registration number">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer Information -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user section-icon"></i>
+                        Customer Information
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Customer Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="customerName" placeholder="Enter customer full name">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number <span class="required">*</span></label>
+                            <input type="tel" class="form-input" id="customerPhone" placeholder="+60 12-345-6789">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" id="customerEmail" placeholder="customer@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-textarea" id="customerAddress" placeholder="Enter customer address" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Claim Details -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-list section-icon"></i>
+                        Claim Details
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Problem Description <span class="required">*</span></label>
+                        <textarea class="form-textarea" id="problemDescription" placeholder="Describe the tire problem/defect in detail. Include when it was noticed, driving conditions, and any relevant details..." rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Purchase Date</label>
+                            <input type="date" class="form-input" id="purchaseDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Current Mileage</label>
+                            <input type="number" class="form-input" id="currentMileage" placeholder="28500">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Dealer/Service Center</label>
+                        <input type="text" class="form-input" id="dealerName" placeholder="Enter dealer or service center name">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button cancel-button" onclick="window.location.href='2-claim-list.html'">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="action-button create-button" id="createButton" disabled onclick="createClaim()">
+                    <i class="fas fa-arrow-right"></i>
+                    Next: Upload Photos
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        let warrantyType = '';
+        
+        function selectWarrantyType(type) {
+            warrantyType = type;
+            
+            // Reset all radio buttons
+            document.querySelectorAll('.radio-input').forEach(radio => {
+                radio.classList.remove('checked');
+            });
+            
+            // Check selected radio
+            document.getElementById(type + '-radio').classList.add('checked');
+            
+            // Check if form is complete
+            checkFormComplete();
+        }
+        
+        function checkFormComplete() {
+            const tirePattern = document.getElementById('tirePattern').value;
+            const serialPlate = document.getElementById('serialPlate').value;
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const problemDescription = document.getElementById('problemDescription').value;
+            
+            const createButton = document.getElementById('createButton');
+            
+            if (tirePattern && serialPlate && warrantyType && customerName && customerPhone && problemDescription) {
+                createButton.disabled = false;
+            } else {
+                createButton.disabled = true;
+            }
+        }
+        
+        // Add event listeners to required fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const requiredFields = [
+                'tirePattern', 'serialPlate', 'customerName', 'customerPhone', 'problemDescription'
+            ];
+            
+            requiredFields.forEach(fieldId => {
+                document.getElementById(fieldId).addEventListener('input', checkFormComplete);
+            });
+        });
+        
+        function createClaim() {
+            if (document.getElementById('createButton').disabled) {
+                return;
+            }
+            
+            // Navigate to photo upload screen
+            window.location.href = '1-2-4-upload-photo.html';
+        }
+    </script>
+</body>
+</html>
