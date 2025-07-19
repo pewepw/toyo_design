@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Confirm Order</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 90px);
+            overflow-y: auto;
+            padding: 16px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .order-item:first-child {
+            padding-top: 0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0 0 0;
+            margin-top: 12px;
+            border-top: 2px solid #f0f0f0;
+            font-weight: 600;
+            font-size: 16px;
+            color: #0062B0;
+        }
+
+        .delivery-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f0f9ff;
+            color: #0062B0;
+            text-transform: uppercase;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .terms-checkbox:hover {
+            background: #f0f9ff;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .terms-checkbox.checked .checkbox {
+            border-color: #0062B0;
+            background: #0062B0;
+        }
+
+        .checkbox i {
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .terms-checkbox.checked .checkbox i {
+            opacity: 1;
+        }
+
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 16px 2px;
+            z-index: 10;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-primary {
+            background: #0062B0;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #004d8c;
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .estimated-delivery {
+            background: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+        }
+
+        .estimated-delivery h4 {
+            color: #2E7D32;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .estimated-delivery p {
+            color: #333;
+            font-size: 12px;
+        }
+
+        .edit-button {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            color: #0062B0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .edit-button:hover {
+            background: #0062B0;
+            color: white;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .product-image i {
+            font-size: 24px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-4-2-normal-cart.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Confirm Order</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Order Summary -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-shopping-cart text-toyo-blue"></i>
+                        Order Summary
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-333 text-14px mb-2px">PROXES CF2 SUV</h4>
+                            <p class="text-12px text-666 mb-2px">225/65R17 102H</p>
+                            <p class="text-12px text-666">Qty: 4 × RM 105.00</p>
+                        </div>
+                        <div class="text-14px font-semibold text-333">RM 420.00</div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-333 text-14px mb-2px">PROXES CL1 SUV</h4>
+                            <p class="text-12px text-666 mb-2px">235/55R18 100V</p>
+                            <p class="text-12px text-666">Qty: 4 × RM 145.00</p>
+                        </div>
+                        <div class="text-14px font-semibold text-333">RM 580.00</div>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-333 text-14px mb-2px">TRANPATH MP7</h4>
+                            <p class="text-12px text-666 mb-2px">195/65R15 91H</p>
+                            <p class="text-12px text-666">Qty: 2 × RM 90.00</p>
+                        </div>
+                        <div class="text-14px font-semibold text-333">RM 180.00</div>
+                    </div>
+                </div>
+
+                <!-- Delivery Information -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-truck text-toyo-blue"></i>
+                        Delivery Information
+                        <button class="edit-button ml-auto">Edit</button>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Delivery Method</span>
+                        <span class="info-value">
+                            <span class="delivery-badge">Pickup</span>
+                        </span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Pickup Location</span>
+                        <span class="info-value">
+                            TOYO TIRES Service Centre<br>
+                            <span class="text-12px text-666">Kuala Lumpur Branch</span>
+                        </span>
+                    </div>
+                    
+                    <div class="estimated-delivery">
+                        <h4>Estimated Ready for Pickup</h4>
+                        <p>Ready in 2-3 business days (Jan 22-23, 2025)</p>
+                    </div>
+                </div>
+
+                <!-- Ship-to Address -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-map-marker-alt text-toyo-blue"></i>
+                        Ship-to Address
+                        <button class="edit-button ml-auto">Edit</button>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Account</span>
+                        <span class="info-value">MYDIN Mohamed Holdings Bhd</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Branch</span>
+                        <span class="info-value">
+                            MYDIN Mall Subang Jaya<br>
+                            <span class="text-12px text-666">47500 Subang Jaya, Selangor</span>
+                        </span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Contact</span>
+                        <span class="info-value">
+                            Ahmad Rahman<br>
+                            <span class="text-12px text-666">+603-5632-1234</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Payment Summary -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-receipt text-toyo-blue"></i>
+                        Payment Summary
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Subtotal (10 items)</span>
+                        <span class="info-value">RM 1,180.00</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Delivery Fee</span>
+                        <span class="info-value">FREE</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">SST (6%)</span>
+                        <span class="info-value">RM 70.80</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <span class="info-label">Credit Applied</span>
+                        <span class="info-value text-green-600">-RM 0.00</span>
+                    </div>
+                    
+                    <div class="total-row">
+                        <span>Total Amount</span>
+                        <span>RM 1,250.80</span>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="terms-checkbox" onclick="toggleTerms()" id="termsCheckbox">
+                    <div class="checkbox">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-14px text-333 font-medium mb-4px">I agree to the Terms and Conditions</p>
+                        <p class="text-12px text-666">By placing this order, you agree to our terms of service, return policy, and privacy policy.</p>
+                    </div>
+                </div>
+
+                <!-- Order Notes -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-sticky-note text-toyo-blue"></i>
+                        Order Notes (Optional)
+                    </div>
+                    
+                    <textarea 
+                        class="w-full p-12px border border-e9ecef rounded-8px text-14px resize-none"
+                        rows="3"
+                        placeholder="Add any special instructions for your order..."
+                    ></textarea>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Cart
+                </button>
+                <button class="action-button btn-primary" id="placeOrderBtn" onclick="placeOrder()" disabled>
+                    Place Order
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let termsAccepted = false;
+
+        function toggleTerms() {
+            const checkbox = document.getElementById('termsCheckbox');
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            
+            termsAccepted = !termsAccepted;
+            
+            if (termsAccepted) {
+                checkbox.classList.add('checked');
+                placeOrderBtn.disabled = false;
+            } else {
+                checkbox.classList.remove('checked');
+                placeOrderBtn.disabled = true;
+            }
+        }
+
+        function goBack() {
+            window.location.href = '2-4-2-normal-cart.html';
+        }
+
+        function placeOrder() {
+            if (!termsAccepted) {
+                alert('Please accept the Terms and Conditions to proceed.');
+                return;
+            }
+            
+            // Simulate order processing
+            const btn = document.getElementById('placeOrderBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = '2-4-4-order-success.html';
+            }, 2000);
+        }
+
+        function editDelivery() {
+            window.location.href = '2-4-2-normal-cart.html';
+        }
+
+        function editAddress() {
+            window.location.href = '2-2-ship-to-selection.html';
+        }
+    </script>
+</body>
+</html>

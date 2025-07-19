@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Back Order Options</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 90px);
+            overflow-y: auto;
+            padding: 16px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .warning-banner {
+            background: #fff3e0;
+            border: 1px solid #FF9800;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .warning-banner i {
+            color: #E65100;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .warning-content h3 {
+            color: #E65100;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .warning-content p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-order-item {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: #fff3e0;
+            border: 1px solid #FF9800;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .back-order-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .available-item {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: #e8f5e8;
+            border: 1px solid #4CAF50;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .available-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .item-specs {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .item-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .stock-warning {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #fff3cd;
+            color: #856404;
+            text-transform: uppercase;
+        }
+
+        .stock-available {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #d4edda;
+            color: #155724;
+            text-transform: uppercase;
+        }
+
+        .option-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+
+        .option-card.selected {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+
+        .option-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .radio-btn {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .option-card.selected .radio-btn {
+            border-color: #0062B0;
+        }
+
+        .option-card.selected .radio-btn::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #0062B0;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .option-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .option-details {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .eta-info {
+            background: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+        }
+
+        .eta-info h4 {
+            color: #2E7D32;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .eta-info p {
+            color: #333;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 16px 2px;
+            z-index: 10;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-primary {
+            background: #0062B0;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,98,176,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #004d8c;
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .summary-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .product-image i {
+            font-size: 24px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-4-2-normal-cart.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Back Order Options</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Warning Banner -->
+                <div class="warning-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="warning-content">
+                        <h3>Stock Shortage Detected</h3>
+                        <p>Some items in your cart have insufficient stock. Please choose how you'd like to handle these items.</p>
+                    </div>
+                </div>
+
+                <!-- Back Order Items -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-clock text-orange-500"></i>
+                        Items with Stock Shortages
+                    </div>
+                    
+                    <div class="back-order-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">PROXES CL1 SUV</div>
+                            <div class="item-specs">Size: 235/55R18 100V</div>
+                            <div class="item-status">
+                                <span class="stock-warning">Low Stock</span>
+                                <span class="text-12px text-666">Only 2 available (Requested: 4)</span>
+                            </div>
+                            <div class="text-12px text-333">
+                                <strong>Available Now:</strong> 2 pieces<br>
+                                <strong>Back Order:</strong> 2 pieces
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="eta-info">
+                        <h4>Expected Restock Date</h4>
+                        <p>Next shipment expected: Jan 28-30, 2025 (7-10 business days)</p>
+                    </div>
+                </div>
+
+                <!-- Available Items -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        Items Available for Immediate Shipment
+                    </div>
+                    
+                    <div class="available-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">PROXES CF2 SUV</div>
+                            <div class="item-specs">Size: 225/65R17 102H</div>
+                            <div class="item-status">
+                                <span class="stock-available">In Stock</span>
+                                <span class="text-12px text-666">4 pieces available</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="available-item">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">TRANPATH MP7</div>
+                            <div class="item-specs">Size: 195/65R15 91H</div>
+                            <div class="item-status">
+                                <span class="stock-available">In Stock</span>
+                                <span class="text-12px text-666">2 pieces available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back Order Options -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-cog text-toyo-blue"></i>
+                        Choose Your Option
+                    </div>
+                    
+                    <div class="option-cards">
+                        <div class="option-card selected" onclick="selectOption('split')" id="option-split">
+                            <div class="option-header">
+                                <div class="radio-btn"></div>
+                                <div class="option-title">Split Order (Recommended)</div>
+                            </div>
+                            <div class="option-description">
+                                Ship available items now, back order the rest
+                            </div>
+                            <div class="option-details">
+                                • Ship 6 pieces immediately (CF2 SUV × 4, TRANPATH MP7 × 2)<br>
+                                • Back order 2 pieces CL1 SUV for later shipment<br>
+                                • No additional shipping charges for back order
+                            </div>
+                        </div>
+
+                        <div class="option-card" onclick="selectOption('wait')" id="option-wait">
+                            <div class="option-header">
+                                <div class="radio-btn"></div>
+                                <div class="option-title">Wait for Complete Order</div>
+                            </div>
+                            <div class="option-description">
+                                Hold entire order until all items are available
+                            </div>
+                            <div class="option-details">
+                                • Ship all 10 pieces together<br>
+                                • Estimated shipping: Jan 28-30, 2025<br>
+                                • Single shipment, no separate deliveries
+                            </div>
+                        </div>
+
+                        <div class="option-card" onclick="selectOption('partial')" id="option-partial">
+                            <div class="option-header">
+                                <div class="radio-btn"></div>
+                                <div class="option-title">Partial Order Only</div>
+                            </div>
+                            <div class="option-description">
+                                Ship only available items, cancel back order items
+                            </div>
+                            <div class="option-details">
+                                • Ship 6 pieces immediately<br>
+                                • Cancel 2 pieces CL1 SUV (refund RM 290.00)<br>
+                                • Adjusted total: RM 960.80
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-receipt text-toyo-blue"></i>
+                        Updated Order Summary
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Immediate Shipment</span>
+                        <span class="summary-value">6 pieces - RM 960.80</span>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Back Order</span>
+                        <span class="summary-value">2 pieces - RM 290.00</span>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Total Order Value</span>
+                        <span class="summary-value font-semibold text-toyo-blue">RM 1,250.80</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Cart
+                </button>
+                <button class="action-button btn-primary" onclick="confirmBackOrder()">
+                    Confirm Order
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedOption = 'split';
+
+        function selectOption(option) {
+            // Remove selected class from all options
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to chosen option
+            document.getElementById('option-' + option).classList.add('selected');
+            selectedOption = option;
+            
+            // Update order summary based on selection
+            updateOrderSummary(option);
+        }
+
+        function updateOrderSummary(option) {
+            const summaryItems = document.querySelectorAll('.summary-item');
+            
+            switch(option) {
+                case 'split':
+                    // Already showing split order summary
+                    break;
+                case 'wait':
+                    // Update to show full order
+                    summaryItems[0].querySelector('.summary-value').textContent = '10 pieces - RM 1,250.80';
+                    summaryItems[1].style.display = 'none';
+                    break;
+                case 'partial':
+                    // Update to show partial order
+                    summaryItems[0].querySelector('.summary-value').textContent = '6 pieces - RM 960.80';
+                    summaryItems[1].style.display = 'none';
+                    summaryItems[2].querySelector('.summary-value').textContent = 'RM 960.80';
+                    break;
+            }
+        }
+
+        function goBack() {
+            window.location.href = '2-4-2-normal-cart.html';
+        }
+
+        function confirmBackOrder() {
+            // Simulate order processing based on selected option
+            let message = '';
+            switch(selectedOption) {
+                case 'split':
+                    message = 'Split order confirmed. Available items will ship immediately, back order items will ship when available.';
+                    break;
+                case 'wait':
+                    message = 'Complete order confirmed. Your order will ship when all items are available.';
+                    break;
+                case 'partial':
+                    message = 'Partial order confirmed. Only available items will be shipped, back order items have been removed.';
+                    break;
+            }
+            
+            alert(message);
+            
+            // Navigate to confirmation or success page
+            setTimeout(() => {
+                window.location.href = '2-4-3-confirm-order.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

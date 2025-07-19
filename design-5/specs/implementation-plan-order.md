@@ -22,51 +22,46 @@ Refer to **[Design System Specification](design-spec.md)** for comprehensive UI 
 - Last 3 months warranty registered
 - Campaign information
 
-### Module 2: Core Order Flow (8 screens)
+### Module 2: Core Order Flow (21 screens)
 **Files:**
 - `2-place-order.html` - Order type selection (Clearance/Normal/Direct Shipment/Own Use)
 - `2-1-credit-check.html` - Credit limit validation
 - `2-2-ship-to-selection.html` - Ship-to location selection (Main Account only)
-- `2-4-product-selection.html` - Product search and selection
-- `2-4-1-normal-cart.html` - Shopping cart with delivery options
-- `2-4-2-confirm-order.html` - Order confirmation
-- `2-4-3-order-success.html` - Order creation success
-- `2-4-4-back-order.html` - Back order handling
-
-**Key Features:**
-- Credit limit display without simulation delays
-- Product search with filters (Pattern, Size, DOT, Origin)
-- Stock status indicators with color coding
-- Cart management with pickup/delivery options
-- Static UI with no API simulation
-
-### Module 3: Specialized Order Types (11 screens)
-
-#### Clearance Orders (3 screens)
 - `2-3-clearance-programs.html` - Clearance program selection
 - `2-3-1-clearance-sku-list.html` - Clearance product listing with filters
 - `2-3-2-clearance-cart.html` - Clearance cart management
-
-#### Direct Shipment Orders (5 screens)
+- `2-4-product-selection.html` - Product search and selection (Normal Order)
+- **Note**: 2.4.1 "Get Price & Stock" is an SAP API function (no UI screen required)
+- `2-4-2-normal-cart.html` - Shopping cart with delivery options
+- `2-4-3-confirm-order.html` - Order confirmation
+- `2-4-4-order-success.html` - Order creation success
+- `2-4-5-back-order.html` - Back order handling
 - `2-5-ds-cart-list.html` - Multiple DS cart management
 - `2-5-1-ds-cart.html` - DS cart with truck sizing (20FT/40FT)
 - `2-5-2-ds-product-selection.html` - DS product search
 - `2-5-3-upload-product-list.html` - Excel template upload
 - `2-5-4-ds-confirm-order.html` - DS order confirmation
-
-#### Own Use Orders (3 screens)
+- `2-5-5-create-ds-order.html` - DS order creation
 - `2-6-own-use-products.html` - Own use product selection (2+2 requirement)
 - `2-6-1-own-use-cart.html` - Own use cart (max 4 pcs, delivery only)
 - `2-6-2-own-use-confirm.html` - Own use order confirmation
+- `2-6-3-create-own-use-order.html` - Own use order creation
 
-**Business Rules:**
-- Clearance: Main account with ship-to selection
-- Direct Shipment: 90% truck fill requirement, ETA D+2, 20FT for East Malaysia/Coast
-- Own Use: Family Channel only, once yearly, minimum order 200k previous year, 2+2 tires
+**Key Features:**
+- Credit limit display and validation
+- Ship-to location selection for Main Accounts
+- Clearance program selection and product listing
+- Product search with filters (Pattern, Size, DOT, Origin)
+- Stock status indicators with color coding
+- Cart management with pickup/delivery options
+- Direct Shipment cart management with truck sizing
+- Own Use order restrictions and business rules
+- Order confirmation and creation flows
+- Back order handling for stock shortages
+- Static UI with no API simulation
 
-### Module 4: Order Management & Forecasting (8 screens)
-
-#### Order Management (6 screens)
+### Module 3: Order Management (6 screens)
+**Files:**
 - `3-order-list.html` - Order listing with comprehensive filters
 - `3-1-order-details.html` - Detailed order view with action buttons
 - `3-1-1-order-receive-rate.html` - Delivery confirmation and rating (5-star)
@@ -74,15 +69,21 @@ Refer to **[Design System Specification](design-spec.md)** for comprehensive UI 
 - `3-2-return-request.html` - Return item selection (7 days from delivery)
 - `3-2-1-return-confirmation.html` - Return confirmation with reasons
 
-#### Sales Forecasting (2 screens)
-- `4-1-generate-forecast.html` - Generate forecast template (last 6 months)
-- `4-2-submit-forecast.html` - Upload and submit forecast data
-
 **Business Rules:**
 - Cancel: 30 minutes from order placement
 - Return: 7 days from delivery date
 - Back Order: Dealer cannot cancel
 - Reorder: Based on previous order items
+
+### Module 4: Sales Forecasting (2 screens)
+**Files:**
+- `4-1-generate-forecast.html` - Generate forecast template (last 6 months)
+- `4-2-submit-forecast.html` - Upload and submit forecast data
+
+**Business Rules:**
+- Forecast based on last 6 months order history
+- Excel template download and upload functionality
+- Dealer value updates and submissions
 
 ## Technical Implementation
 
@@ -117,18 +118,20 @@ design-5/order/
 ├── 2-3-1-clearance-sku-list.html
 ├── 2-3-2-clearance-cart.html
 ├── 2-4-product-selection.html
-├── 2-4-1-normal-cart.html
-├── 2-4-2-confirm-order.html
-├── 2-4-3-order-success.html
-├── 2-4-4-back-order.html
+├── 2-4-2-normal-cart.html
+├── 2-4-3-confirm-order.html
+├── 2-4-4-order-success.html
+├── 2-4-5-back-order.html
 ├── 2-5-ds-cart-list.html
 ├── 2-5-1-ds-cart.html
 ├── 2-5-2-ds-product-selection.html
 ├── 2-5-3-upload-product-list.html
 ├── 2-5-4-ds-confirm-order.html
+├── 2-5-5-create-ds-order.html
 ├── 2-6-own-use-products.html
 ├── 2-6-1-own-use-cart.html
 ├── 2-6-2-own-use-confirm.html
+├── 2-6-3-create-own-use-order.html
 ├── 3-order-list.html
 ├── 3-1-order-details.html
 ├── 3-1-1-order-receive-rate.html

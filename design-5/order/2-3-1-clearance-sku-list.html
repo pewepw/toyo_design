@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Clearance Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+
+        .search-container {
+            padding: 16px 15px;
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 48px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fafafa;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #0062B0;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0,98,176,0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 16px;
+        }
+
+        .program-banner {
+            background: linear-gradient(135deg, #0062B0, #4A90E2);
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .program-banner i {
+            font-size: 20px;
+        }
+
+        .program-info {
+            flex: 1;
+        }
+
+        .program-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .program-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0062B0;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 65px - 49px - 61px - 90px);
+            overflow-y: auto;
+            padding: 16px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .product-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .product-image i {
+            font-size: 32px;
+            color: #ccc;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .product-specs {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .product-badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-clearance {
+            background: #e8f5e8;
+            color: #2E7D32;
+        }
+
+        .badge-limited {
+            background: #fff3e0;
+            color: #E65100;
+        }
+
+        .badge-final {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .detail-item {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .pricing-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .price-row:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #0062B0;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .clearance-price {
+            color: #2E7D32;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .discount-badge {
+            background: #2E7D32;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .stock-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .stock-low {
+            background: #FF9800;
+        }
+
+        .stock-very-low {
+            background: #f44336;
+        }
+
+        .add-to-cart {
+            background: #0062B0;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #004d8c;
+        }
+
+        .cart-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #0062B0;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(0,98,176,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-fab:hover {
+            background: #004d8c;
+            transform: scale(1.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f44336;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-3-clearance-programs.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Clearance Products</h1>
+                <div class="header-actions">
+                    <button class="filter-button" onclick="toggleFilters()">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Container -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search clearance products..." id="searchInput">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+
+            <!-- Program Banner -->
+            <div class="program-banner">
+                <i class="fas fa-leaf"></i>
+                <div class="program-info">
+                    <div class="program-title">End of Season Clearance</div>
+                    <div class="program-subtitle">Summer 2024 Collection • Up to 30% Off</div>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-summary">
+                <div class="stat-item">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Total SKUs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Low Stock</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Final Stock</div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">PROXES CF2 SUV</div>
+                            <div class="product-specs">Size: 235/60R18 107W • DOT: 2024 • Origin: Japan</div>
+                            <div class="product-badges">
+                                <span class="badge badge-clearance">Clearance</span>
+                                <span class="badge badge-limited">Limited</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Category:</span> SUV Touring
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Load Index:</span> 107
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Speed Rating:</span> W (270 km/h)
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Season:</span> Summer
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 185.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <div>
+                                <span class="clearance-price">RM 129.50</span>
+                                <span class="discount-badge">30% OFF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-info">
+                        <div class="stock-status">
+                            <div class="stock-dot stock-low"></div>
+                            <span>12 pieces available</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('cf2-suv-235-60r18')">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">PROXES R888R</div>
+                            <div class="product-specs">Size: 225/45R17 94W • DOT: 2023 • Origin: Japan</div>
+                            <div class="product-badges">
+                                <span class="badge badge-clearance">Clearance</span>
+                                <span class="badge badge-final">Final Stock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Category:</span> Racing
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Load Index:</span> 94
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Speed Rating:</span> W (270 km/h)
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Compound:</span> Semi-Slick
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 425.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <div>
+                                <span class="clearance-price">RM 297.50</span>
+                                <span class="discount-badge">30% OFF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-info">
+                        <div class="stock-status">
+                            <div class="stock-dot stock-very-low"></div>
+                            <span>4 pieces available</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('r888r-225-45r17')">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">TRANPATH MP7</div>
+                            <div class="product-specs">Size: 215/65R16 98H • DOT: 2024 • Origin: Japan</div>
+                            <div class="product-badges">
+                                <span class="badge badge-clearance">Clearance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Category:</span> MPV/Van
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Load Index:</span> 98
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Speed Rating:</span> H (210 km/h)
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Season:</span> All Season
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 125.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <div>
+                                <span class="clearance-price">RM 100.00</span>
+                                <span class="discount-badge">20% OFF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-info">
+                        <div class="stock-status">
+                            <div class="stock-dot stock-low"></div>
+                            <span>18 pieces available</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('mp7-215-65r16')">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cart FAB -->
+            <div class="cart-fab" onclick="viewCart()" id="cartFab" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-badge" id="cartBadge">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = 0;
+
+        function addToCart(productId) {
+            cartItems++;
+            updateCartDisplay();
+            
+            // Show success feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Added!';
+            button.style.background = '#4CAF50';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#0062B0';
+            }, 1000);
+        }
+
+        function updateCartDisplay() {
+            const cartFab = document.getElementById('cartFab');
+            const cartBadge = document.getElementById('cartBadge');
+            
+            if (cartItems > 0) {
+                cartFab.style.display = 'flex';
+                cartBadge.textContent = cartItems;
+            } else {
+                cartFab.style.display = 'none';
+            }
+        }
+
+        function viewCart() {
+            window.location.href = '2-3-2-clearance-cart.html';
+        }
+
+        function toggleFilters() {
+            // In a real app, this would open a filter modal
+            alert('Filter functionality would be implemented here.');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            // In a real app, this would filter the product list
+            console.log('Searching for:', searchTerm);
+        });
+
+        // Auto-scroll to top on load
+        window.addEventListener('load', function() {
+            document.querySelector('.main-content').scrollTop = 0;
+        });
+    </script>
+</body>
+</html>

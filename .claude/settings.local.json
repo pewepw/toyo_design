@@ -16,7 +16,9 @@
       "Bash(mkdir:*)",
       "Bash(for:*)",
       "Bash(do echo \"Updating $file...\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(mv:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

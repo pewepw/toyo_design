@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEN - Clearance Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'toyo-blue': '#0062B0',
+                        'toyo-gray': '#7F7F7F',
+                        'toyo-light-gray': '#727272'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 25px;
+            padding: 2px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #0062B0;
+            color: white;
+            border-color: #0062B0;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .clearance-banner {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .clearance-banner i {
+            font-size: 20px;
+        }
+
+        .banner-info {
+            flex: 1;
+        }
+
+        .banner-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .banner-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            height: calc(100% - 44px - 73px - 49px - 90px);
+            overflow-y: auto;
+            padding: 16px 15px;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .clearance-notice {
+            background: #fff3e0;
+            border: 1px solid #FF9800;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .clearance-notice i {
+            color: #E65100;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .notice-content h3 {
+            color: #E65100;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .notice-content ul {
+            margin: 0;
+            padding-left: 16px;
+            color: #333;
+            font-size: 12px;
+        }
+
+        .notice-content li {
+            margin-bottom: 4px;
+        }
+
+        .cart-item {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .clearance-label {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            background: #2E7D32;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .item-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .item-image i {
+            font-size: 32px;
+            color: #ccc;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .item-specs {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .item-badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-clearance {
+            background: #e8f5e8;
+            color: #2E7D32;
+        }
+
+        .badge-limited {
+            background: #fff3e0;
+            color: #E65100;
+        }
+
+        .badge-final {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .pricing-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .price-row:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #2E7D32;
+            font-size: 14px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .discount-badge {
+            background: #2E7D32;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .quantity-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: white;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0062B0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .qty-btn:hover {
+            background: #0062B0;
+            color: white;
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .remove-btn {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            color: #dc3545;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .delivery-options {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 12px;
+        }
+
+        .delivery-option.selected {
+            border-color: #0062B0;
+            background: #f0f9ff;
+        }
+
+        .delivery-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .radio-btn {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .delivery-option.selected .radio-btn {
+            border-color: #0062B0;
+        }
+
+        .delivery-option.selected .radio-btn::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #0062B0;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 16px;
+            color: #2E7D32;
+            padding-top: 12px;
+            margin-top: 12px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .savings-highlight {
+            background: #e8f5e8;
+            color: #2E7D32;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            padding: 16px 2px;
+            z-index: 10;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-primary {
+            background: #2E7D32;
+            color: white;
+            box-shadow: 0 4px 20px rgba(46,125,50,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1B5E20;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div>12:30</div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <button class="back-button" onclick="window.location.href='2-3-1-clearance-sku-list.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">Clearance Cart</h1>
+                <div class="flex items-center gap-8px">
+                    <span class="text-sm font-semibold text-toyo-blue">3 items</span>
+                </div>
+            </div>
+
+            <!-- Clearance Banner -->
+            <div class="clearance-banner">
+                <i class="fas fa-tag"></i>
+                <div class="banner-info">
+                    <div class="banner-title">Clearance Order</div>
+                    <div class="banner-subtitle">End of Season Collection • Special Pricing Applied</div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Clearance Notice -->
+                <div class="clearance-notice">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="notice-content">
+                        <h3>Clearance Terms</h3>
+                        <ul>
+                            <li>All clearance items are final sale - no returns/exchanges</li>
+                            <li>Limited stock availability - subject to change</li>
+                            <li>Clearance pricing valid until program end date</li>
+                            <li>Standard manufacturer warranty applies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cart Items -->
+                <div class="cart-item">
+                    <div class="clearance-label">Clearance</div>
+                    <div class="item-header">
+                        <div class="item-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">PROXES CF2 SUV</div>
+                            <div class="item-specs">Size: 235/60R18 107W • DOT: 2024 • Origin: Japan</div>
+                            <div class="item-badges">
+                                <span class="badge badge-clearance">30% Off</span>
+                                <span class="badge badge-limited">Limited</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 185.00 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <span>RM 129.50 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Subtotal (2 pieces):</span>
+                            <span>RM 259.00</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <div class="quantity-control">
+                            <button class="qty-btn" onclick="updateQuantity('item1', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="2" id="qty-item1" min="1" readonly>
+                            <button class="qty-btn" onclick="updateQuantity('item1', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem('item1')">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="clearance-label">Clearance</div>
+                    <div class="item-header">
+                        <div class="item-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">PROXES R888R</div>
+                            <div class="item-specs">Size: 225/45R17 94W • DOT: 2023 • Origin: Japan</div>
+                            <div class="item-badges">
+                                <span class="badge badge-clearance">30% Off</span>
+                                <span class="badge badge-final">Final Stock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 425.00 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <span>RM 297.50 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Subtotal (2 pieces):</span>
+                            <span>RM 595.00</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <div class="quantity-control">
+                            <button class="qty-btn" onclick="updateQuantity('item2', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="2" id="qty-item2" min="1" readonly>
+                            <button class="qty-btn" onclick="updateQuantity('item2', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem('item2')">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="clearance-label">Clearance</div>
+                    <div class="item-header">
+                        <div class="item-image">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">TRANPATH MP7</div>
+                            <div class="item-specs">Size: 215/65R16 98H • DOT: 2024 • Origin: Japan</div>
+                            <div class="item-badges">
+                                <span class="badge badge-clearance">20% Off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span>Regular Price:</span>
+                            <span class="original-price">RM 125.00 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Clearance Price:</span>
+                            <span>RM 100.00 each</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Subtotal (1 piece):</span>
+                            <span>RM 100.00</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <div class="quantity-control">
+                            <button class="qty-btn" onclick="updateQuantity('item3', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="1" id="qty-item3" min="1" readonly>
+                            <button class="qty-btn" onclick="updateQuantity('item3', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem('item3')">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Delivery Options -->
+                <div class="delivery-options">
+                    <div class="section-title">
+                        <i class="fas fa-truck text-toyo-blue"></i>
+                        Delivery Options
+                    </div>
+                    
+                    <div class="delivery-option selected" onclick="selectDelivery('pickup')">
+                        <div class="radio-btn"></div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-333 text-14px mb-4px">Pickup from Store</h4>
+                            <p class="text-12px text-666 mb-4px">Ready for pickup in 2-3 business days</p>
+                            <p class="text-12px text-toyo-blue font-semibold">FREE</p>
+                        </div>
+                        <i class="fas fa-store text-toyo-blue"></i>
+                    </div>
+
+                    <div class="delivery-option" onclick="selectDelivery('delivery')">
+                        <div class="radio-btn"></div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-333 text-14px mb-4px">Home Delivery</h4>
+                            <p class="text-12px text-666 mb-4px">Delivered in 3-5 business days</p>
+                            <p class="text-12px text-toyo-blue font-semibold">RM 25.00</p>
+                        </div>
+                        <i class="fas fa-truck text-toyo-blue"></i>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="summary-card">
+                    <div class="section-title">
+                        <i class="fas fa-receipt text-toyo-blue"></i>
+                        Clearance Order Summary
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="text-14px text-666">Subtotal (5 items)</span>
+                        <span class="text-14px text-333 font-semibold">RM 954.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="text-14px text-666">Regular Price Total</span>
+                        <span class="text-14px text-999 line-through">RM 1,210.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="text-14px text-666">Delivery Fee</span>
+                        <span class="text-14px text-333 font-semibold">FREE</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="text-14px text-666">SST (6%)</span>
+                        <span class="text-14px text-333 font-semibold">RM 57.24</span>
+                    </div>
+
+                    <div class="savings-highlight">
+                        <i class="fas fa-tag"></i> You Save: RM 256.00 (21%)
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="text-16px">Total Amount</span>
+                        <span class="text-16px">RM 1,011.24</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-button btn-secondary" onclick="continueShopping()">
+                    <i class="fas fa-arrow-left"></i>
+                    Continue Shopping
+                </button>
+                <button class="action-button btn-primary" onclick="proceedToCheckout()">
+                    Proceed to Checkout
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateQuantity(itemId, change) {
+            const input = document.getElementById('qty-' + itemId);
+            let currentValue = parseInt(input.value);
+            let newValue = currentValue + change;
+            
+            if (newValue >= 1) {
+                input.value = newValue;
+                updateItemTotal(itemId, newValue);
+                updateOrderSummary();
+            }
+        }
+
+        function updateItemTotal(itemId, quantity) {
+            console.log(`Updated ${itemId} quantity to ${quantity}`);
+            // Update pricing in real implementation
+        }
+
+        function updateOrderSummary() {
+            console.log('Order summary updated');
+            // Recalculate totals in real implementation
+        }
+
+        function removeItem(itemId) {
+            if (confirm('Remove this item from your clearance cart?')) {
+                // Remove item logic
+                console.log(`Removed ${itemId} from cart`);
+            }
+        }
+
+        function selectDelivery(type) {
+            document.querySelectorAll('.delivery-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            event.currentTarget.classList.add('selected');
+            
+            const deliveryFee = type === 'pickup' ? 'FREE' : 'RM 25.00';
+            console.log(`Selected delivery: ${type}, fee: ${deliveryFee}`);
+        }
+
+        function continueShopping() {
+            window.location.href = '2-3-1-clearance-sku-list.html';
+        }
+
+        function proceedToCheckout() {
+            // For clearance orders, proceed to confirmation
+            window.location.href = '2-4-3-confirm-order.html';
+        }
+    </script>
+</body>
+</html>

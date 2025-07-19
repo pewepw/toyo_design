@@ -389,10 +389,7 @@ To prevent content from being hidden behind floating/fixed elements, follow thes
     display: flex;
     gap: 12px;
     padding: 16px 2px;
-    background: white;
-    border-top: 1px solid #f0f0f0;
-    z-index: 100;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    z-index: 10;
 }
 
 .action-button {
