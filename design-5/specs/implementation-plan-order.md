@@ -5,26 +5,7 @@ Implementation of comprehensive order management system for TOYO TIRES ETEN foll
 
 ## Design System
 
-### Colors
-- **Primary**: #0062B0 (TOYO Blue)
-- **Secondary**: #7F7F7F (TOYO Gray)
-- **Light Gray**: #727272 (TOYO Light Gray)
-- **Background**: #f0f0f0
-- **Card Background**: #ffffff
-- **Input Background**: #fafafa
-
-### Typography
-- **Font Family**: 'Helvetica Neue', sans-serif
-- **Title**: 32px, font-weight: 700
-- **Subtitle**: 16px, font-weight: 500
-- **Body**: 14px, font-weight: 400
-- **Button**: 16px, font-weight: 600
-
-### Layout Specifications
-- **Device Frame**: 393px × 852px (iPhone 16 Pro)
-- **Border Radius**: 25px (device), 8px (buttons), 20px (cards)
-- **Padding**: 15px (screen), 18px (buttons), 16px (inputs)
-- **Status Bar Height**: 44px
+Refer to **[Design System Specification](design-spec.md)** for comprehensive UI guidelines, component library, and navigation patterns.
 
 ## Module Implementation Strategy
 
@@ -110,30 +91,17 @@ Implementation of comprehensive order management system for TOYO TIRES ETEN foll
 - **TailwindCSS** via CDN for styling
 - **FontAwesome** for icons
 - **JavaScript** for interactions (no auto-redirects)
+- **Design System**: Follow [design-spec.md](design-spec.md) for all UI components
 
-### Mobile-First Design
-- iPhone 16 Pro dimensions (393×852px)
-- iOS-style status bar with time, signal, battery
-- Navigation guidelines: 
-  - Bottom tab navigation only for main entry points (dashboard, index files)
-  - Sub-screens with back buttons and header navigation do NOT need bottom nav
-  - Only screens without top navigation headers require bottom navigation
-- **Sticky Bottom Buttons**: 
-  - Action buttons (Continue, Submit, Confirm, etc.) should be positioned fixed at bottom
-  - Use `position: fixed` or `position: absolute` with `bottom: 0`
-  - Add bottom padding to main content to prevent content from being hidden behind button
-  - Ensure buttons remain visible and accessible regardless of scroll position
-- Touch-friendly buttons and interactions
-
-### UI Components (Static)
+### Static UI Components
 - Credit limit display cards
 - Product listing with static data
 - Ship-to location selection
 - Order confirmation screens
 
-### Data Management
+### Data Management (Static)
 - Product catalog with filters
-- Shopping cart persistence
+- Shopping cart persistence simulation
 - Order history tracking
 - User preferences
 

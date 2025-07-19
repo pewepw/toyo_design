@@ -5,26 +5,7 @@ Implementation of a comprehensive warranty management system for TOYO TIRES ETEN
 
 ## Design System
 
-### Colors
-- **Primary**: #0062B0 (TOYO Blue)
-- **Secondary**: #7F7F7F (TOYO Gray)
-- **Light Gray**: #727272 (TOYO Light Gray)
-- **Background**: #f0f0f0
-- **Card Background**: #ffffff
-- **Input Background**: #fafafa
-
-### Typography
-- **Font Family**: 'Helvetica Neue', sans-serif
-- **Title**: 32px, font-weight: 700
-- **Subtitle**: 16px, font-weight: 500
-- **Body**: 14px, font-weight: 400
-- **Button**: 16px, font-weight: 600
-
-### Layout Specifications
-- **Device Frame**: 393px × 852px (iPhone 16 Pro)
-- **Border Radius**: 25px (device), 8px (buttons), 20px (cards)
-- **Padding**: 15px (screen), 18px (buttons), 16px (inputs)
-- **Status Bar Height**: 44px
+Refer to **[Design System Specification](design-spec.md)** for comprehensive UI guidelines, component library, and navigation patterns.
 
 ## Screen Specifications
 
@@ -262,75 +243,25 @@ Implementation of a comprehensive warranty management system for TOYO TIRES ETEN
 
 ## Navigation Structure
 
-### Navigation Guidelines
-- **Bottom Navigation**: Only for main entry points and dashboard screens
-- **Sub-screens**: Use back buttons in top-left header, NO bottom navigation
-- **Rule**: Screens with back buttons and header navigation do NOT need bottom nav
-- **Only include bottom nav**: On screens without top navigation headers
+Refer to **[Design System Specification](design-spec.md)** for complete navigation patterns and implementation guidelines.
 
-### Sticky Bottom Buttons
-- **Action buttons** (Continue, Submit, Confirm, Accept, Reject, etc.) should be positioned fixed at bottom
-- Use `position: fixed` or `position: absolute` with `bottom: 0`
-- Add bottom padding to main content to prevent content from being hidden behind button
-- Ensure buttons remain visible and accessible regardless of scroll position
-- Button container should have background and padding for better UX
-
-### Custom Bottom Navigation (When Applicable)
-Based on the provided design, implement a rounded blue navigation bar with 5 icons:
-1. Home (selected state)
-2. Shopping/Orders
-3. Search
-4. Claims/Warranty
-5. Profile
-
-### Navigation Patterns
-- Back button in top-left for sub-screens
-- Breadcrumb navigation for deep flows
-- Tab switching for related content
-- Modal overlays for confirmations
+### Screen-Specific Navigation Rules
+- **Dashboard screens**: Use bottom navigation
+- **Detail/sub-screens**: Use top header with back button (NO bottom nav)
+- **Form screens**: Sticky bottom action buttons
 
 ## Technical Implementation
 
-### Base Template Structure
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETEN - [Screen Name]</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom styles -->
-</head>
-<body>
-    <div class="device-frame">
-        <div class="screen-content">
-            <!-- Status Bar -->
-            <!-- Main Content -->
-            <!-- Bottom Navigation -->
-        </div>
-    </div>
-</body>
-</html>
-```
+### Base Template
+Refer to **[Design System Specification](design-spec.md)** for complete HTML template and component library.
 
-### Shared Components
-- Status bar with time and battery
-- Navigation headers with back buttons
-- Form inputs with icons
-- Button styles (primary, secondary, danger)
-- Card layouts
-- Photo upload components
-- Modal overlays
-
-### Interactive Elements
-- Form validation
-- Photo upload UI (static mockups)
-- QR code scanner UI (static interface)
+### Interactive Elements (Static UI)
+- Form validation feedback
+- Photo upload mockups
+- QR code scanner interface
 - Date/time picker UI
 - Checkbox interactions
-- Button state management (no API calls)
+- Button state management
 
 ## File Organization
 ```
