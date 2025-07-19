@@ -262,7 +262,20 @@ Implementation of a comprehensive warranty management system for TOYO TIRES ETEN
 
 ## Navigation Structure
 
-### Custom Bottom Navigation
+### Navigation Guidelines
+- **Bottom Navigation**: Only for main entry points and dashboard screens
+- **Sub-screens**: Use back buttons in top-left header, NO bottom navigation
+- **Rule**: Screens with back buttons and header navigation do NOT need bottom nav
+- **Only include bottom nav**: On screens without top navigation headers
+
+### Sticky Bottom Buttons
+- **Action buttons** (Continue, Submit, Confirm, Accept, Reject, etc.) should be positioned fixed at bottom
+- Use `position: fixed` or `position: absolute` with `bottom: 0`
+- Add bottom padding to main content to prevent content from being hidden behind button
+- Ensure buttons remain visible and accessible regardless of scroll position
+- Button container should have background and padding for better UX
+
+### Custom Bottom Navigation (When Applicable)
 Based on the provided design, implement a rounded blue navigation bar with 5 icons:
 1. Home (selected state)
 2. Shopping/Orders
