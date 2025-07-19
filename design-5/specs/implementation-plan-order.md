@@ -53,11 +53,11 @@ Implementation of comprehensive order management system for TOYO TIRES ETEN foll
 - `2-4-4-back-order.html` - Back order handling
 
 **Key Features:**
-- Credit limit checks before order placement
+- Credit limit display without simulation delays
 - Product search with filters (Pattern, Size, DOT, Origin)
 - Stock status indicators with color coding
 - Cart management with pickup/delivery options
-- SAP API integration mockups
+- Static UI with no API simulation
 
 ### Module 3: Specialized Order Types (11 screens)
 
@@ -125,11 +125,11 @@ Implementation of comprehensive order management system for TOYO TIRES ETEN foll
   - Ensure buttons remain visible and accessible regardless of scroll position
 - Touch-friendly buttons and interactions
 
-### API Integration Points (Mockups)
-- SAP Credit Limit Check API
-- SAP Stock & Pricing API  
-- SAP Ship-to Location API
-- SAP Order Creation API
+### UI Components (Static)
+- Credit limit display cards
+- Product listing with static data
+- Ship-to location selection
+- Order confirmation screens
 
 ### Data Management
 - Product catalog with filters

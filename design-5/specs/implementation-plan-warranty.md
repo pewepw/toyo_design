@@ -326,11 +326,11 @@ Based on the provided design, implement a rounded blue navigation bar with 5 ico
 
 ### Interactive Elements
 - Form validation
-- Photo upload simulation
-- QR code scanner simulation
-- Date/time pickers
+- Photo upload UI (static mockups)
+- QR code scanner UI (static interface)
+- Date/time picker UI
 - Checkbox interactions
-- Button state management
+- Button state management (no API calls)
 
 ## File Organization
 ```

@@ -146,14 +146,6 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             border: 1px solid #f0f0f0;
             margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-        
-        .credit-info-card.show {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         .account-info {
@@ -248,8 +240,7 @@
         .credit-bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #4CAF50, #8BC34A);
-            width: 0%;
-            transition: width 1s ease-in-out;
+            width: 89%;
             border-radius: 4px;
         }
         
@@ -272,13 +263,6 @@
             justify-content: center;
             gap: 8px;
             box-shadow: 0 4px 20px rgba(0,98,176,0.3);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .continue-button.show {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         .continue-button:hover {
@@ -293,13 +277,9 @@
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 20px;
-            display: none;
+            display: flex;
             align-items: flex-start;
             gap: 12px;
-        }
-        
-        .warning-card.show {
-            display: flex;
         }
         
         .warning-icon {
@@ -341,15 +321,8 @@
             <!-- Main Content -->
             <div class="main-content" style="padding-bottom: 80px;">
                 
-                <!-- Loading Section -->
-                <div class="loading-section" id="loadingSection">
-                    <div class="loading-spinner"></div>
-                    <div class="loading-text">Checking Credit Limit</div>
-                    <div class="loading-subtext">Connecting to SAP system...</div>
-                </div>
-                
                 <!-- Warning Card -->
-                <div class="warning-card" id="warningCard">
+                <div class="warning-card">
                     <div class="warning-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
@@ -359,7 +332,7 @@
                 </div>
                 
                 <!-- Credit Info Card -->
-                <div class="credit-info-card" id="creditCard">
+                <div class="credit-info-card">
                     <div class="account-info">
                         <div class="account-number">Account: 1234567890</div>
                         <div class="account-status">Active</div>
@@ -382,7 +355,7 @@
                             <span class="credit-percentage">89%</span>
                         </div>
                         <div class="credit-bar">
-                            <div class="credit-bar-fill" id="creditBarFill"></div>
+                            <div class="credit-bar-fill"></div>
                         </div>
                     </div>
                     
@@ -394,7 +367,7 @@
             </div>
             
             <!-- Continue Button -->
-            <button class="continue-button" id="continueBtn" onclick="proceedToNext()">
+            <button class="continue-button" onclick="proceedToNext()">
                 <i class="fas fa-arrow-right"></i>
                 Continue to Ship-to Selection
             </button>
@@ -402,29 +375,6 @@
     </div>
     
     <script>
-        // Simulate credit check process
-        setTimeout(() => {
-            // Hide loading
-            document.getElementById('loadingSection').style.display = 'none';
-            
-            // Show warning if applicable
-            document.getElementById('warningCard').classList.add('show');
-            
-            // Show credit info
-            document.getElementById('creditCard').classList.add('show');
-            
-            // Animate credit bar
-            setTimeout(() => {
-                document.getElementById('creditBarFill').style.width = '89%';
-            }, 500);
-            
-            // Show continue button
-            setTimeout(() => {
-                document.getElementById('continueBtn').classList.add('show');
-            }, 1000);
-            
-        }, 2000);
-        
         function proceedToNext() {
             window.location.href = '2-2-ship-to-selection.html';
         }

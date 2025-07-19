@@ -57,7 +57,7 @@
         }
         
         .main-content {
-            height: calc(100% - 44px - 70px);
+            height: calc(100% - 44px - 90px);
             overflow-y: auto;
             padding: 20px 15px;
         }
@@ -296,18 +296,9 @@
             justify-content: center;
             gap: 8px;
             box-shadow: 0 4px 20px rgba(0,98,176,0.3);
-            background: #ccc;
-            color: #666;
-            cursor: not-allowed;
-            pointer-events: none;
         }
         
-        .continue-button.active {
-            background: #0062B0;\n            color: white;\n            cursor: pointer;
-            pointer-events: auto;
-        }
-        
-        .continue-button:hover.active {
+        .continue-button:hover {
             background: #004d8c;
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0,98,176,0.4);
